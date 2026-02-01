@@ -32,7 +32,7 @@ export function AboutSection() {
                 viewport={{ once: true }}
                 className="flex items-center justify-center"
               >
-                <div className="relative w-80 h-80 rounded-full overflow-hidden shadow-2xl transition-transform hover:scale-105 duration-500 border-4 border-white/5">
+                <div className="relative w-80 h-80 rounded-b-full overflow-hidden shadow-2xl transition-transform hover:scale-105 duration-500 border-4 border-white/5">
                   <Image
                     src="/me.png"
                     alt="Mansah"

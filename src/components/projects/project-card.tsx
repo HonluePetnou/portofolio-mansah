@@ -29,7 +29,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
     <Link href={`/projects/${project.slug}`} className="block group">
       <GlassCard className="flex flex-col p-0 overflow-hidden border-0 bg-transparent hover:bg-transparent shadow-none hover:shadow-none hover:-translate-y-2 transition-all duration-500">
         {/* Image Container */}
-        <div className="relative aspect-16/10 w-full rounded-2xl overflow-hidden border border-black/5 dark:border-white/10 mb-6">
+        <div className="relative aspect-16/10 w-full rounded-t-2xl overflow-hidden border border-black/5 dark:border-white/10 mb-6">
           <Image
             src={project.image}
             alt={project.title}

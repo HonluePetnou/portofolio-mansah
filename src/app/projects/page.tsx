@@ -14,7 +14,7 @@ const projects: ProjectData[] = [
     title: "OneControl",
     description:
       "AI-integrated hackathon project optimizing resource management.",
-    image: "/projects/onecontrol.png",
+    image: "/onecontrol.png",
     slug: "one-control",
     stack: ["Gemini AI", "Next.js", "Python"],
     highlightedStack: "Gemini AI",
@@ -23,7 +23,7 @@ const projects: ProjectData[] = [
     title: "Feedly",
     description:
       "Health analytics application for personalized nutrition tracking.",
-    image: "/projects/feedly.png",
+    image: "/feedly.png",
     slug: "feedly",
     stack: ["FastAPI", "Python", "React", "PostgreSQL"],
     highlightedStack: "PostgreSQL",
@@ -31,7 +31,7 @@ const projects: ProjectData[] = [
   {
     title: "Tech Portfolio Directory",
     description: "Aggregator for tech portfolios with advanced filtering.",
-    image: "/projects/portfolio-directory.png",
+    image: "/foliofy.png",
     slug: "tech-portfolio-directory",
     stack: ["Next.js", "Firebase", "Puppeteer", "Tailwind CSS"],
     highlightedStack: "Firebase",
@@ -39,7 +39,7 @@ const projects: ProjectData[] = [
   {
     title: "Ubuntu App / Library Manager",
     description: "Desktop-grade library management system.",
-    image: "/projects/ubuntu-lib.png", // Added image path
+    image: "/ubuntu-lib.png", // Added image path
     slug: "ubuntu-app-library-manager",
     stack: ["React", "Java EE", "Electron", "MySQL"],
     highlightedStack: "Electron",
