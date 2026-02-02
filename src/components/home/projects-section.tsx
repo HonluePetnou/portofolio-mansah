@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { ProjectCard, ProjectData } from "@/components/projects/project-card";
+import { FadeUp, StaggerContainer } from "@/lib/animations";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
@@ -51,23 +52,23 @@ export function ProjectsSection() {
             Case studies in reliability and impact
           </p>
 
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 mx-auto">
-            {featuredProjects.map((project, index) => (
-              <motion.div
-                key={project.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                viewport={{ once: true }}
-              >
+          <motion.div
+            variants={StaggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 mx-auto"
+          >
+            {featuredProjects.map((project) => (
+              <motion.div key={project.title} variants={FadeUp}>
                 <ProjectCard project={project} />
               </motion.div>
             ))}
-          </div>
+          </motion.div>
 
           <div className="flex justify-center mt-12">
             <Link href="/projects">
-              <button className="group flex items-center gap-2 px-6 py-3 rounded-full border border-white/10 bg-white/5 hover:bg-white/10 transition-all text-white font-medium">
+              <button className="group flex items-center gap-2 px-6 py-3 rounded-full border border-black/10 dark:border-white/10 bg-white/50 dark:bg-white/5 hover:bg-black/5 dark:hover:bg-white/10 transition-all text-gray-900 dark:text-white font-medium backdrop-blur-sm">
                 View All Projects
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
               </button>

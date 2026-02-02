@@ -68,7 +68,7 @@ export function Navbar() {
 
   const handleClick = (
     e: React.MouseEvent<HTMLAnchorElement>,
-    href: string
+    href: string,
   ) => {
     setIsOpen(false);
     // Only intercept and smooth scroll if we are already on the home page
@@ -101,7 +101,7 @@ export function Navbar() {
             "pointer-events-auto flex items-center justify-between gap-2 md:gap-6 px-4 md:px-6 py-3 md:py-4 rounded-full backdrop-blur-xl transition-all duration-300 max-w-full",
             isDark
               ? "bg-black/80 border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.4)]"
-              : "bg-white/90 border border-gray-200/50 shadow-[0_8px_32px_rgba(0,0,0,0.08),0_0_1px_rgba(0,0,0,0.05)]"
+              : "bg-white/90 border border-gray-200/50 shadow-[0_8px_32px_rgba(0,0,0,0.08),0_0_1px_rgba(0,0,0,0.05)]",
           )}
         >
           {/* Mobile Menu Button */}
@@ -131,8 +131,8 @@ export function Navbar() {
                         ? "text-white"
                         : "text-gray-400 hover:text-gray-200"
                       : isActive
-                      ? "text-black"
-                      : "text-gray-600 hover:text-gray-900"
+                        ? "text-black"
+                        : "text-gray-600 hover:text-gray-900",
                   )}
                 >
                   {item.name}
@@ -156,7 +156,7 @@ export function Navbar() {
                           "absolute top-0 left-1/2 -translate-x-1/2 h-0.5 w-12 rounded-full",
                           isDark
                             ? "bg-white shadow-[0_0_20px_rgba(255,255,255,0.8),0_0_40px_rgba(255,255,255,0.4),0_0_60px_rgba(255,255,255,0.2)]"
-                            : "bg-black shadow-[0_4px_12px_rgba(0,0,0,0.25),0_2px_4px_rgba(0,0,0,0.15)]"
+                            : "bg-black shadow-[0_4px_12px_rgba(0,0,0,0.25),0_2px_4px_rgba(0,0,0,0.15)]",
                         )}
                         initial={false}
                         transition={{
@@ -197,7 +197,7 @@ export function Navbar() {
                 "absolute top-20 left-4 right-4 p-6 rounded-3xl border lg:hidden overflow-hidden",
                 isDark
                   ? "bg-gray-900/90 border-white/10 shadow-2xl"
-                  : "bg-white/95 border-gray-200 shadow-xl text-black"
+                  : "bg-white/95 border-gray-200 shadow-xl text-black",
               )}
             >
               <div className="flex flex-col gap-4">
@@ -216,8 +216,8 @@ export function Navbar() {
                         isActive
                           ? "text-neon-blue"
                           : isDark
-                          ? "text-gray-400"
-                          : "text-gray-600"
+                            ? "text-gray-400"
+                            : "text-gray-600",
                       )}
                     >
                       {item.name}

@@ -45,7 +45,7 @@ export function TechStack() {
                     "text-lg font-semibold text-foreground transition-colors",
                     tech.color === "purple"
                       ? "group-hover:text-neon-purple"
-                      : "group-hover:text-neon-blue"
+                      : "group-hover:text-neon-blue",
                   )}
                 >
                   {tech.name}

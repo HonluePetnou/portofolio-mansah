@@ -3,15 +3,16 @@
 import { motion } from "framer-motion";
 import { GlassCard } from "@/components/ui/glass-card";
 import { Mail, Linkedin, Github, MapPin, Send } from "lucide-react";
+import { ScaleIn } from "@/lib/animations";
 
 export function ContactSection() {
   return (
     <section id="contact" className="py-20 scroll-mt-12 overflow-x-hidden">
       <div className="container mx-auto px-4 md:px-8 lg:px-16 xl:px-24">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
+          variants={ScaleIn}
+          initial="hidden"
+          whileInView="visible"
           viewport={{ once: true }}
         >
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">

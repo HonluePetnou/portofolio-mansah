@@ -30,8 +30,8 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           {/* Background Blobs */}
-          <div className="fixed top-[-20%] left-[-10%] h-[50%] bg-blue-900/10 bg-blob animate-blob w-full"/>
-          <div className="fixed bottom-[-20%] right-[-10%] h-[50%] bg-blue-800/10 bg-blob animate-blob animation-delay-2000 w-full" />
+          <div className="fixed top-[-20%] left-[-10%] h-[50%] bg-blue-900/10 bg-blob animate-blob w-full" />
+          <div className="fixed bottom-[-20%] right-[10%] h-[50%] bg-blue-800/10 bg-blob animate-blob animation-delay-2000 w-full" />
 
           <Navbar />
           <main className="w-full pt-20 min-h-[calc(100vh-100px)]">

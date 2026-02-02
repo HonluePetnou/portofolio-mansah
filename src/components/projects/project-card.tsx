@@ -59,7 +59,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
                   "text-[11px] font-medium px-2.5 py-0.5",
                   tech === project.highlightedStack
                     ? "bg-neon-purple/10 border-neon-purple/20 text-neon-purple"
-                    : "bg-neon-blue/10 border-neon-blue/20 text-neon-blue"
+                    : "bg-neon-blue/10 border-neon-blue/20 text-neon-blue",
                 )}
               >
                 {tech}
