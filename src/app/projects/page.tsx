@@ -4,9 +4,9 @@ import { Breadcrumbs } from "@/components/shared/breadcrumbs";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Projects | Honlue Petnou Frederic Armel",
+  title: "Projects | Mansah - Honlue Petnou Frederic Armel",
   description:
-    "Case studies of my work in Frontend Engineering, QA, and Product Development by Honlue Petnou Frederic Armel.",
+    "Case studies of my work in Frontend Engineering, QA, and Product Development by Mansah (Honlue Petnou Frederic Armel).",
 };
 
 const projects: ProjectData[] = [
@@ -39,7 +39,7 @@ const projects: ProjectData[] = [
   {
     title: "Ubuntu App / Library Manager",
     description: "Desktop-grade library management system.",
-    image: "/ubuntu-lib.png", // Added image path
+    image: "/foliofy.png",
     slug: "ubuntu-app-library-manager",
     stack: ["React", "Java EE", "Electron", "MySQL"],
     highlightedStack: "Electron",
@@ -48,7 +48,7 @@ const projects: ProjectData[] = [
 
 export default function ProjectsPage() {
   return (
-    <div className="py-10 max-w-7xl mx-auto px-4 md:px-8">
+    <div className="container section-py">
       <Breadcrumbs items={[{ label: "Projects", href: "/projects" }]} />
 
       <SectionHeader

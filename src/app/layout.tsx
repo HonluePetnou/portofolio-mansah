@@ -8,9 +8,9 @@ import { Footer } from "@/components/layout/footer";
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
 export const metadata: Metadata = {
-  title: "Honlue Petnou Frederic Armel | Senior Frontend Engineer",
+  title: "Mansah | Honlue Petnou Frederic Armel - Senior Frontend Engineer",
   description:
-    "Honlue Petnou Frederic Armel - Senior Frontend Engineer & QA — Product-Oriented. Designing, testing, and shipping reliable digital products.",
+    "Mansah (Honlue Petnou Frederic Armel) - Senior Frontend Engineer & QA — Product-Oriented. Designing, testing, and shipping reliable digital products.",
 };
 
 export default function RootLayout({
@@ -19,9 +19,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="overflow-x-hidden" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning>
       <body
-        className={`${inter.variable} min-h-screen overflow-x-hidden antialiased selection:bg-neon-blue/30 selection:text-white`}
+        className={`${inter.variable} min-h-screen antialiased selection:bg-brand-primary/30 selection:text-white`}
       >
         <ThemeProvider
           attribute="class"
@@ -29,12 +29,12 @@ export default function RootLayout({
           enableSystem={true}
           disableTransitionOnChange
         >
-          {/* Background Blobs */}
-          <div className="fixed top-[-20%] left-[-10%] h-[50%] bg-blue-900/10 bg-blob animate-blob w-full" />
-          <div className="fixed bottom-[-20%] right-[10%] h-[50%] bg-blue-800/10 bg-blob animate-blob animation-delay-2000 w-full" />
+          {/* Background Glows */}
+          <div className="fixed top-[-10%] left-[-10%] h-[40%] w-[50%] bg-brand-primary/5 rounded-full blur-[120px] pointer-events-none -z-10" />
+          <div className="fixed bottom-[-10%] right-[10%] h-[40%] w-[50%] bg-brand-accent/5 rounded-full blur-[120px] pointer-events-none -z-10" />
 
           <Navbar />
-          <main className="w-full pt-20 min-h-[calc(100vh-100px)]">
+          <main className="w-full pt-12 min-h-[calc(100vh-100px)]">
             {children}
           </main>
           <Footer />

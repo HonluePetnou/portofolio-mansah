@@ -52,7 +52,7 @@ const strengths = [
 export function Strengths() {
   return (
     <div className="mt-20">
-      <h2 className="mb-10 text-3xl font-bold text-white text-center">
+      <h2 className="mb-10 text-3xl font-bold text-foreground text-center">
         Personal Strengths
       </h2>
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -61,11 +61,11 @@ export function Strengths() {
             key={index}
             className="flex flex-col items-center text-center p-6"
           >
-            <div className="mb-4 p-3 rounded-full bg-white/5 text-neon-blue">
+            <div className="mb-4 p-3 rounded-full bg-brand-primary/5 dark:bg-white/5 text-brand-primary dark:text-brand-accent">
               <item.icon className="h-8 w-8" />
             </div>
-            <h3 className="text-lg font-bold text-white mb-2">{item.title}</h3>
-            <p className="text-gray-400 text-sm">{item.description}</p>
+            <h3 className="text-lg font-bold text-foreground mb-2">{item.title}</h3>
+            <p className="text-muted-foreground dark:text-gray-400 text-sm">{item.description}</p>
           </GlassCard>
         ))}
       </div>

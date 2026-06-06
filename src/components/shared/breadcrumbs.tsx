@@ -27,7 +27,7 @@ export function Breadcrumbs({ items }: BreadcrumbsProps) {
         <div key={item.href} className="flex items-center gap-2">
           <ChevronRight className="w-3 h-3 text-muted/40" />
           {index === items.length - 1 ? (
-            <span className="text-neon-blue font-bold">{item.label}</span>
+            <span className="text-brand-primary font-bold">{item.label}</span>
           ) : (
             <Link
               href={item.href}

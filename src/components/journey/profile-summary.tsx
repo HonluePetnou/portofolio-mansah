@@ -5,10 +5,10 @@ import { GlassCard } from "@/components/ui/glass-card";
 export function ProfileSummary() {
   return (
     <GlassCard className="mb-10 p-8 md:p-12">
-      <h2 className="text-2xl font-bold text-white mb-6">
+      <h2 className="text-2xl font-bold text-foreground mb-6">
         Engineering Profile
       </h2>
-      <div className="space-y-4 text-gray-300">
+      <div className="space-y-4 text-muted-foreground dark:text-gray-300">
         <p>
           Aspiring Software Engineer currently pursuing an Engineering Degree at{" "}
           <strong>

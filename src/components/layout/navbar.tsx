@@ -6,30 +6,37 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { useTheme } from "next-themes";
-import { Menu, X } from "lucide-react";
+import { Menu, X, ArrowRight } from "lucide-react";
+import Link from "next/link";
 
 const navItems = [
-  { name: "Home", href: "/" },
-  { name: "About", href: "/#about" },
-  { name: "Projects", href: "/#projects" },
-  { name: "Experience", href: "/#experience" },
-  { name: "Blog", href: "/#blog" },
-  { name: "Contact", href: "/#contact" },
+  { name: "HOME", href: "/" },
+  { name: "ABOUT", href: "/#about" },
+  { name: "SERVICES", href: "/#services" },
+  { name: "WORKS", href: "/#projects" },
+  { name: "EXPERIENCE", href: "/#experience" },
+  { name: "BLOG", href: "/#blog" },
 ];
 
 export function Navbar() {
   const pathname = usePathname();
   const [activeSection, setActiveSection] = useState("home");
   const [isOpen, setIsOpen] = useState(false);
-  const { theme, systemTheme } = useTheme();
+  const [scrolled, setScrolled] = useState(false);
+  const { resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
-  // Determine the actual theme being used
-  const currentTheme = theme === "system" ? systemTheme : theme;
-  const isDark = currentTheme === "dark";
+  const isDark = resolvedTheme === "dark" || resolvedTheme === undefined;
 
   useEffect(() => {
     setMounted(true);
+
+    const handleScrollState = () => {
+      setScrolled(window.scrollY > 20);
+    };
+
+    window.addEventListener("scroll", handleScrollState);
+    return () => window.removeEventListener("scroll", handleScrollState);
   }, []);
 
   useEffect(() => {
@@ -39,12 +46,13 @@ export function Navbar() {
       const sections = [
         "home",
         "about",
+        "services",
         "projects",
         "experience",
         "blog",
         "contact",
       ];
-      const scrollPosition = window.scrollY + 100;
+      const scrollPosition = window.scrollY + 120;
 
       for (const section of sections) {
         const element = document.getElementById(section);
@@ -71,7 +79,6 @@ export function Navbar() {
     href: string,
   ) => {
     setIsOpen(false);
-    // Only intercept and smooth scroll if we are already on the home page
     if (pathname === "/") {
       if (href === "/") {
         e.preventDefault();
@@ -88,93 +95,76 @@ export function Navbar() {
     }
   };
 
-  // Avoid hydration mismatch
   if (!mounted) {
     return null;
   }
 
   return (
-    <header className="fixed top-2 inset-x-0 z-50 px-4 pointer-events-none w-screen">
-      <div className="flex justify-center w-full">
-        <nav
-          className={cn(
-            "pointer-events-auto flex items-center justify-between gap-2 md:gap-6 px-4 md:px-6 py-3 md:py-4 rounded-full backdrop-blur-xl transition-all duration-300 max-w-full",
-            isDark
-              ? "bg-black/80 border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.4)]"
-              : "bg-white/90 border border-gray-200/50 shadow-[0_8px_32px_rgba(0,0,0,0.08),0_0_1px_rgba(0,0,0,0.05)]",
-          )}
-        >
-          {/* Mobile Menu Button */}
+    <header
+      className={cn(
+        "fixed top-0 inset-x-0 z-50 transition-all duration-300 border-b border-transparent flex items-center",
+        scrolled
+          ? "h-16 bg-white/80 dark:bg-brand-dark/80 backdrop-blur-xl border-gray-100 dark:border-white/5 shadow-md dark:shadow-lg"
+          : "h-20 bg-transparent"
+      )}
+    >
+      <div className="container h-full flex items-center justify-between">
+        {/* Logo */}
+        <Link href="/" className="flex items-center gap-1.5 group">
+          <span className="text-xl font-bold tracking-tight text-foreground">
+            Mansah
+          </span>
+          <span className="h-2 w-2 rounded-full bg-brand-primary dark:bg-brand-accent animate-pulse" />
+        </Link>
+
+        {/* Center - Desktop Nav Items */}
+        <nav className="hidden lg:flex items-center gap-8">
+          {navItems.map((item) => {
+            const sectionId =
+              item.href === "/"
+                ? "home"
+                : item.href === "/#projects"
+                ? "projects"
+                : item.href.substring(2);
+            const isActive = pathname === "/" && activeSection === sectionId;
+            return (
+              <a
+                key={item.href}
+                href={item.href}
+                onClick={(e) => handleClick(e, item.href)}
+                className={cn(
+                  "text-xs font-semibold tracking-wider transition-colors hover:text-brand-primary dark:hover:text-brand-accent cursor-pointer",
+                  isActive ? "text-brand-primary dark:text-brand-accent" : "text-gray-600 dark:text-gray-400"
+                )}
+              >
+                {item.name}
+              </a>
+            );
+          })}
+        </nav>
+
+        {/* Right Actions */}
+        <div className="hidden lg:flex items-center gap-4">
+          <ThemeToggle />
+          <Link href="/#contact">
+            <button className="flex items-center gap-2 px-5 py-2.5 rounded-lg bg-brand-primary text-white font-semibold text-xs tracking-wider uppercase hover:bg-brand-primary/95 transition-all shadow-[0_4px_14px_rgba(94,80,249,0.3)]">
+              CONTACT ME
+              <ArrowRight className="w-3.5 h-3.5" />
+            </button>
+          </Link>
+        </div>
+
+        {/* Mobile Actions & Menu Toggle */}
+        <div className="flex lg:hidden items-center gap-3">
+          <ThemeToggle />
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="lg:hidden p-2 hover:bg-white/10 rounded-full transition-colors"
+            className="p-2 hover:bg-white/10 rounded-lg transition-colors text-foreground"
             aria-label="Toggle menu"
           >
-            {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
-
-          {/* Desktop Nav Items */}
-          <div className="hidden lg:flex items-center gap-1">
-            {navItems.map((item) => {
-              const sectionId =
-                item.href === "/" ? "home" : item.href.substring(2);
-              const isActive = pathname === "/" && activeSection === sectionId;
-              return (
-                <a
-                  key={item.href}
-                  href={item.href}
-                  onClick={(e) => handleClick(e, item.href)}
-                  className={cn(
-                    "relative px-6 py-2.5 text-[15px] font-medium transition-all cursor-pointer",
-                    isDark
-                      ? isActive
-                        ? "text-white"
-                        : "text-gray-400 hover:text-gray-200"
-                      : isActive
-                        ? "text-black"
-                        : "text-gray-600 hover:text-gray-900",
-                  )}
-                >
-                  {item.name}
-                  {isActive && (
-                    <>
-                      {isDark && (
-                        <motion.div
-                          layoutId="navbar-glow"
-                          className="absolute top-0 left-1/2 -translate-x-1/2 h-0.5 w-16 rounded-full bg-white blur-sm opacity-80"
-                          initial={false}
-                          transition={{
-                            type: "spring",
-                            stiffness: 380,
-                            damping: 30,
-                          }}
-                        />
-                      )}
-                      <motion.div
-                        layoutId="navbar-indicator"
-                        className={cn(
-                          "absolute top-0 left-1/2 -translate-x-1/2 h-0.5 w-12 rounded-full",
-                          isDark
-                            ? "bg-white shadow-[0_0_20px_rgba(255,255,255,0.8),0_0_40px_rgba(255,255,255,0.4),0_0_60px_rgba(255,255,255,0.2)]"
-                            : "bg-black shadow-[0_4px_12px_rgba(0,0,0,0.25),0_2px_4px_rgba(0,0,0,0.15)]",
-                        )}
-                        initial={false}
-                        transition={{
-                          type: "spring",
-                          stiffness: 380,
-                          damping: 30,
-                        }}
-                      />
-                    </>
-                  )}
-                </a>
-              );
-            })}
-          </div>
-
-          {/* Theme Toggle */}
-          <ThemeToggle />
-        </nav>
+        </div>
       </div>
 
       {/* Mobile Menu Drawer */}
@@ -186,24 +176,26 @@ export function Navbar() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setIsOpen(false)}
-              className="fixed inset-0 bg-black/40 backdrop-blur-sm z-[-1] lg:hidden"
+              className={cn(
+                "fixed inset-0 bg-black/60 backdrop-blur-sm z-40 lg:hidden",
+                scrolled ? "top-16" : "top-20"
+              )}
             />
             <motion.div
-              initial={{ opacity: 0, scale: 0.95, y: -20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.95, y: -20 }}
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.2 }}
-              className={cn(
-                "absolute top-20 left-4 right-4 p-6 rounded-3xl border lg:hidden overflow-hidden",
-                isDark
-                  ? "bg-gray-900/90 border-white/10 shadow-2xl"
-                  : "bg-white/95 border-gray-200 shadow-xl text-black",
-              )}
+              className="absolute top-full left-0 right-0 bg-white/95 dark:bg-brand-dark/95 border-b border-gray-100 dark:border-white/10 p-6 z-50 lg:hidden"
             >
               <div className="flex flex-col gap-4">
                 {navItems.map((item) => {
                   const sectionId =
-                    item.href === "/" ? "home" : item.href.substring(2);
+                    item.href === "/"
+                      ? "home"
+                      : item.href === "/#projects"
+                      ? "projects"
+                      : item.href.substring(2);
                   const isActive =
                     pathname === "/" && activeSection === sectionId;
                   return (
@@ -212,18 +204,24 @@ export function Navbar() {
                       href={item.href}
                       onClick={(e) => handleClick(e, item.href)}
                       className={cn(
-                        "text-lg font-medium py-2 transition-colors",
+                        "text-sm font-semibold tracking-wider py-2 transition-colors",
                         isActive
-                          ? "text-neon-blue"
-                          : isDark
-                            ? "text-gray-400"
-                            : "text-gray-600",
+                          ? "text-brand-primary dark:text-brand-accent"
+                          : "text-gray-600 dark:text-gray-400 hover:text-brand-primary dark:hover:text-white"
                       )}
                     >
                       {item.name}
                     </a>
                   );
                 })}
+                <Link
+                  href="/#contact"
+                  onClick={() => setIsOpen(false)}
+                  className="mt-2 w-full flex items-center justify-center gap-2 px-5 py-3 rounded-lg bg-brand-primary text-white font-semibold text-xs tracking-wider uppercase"
+                >
+                  CONTACT ME
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
               </div>
             </motion.div>
           </>

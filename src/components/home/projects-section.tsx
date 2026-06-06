@@ -12,7 +12,7 @@ const featuredProjects: ProjectData[] = [
     description:
       "AI-integrated hackathon project optimizing resource management.",
     image: "/onecontrol.png",
-    slug: "onecontrol",
+    slug: "one-control",
     stack: ["Gemini AI", "Next.js", "Python"],
     highlightedStack: "Gemini AI",
   },
@@ -37,44 +37,48 @@ const featuredProjects: ProjectData[] = [
 
 export function ProjectsSection() {
   return (
-    <section id="projects" className="py-20 scroll-mt-12 overflow-x-hidden">
-      <div className="container mx-auto px-4 md:px-8 lg:px-16 xl:px-24">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          viewport={{ once: true }}
-        >
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">
-            Featured <span className="text-neon-blue">Projects</span>
-          </h2>
-          <p className="text-center text-muted mb-12 max-w-2xl mx-auto">
-            Case studies in reliability and impact
-          </p>
-
-          <motion.div
-            variants={StaggerContainer}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-            className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 mx-auto"
-          >
-            {featuredProjects.map((project) => (
-              <motion.div key={project.title} variants={FadeUp}>
-                <ProjectCard project={project} />
-              </motion.div>
-            ))}
-          </motion.div>
-
-          <div className="flex justify-center mt-12">
-            <Link href="/projects">
-              <button className="group flex items-center gap-2 px-6 py-3 rounded-full border border-black/10 dark:border-white/10 bg-white/50 dark:bg-white/5 hover:bg-black/5 dark:hover:bg-white/10 transition-all text-gray-900 dark:text-white font-medium backdrop-blur-sm">
-                View All Projects
-                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-              </button>
-            </Link>
+    <section id="projects" className="section-py gap-y-md scroll-mt-20 overflow-hidden bg-brand-alt border-t border-b border-gray-100/50 dark:border-white/5">
+      <div className="container">
+        
+        {/* Section Header */}
+        <div className="mb-16 text-center">
+          <div className="inline-flex items-center gap-2 text-brand-primary dark:text-brand-accent text-xs font-bold tracking-widest uppercase mb-4 justify-center">
+            <span className="h-1.5 w-1.5 rounded-full bg-brand-primary dark:bg-brand-accent" />
+            PORTFOLIO
           </div>
+          <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-foreground">
+            Selected Works
+          </h2>
+          <p className="mt-4 text-muted-foreground dark:text-gray-400 max-w-xl mx-auto text-sm leading-relaxed">
+            Case studies in software engineering reliability and impact.
+          </p>
+        </div>
+
+        {/* Projects Grid */}
+        <motion.div
+          variants={StaggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 mx-auto max-w-6xl"
+        >
+          {featuredProjects.map((project) => (
+            <motion.div key={project.title} variants={FadeUp}>
+              <ProjectCard project={project} isAlt={true} />
+            </motion.div>
+          ))}
         </motion.div>
+
+        {/* View All Button */}
+        <div className="flex justify-center mt-12">
+          <Link href="/projects">
+            <button className="group flex items-center gap-2 px-6 py-3.5 rounded-lg border border-gray-200 dark:border-white/10 bg-white dark:bg-card-bg-alt hover:bg-gray-50 dark:hover:bg-[#222033] transition-all text-foreground font-bold text-xs tracking-wider uppercase">
+              View All Projects
+              <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
+            </button>
+          </Link>
+        </div>
+
       </div>
     </section>
   );

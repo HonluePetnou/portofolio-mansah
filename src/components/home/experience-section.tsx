@@ -13,8 +13,8 @@ const experiences = [
       "Leading frontend architecture and ensuring product reliability.",
     achievements: [
       "Ownership of frontend architecture and decision making",
-      "Implemented BDD automation using Cucumber",
-      "Close collaboration with product and backend teams",
+      "Implemented BDD automation using Cucumber for regression prevention",
+      "Close collaboration with product and backend teams to streamline delivery",
     ],
   },
   {
@@ -24,18 +24,18 @@ const experiences = [
     description: "Managed frontend delivery and team coordination.",
     achievements: [
       "Developed complex React-based frontend interfaces",
-      "Coordinated team tasks and tracked KPIs",
-      "Delivered high-quality features under strict constraints",
+      "Coordinated team tasks and tracked KPIs for project success",
+      "Delivered high-quality features under strict real-world constraints",
     ],
   },
   {
     role: "Software Developer",
     company: "SOLUTY",
-    period: "Software Agency",
+    period: "Jan 2024 – Apr 2025",
     description:
       "Co-building software products with a focus on technical excellence.",
     achievements: [
-      "Participated in full lifecycle of software product building",
+      "Participated in the full lifecycle of software product building",
       "Contributed to key technical and product decisions",
     ],
   },
@@ -43,65 +43,66 @@ const experiences = [
 
 export function ExperienceSection() {
   return (
-    <section id="experience" className="py-20 scroll-mt-12 overflow-x-hidden">
-      <div className="container mx-auto px-4 md:px-8 lg:px-16 xl:px-24">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          viewport={{ once: true }}
-        >
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">
-            Professional <span className="text-neon-blue">Experience</span>
+    <section id="experience" className="section-py gap-y-md scroll-mt-20 overflow-hidden">
+      <div className="container">
+        
+        {/* Section Header */}
+        <div className="mb-16 text-center">
+          <div className="inline-flex items-center gap-2 text-brand-primary dark:text-brand-accent text-xs font-bold tracking-widest uppercase mb-4 justify-center">
+            <span className="h-1.5 w-1.5 rounded-full bg-brand-primary dark:bg-brand-accent" />
+            EXPERIENCE
+          </div>
+          <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-foreground">
+            Professional Experience
           </h2>
-          <p className="text-center text-muted mb-12 max-w-2xl mx-auto">
+          <p className="mt-4 text-muted-foreground dark:text-gray-400 max-w-xl mx-auto text-sm leading-relaxed">
             My journey in building reliable digital products
           </p>
+        </div>
 
-          <div className="max-w-4xl mx-auto space-y-6">
-            {experiences.map((exp, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                viewport={{ once: true }}
-              >
-                <GlassCard className="p-6">
-                  <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-4">
-                    <div className="flex items-start gap-4">
-                      <div className="p-3 rounded-full bg-neon-purple/20 shrink-0">
-                        <Briefcase className="w-6 h-6 text-neon-purple" />
-                      </div>
-                      <div>
-                        <h3 className="text-xl font-bold text-foreground">
-                          {exp.role}
-                        </h3>
-                        <p className="text-neon-blue font-medium">
-                          {exp.company}
-                        </p>
-                        <p className="text-muted text-sm mt-2">
-                          {exp.description}
-                        </p>
-                      </div>
+        <div className="max-w-4xl mx-auto space-y-6">
+          {experiences.map((exp, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              viewport={{ once: true }}
+            >
+              <GlassCard className="p-6">
+                <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-4">
+                  <div className="flex items-start gap-4">
+                    <div className="p-3 rounded-full bg-brand-primary/10 dark:bg-brand-accent/10 text-brand-primary dark:text-brand-accent shrink-0">
+                      <Briefcase className="w-6 h-6" />
                     </div>
-                    <div className="flex items-center gap-2 text-sm text-muted bg-glass-bg border border-glass-border px-3 py-1.5 rounded-full w-fit">
-                      <Calendar className="w-4 h-4" />
-                      {exp.period}
+                    <div className="text-left">
+                      <h3 className="text-xl font-bold text-foreground">
+                        {exp.role}
+                      </h3>
+                      <p className="text-brand-primary dark:text-brand-accent font-semibold text-sm mt-1">
+                        {exp.company}
+                      </p>
+                      <p className="text-muted-foreground dark:text-gray-400 text-xs mt-2 leading-relaxed">
+                        {exp.description}
+                      </p>
                     </div>
                   </div>
-                  <ul className="list-disc list-inside space-y-2 text-muted dark:text-gray-300 ml-16 mt-4">
-                    {exp.achievements.map((item, i) => (
-                      <li key={i} className="text-sm leading-relaxed">
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                </GlassCard>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
+                  <div className="flex items-center gap-2 text-xs font-semibold text-muted-foreground dark:text-gray-400 bg-gray-50 dark:bg-brand-dark/50 border border-gray-200/50 dark:border-white/5 px-3.5 py-1.5 rounded-full w-fit shrink-0">
+                    <Calendar className="w-3.5 h-3.5" />
+                    {exp.period}
+                  </div>
+                </div>
+                <ul className="list-disc list-inside space-y-2 text-muted-foreground dark:text-gray-300 ml-0 md:ml-16 mt-4 text-left">
+                  {exp.achievements.map((item, i) => (
+                    <li key={i} className="text-xs leading-relaxed">
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </GlassCard>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </section>
   );

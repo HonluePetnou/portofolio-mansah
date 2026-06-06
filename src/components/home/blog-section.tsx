@@ -1,11 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { GlassCard } from "@/components/ui/glass-card";
-import { SectionHeader } from "@/components/shared/section-header";
-import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
 import { ArrowRight, BookOpen } from "lucide-react";
+
 
 const recentPosts = [
   {
@@ -36,14 +34,25 @@ const recentPosts = [
 
 export function BlogSection() {
   return (
-    <section id="blog" className="py-24 scroll-mt-12 overflow-x-hidden">
-      <div className="container mx-auto px-4 md:px-8 lg:px-16 xl:px-24">
-        <SectionHeader
-          title="Engineering Insights"
-          subtitle="Latest thoughts on technology, product, and quality."
-        />
+    <section id="blog" className="section-py gap-y-md scroll-mt-20 overflow-hidden bg-transparent">
+      <div className="container">
+        
+        {/* Section Header */}
+        <div className="mb-16 text-center">
+          <div className="inline-flex items-center gap-2 text-brand-primary dark:text-brand-accent text-xs font-bold tracking-widest uppercase mb-4 justify-center">
+            <span className="h-1.5 w-1.5 rounded-full bg-brand-primary dark:bg-brand-accent" />
+            INSIGHTS
+          </div>
+          <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-foreground">
+            Engineering Blog
+          </h2>
+          <p className="mt-4 text-muted-foreground dark:text-gray-400 max-w-xl mx-auto text-sm leading-relaxed">
+            Latest thoughts on software engineering, product architecture, and quality assurance.
+          </p>
+        </div>
 
-        <div className="grid gap-6 md:grid-cols-3 mb-12">
+        {/* Blog Posts Grid */}
+        <div className="grid gap-6 md:grid-cols-3 mb-12 max-w-6xl mx-auto">
           {recentPosts.map((post, index) => (
             <motion.div
               key={post.slug}
@@ -53,43 +62,43 @@ export function BlogSection() {
               viewport={{ once: true }}
             >
               <Link href={`/blog/${post.slug}`} className="block group h-full">
-                <GlassCard className="h-full flex flex-col p-8 group-hover:border-neon-blue/30 transition-all">
-                  <div className="flex justify-between items-start mb-4">
-                    <Badge
-                      variant="outline"
-                      className="text-xs text-neon-blue border-neon-blue/20 bg-neon-blue/5"
-                    >
-                      {post.category}
-                    </Badge>
-                    <span className="text-xs text-gray-500">{post.date}</span>
+                <div className="h-full flex flex-col justify-between p-8 rounded-2xl border border-gray-100 dark:border-white/5 bg-white dark:bg-card-bg hover:border-brand-primary/30 dark:hover:border-brand-primary/30 transition-all duration-300 shadow-sm dark:shadow-lg hover:-translate-y-1.5">
+                  <div>
+                    <div className="flex justify-between items-center mb-4">
+                      <span className="text-[9px] font-bold tracking-wider uppercase px-2.5 py-0.5 rounded-full bg-brand-primary/15 border border-brand-primary/30 text-brand-primary">
+                        {post.category}
+                      </span>
+                      <span className="text-[10px] text-gray-500 dark:text-gray-500 font-medium">{post.date}</span>
+                    </div>
+                    
+                    <h3 className="text-lg font-bold text-foreground mb-3 group-hover:text-brand-primary transition-colors text-left leading-snug">
+                      {post.title}
+                    </h3>
+                    
+                    <p className="text-muted-foreground dark:text-gray-400 text-xs leading-relaxed text-left line-clamp-4">
+                      {post.excerpt}
+                    </p>
                   </div>
-                  <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-neon-blue transition-colors">
-                    {post.title}
-                  </h3>
-                  <p className="text-gray-600 dark:text-gray-400 text-sm grow">
-                    {post.excerpt}
-                  </p>
-                  <div className="mt-6 pt-4 border-t border-black/5 dark:border-white/5 flex items-center text-sm text-gray-700 dark:text-gray-300 group-hover:text-neon-blue transition-colors">
-                    Read more <ArrowRight className="ml-2 h-3 w-3" />
+                  
+                  <div className="mt-6 pt-4 border-t border-gray-100 dark:border-white/5 flex items-center text-xs font-bold text-muted-foreground dark:text-gray-300 group-hover:text-brand-primary transition-colors">
+                    Read more <ArrowRight className="ml-2 h-3.5 w-3.5" />
                   </div>
-                </GlassCard>
+                </div>
               </Link>
             </motion.div>
           ))}
         </div>
 
+        {/* Action Button */}
         <div className="flex justify-center">
           <Link href="/blog">
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="flex items-center gap-2 px-8 py-3 rounded-full bg-neon-blue text-white font-semibold hover:shadow-[0_0_20px_rgba(14,165,233,0.4)] transition-all shadow-lg"
-            >
+            <button className="group flex items-center gap-2 px-6 py-3.5 rounded-lg border border-gray-200 dark:border-white/10 bg-white dark:bg-card-bg hover:bg-gray-50 dark:hover:bg-[#1A1A1F] transition-all text-foreground font-bold text-xs tracking-wider uppercase">
               View All Posts
-              <BookOpen className="w-5 h-5" />
-            </motion.button>
+              <BookOpen className="w-3.5 h-3.5" />
+            </button>
           </Link>
         </div>
+
       </div>
     </section>
   );
