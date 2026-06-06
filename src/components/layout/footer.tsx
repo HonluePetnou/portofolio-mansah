@@ -69,15 +69,15 @@ const marqueeItems = [
 function Marquee() {
   const repeated = [...marqueeItems, ...marqueeItems];
   return (
-    <div className="overflow-hidden border-y border-white/5 py-4">
+    <div className="overflow-hidden border-y border-white/5 py-4 bg-white/[0.01] relative [mask-image:_linear-gradient(to_right,transparent_0,_black_10%,_black_90%,transparent_100%)]">
       <motion.div
         className="flex gap-12 whitespace-nowrap"
         animate={{ x: ["0%", "-50%"] }}
         transition={{ duration: 28, ease: "linear", repeat: Infinity }}
       >
         {repeated.map((item, i) => (
-          <span key={i} className="flex items-center gap-3 text-xs font-semibold tracking-widest uppercase text-white/20">
-            <span className="h-1 w-1 rounded-full bg-brand-accent inline-block" />
+          <span key={i} className="flex items-center gap-3 text-xs font-bold tracking-widest uppercase text-white/50 hover:text-white/80 transition-colors duration-200">
+            <span className="h-1.5 w-1.5 rounded-full bg-brand-accent inline-block shadow-[0_0_8px_rgba(57,255,20,0.8)]" />
             {item}
           </span>
         ))}
