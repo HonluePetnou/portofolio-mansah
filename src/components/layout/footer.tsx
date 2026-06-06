@@ -95,7 +95,7 @@ export function Footer() {
       <Marquee />
 
       {/* ── Main body ── */}
-      <div className="mx-auto max-w-7xl px-6 pt-6 pb-12 grid lg:grid-cols-[1fr_auto] gap-10 items-start">
+      <div className="mx-auto max-w-7xl px-6 pt-2 pb-12 grid lg:grid-cols-[1.8fr_1fr] gap-10 items-start">
 
         {/* Left — Big statement + CTA */}
         <div className="space-y-6">
@@ -148,7 +148,7 @@ export function Footer() {
         </div>
 
         {/* Right — Nav columns */}
-        <div className="grid grid-cols-3 gap-x-12 gap-y-8 lg:gap-x-16 pt-2">
+        <div className="grid grid-cols-3 gap-x-6 md:gap-x-8 lg:gap-x-10 gap-y-8 pt-2">
           {navCols.map((col) => (
             <div key={col.label}>
               <p className="mb-4 text-[10px] font-bold tracking-widest uppercase text-white/25">
