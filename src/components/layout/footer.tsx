@@ -98,46 +98,53 @@ export function Footer() {
       <div className="mx-auto max-w-7xl px-6 py-20 grid lg:grid-cols-[1fr_auto] gap-16 items-start">
 
         {/* Left — Big statement + CTA */}
-        <div className="space-y-10">
+        <div className="space-y-6">
 
           {/* Availability pill */}
-          <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-xs font-medium text-white/60">
-            <span className="h-2 w-2 rounded-full bg-brand-accent animate-pulse" />
+          <div className="inline-flex items-center gap-2.5 rounded-full border border-white/5 bg-white/[0.02] px-3.5 py-1 text-[11px] font-medium tracking-wide text-white/50">
+            <span className="relative flex h-1.5 w-1.5">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-accent/40 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-brand-accent"></span>
+            </span>
             Available for new projects
           </div>
 
           {/* Statement */}
           <div>
-            <h2 className="text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.05] text-white">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-semibold tracking-tight leading-[1.15] text-white">
               Let&apos;s build<br />
-              <span className="text-brand-accent">something</span><br />
+              <span className="text-brand-accent font-bold">something</span><br />
               remarkable.
             </h2>
           </div>
 
           {/* Email CTA */}
-          <a
-            href="mailto:fredericarmel.mansah@gmail.com"
-            className="group inline-flex items-center gap-3 text-sm md:text-base font-medium text-white/40 hover:text-white transition-colors duration-300"
-          >
-            <Mail className="w-4 h-4 shrink-0 text-brand-accent" />
-            fredericarmel.mansah@gmail.com
-            <ArrowUpRight className="w-4 h-4 opacity-0 -translate-y-1 translate-x-1 group-hover:opacity-100 group-hover:translate-y-0 group-hover:translate-x-0 transition-all duration-300" />
-          </a>
+          <div className="pt-2">
+            <a
+              href="mailto:fredericarmel.mansah@gmail.com"
+              className="group inline-flex items-center gap-2.5 text-xs md:text-sm font-medium text-white/40 hover:text-white transition-colors duration-300"
+            >
+              <Mail className="w-3.5 h-3.5 shrink-0 text-brand-accent" />
+              fredericarmel.mansah@gmail.com
+              <ArrowUpRight className="w-3.5 h-3.5 opacity-0 -translate-y-1 translate-x-1 group-hover:opacity-100 group-hover:translate-y-0 group-hover:translate-x-0 transition-all duration-300" />
+            </a>
+          </div>
 
           {/* Location */}
-          <div className="flex items-center gap-2 text-xs text-white/25">
-            <MapPin className="w-3.5 h-3.5" />
+          <div className="flex items-center gap-2 text-[11px] text-white/20">
+            <MapPin className="w-3 h-3" />
             Douala, Cameroon · UTC+1
           </div>
 
           {/* Start project button */}
-          <Link href="/#contact">
-            <button className="group mt-2 inline-flex items-center gap-2 rounded-full bg-brand-primary px-7 py-3.5 text-sm font-bold tracking-wide text-white hover:bg-brand-primary/90 transition-all shadow-[0_8px_30px_rgba(94,80,249,0.35)] hover:shadow-[0_8px_40px_rgba(94,80,249,0.5)] hover:scale-105">
-              Start a Project
-              <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-            </button>
-          </Link>
+          <div className="pt-2">
+            <Link href="/#contact">
+              <button className="group inline-flex items-center gap-2 rounded-full bg-brand-primary px-5 py-2.5 text-xs font-bold tracking-wide text-white hover:bg-brand-primary/95 transition-all shadow-[0_4px_20px_rgba(94,80,249,0.2)] hover:scale-102">
+                Start a Project
+                <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              </button>
+            </Link>
+          </div>
         </div>
 
         {/* Right — Nav columns */}
