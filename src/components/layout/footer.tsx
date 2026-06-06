@@ -29,7 +29,7 @@ const socials = [
 
 export function Footer() {
   return (
-    <footer className="w-full bg-white dark:bg-[#060608] text-black dark:text-white border-t border-black/5 dark:border-white/5 py-12 transition-colors duration-300">
+    <footer className="w-full bg-[#060608] dark:bg-[#121216] text-white border-t border-white/5 py-12 transition-colors duration-300">
       <div className="mx-auto max-w-6xl px-6">
         
         {/* Top section: Main Info & Links */}
@@ -38,43 +38,34 @@ export function Footer() {
           {/* Brand and Description */}
           <div className="space-y-3 max-w-sm">
             <Link href="/" className="flex items-center gap-1.5 w-fit group">
-              <span className="text-lg font-bold tracking-tight text-black dark:text-white hover:text-black/80 dark:hover:text-white/80 transition-colors">
+              <span className="text-lg font-bold tracking-tight text-white hover:text-white/80 transition-colors">
                 Mansah
               </span>
               <span className="h-1.5 w-1.5 rounded-full bg-brand-accent shadow-[0_0_8px_rgba(57,255,20,0.8)]" />
             </Link>
-            <p className="text-xs text-gray-500 dark:text-white/40 leading-relaxed">
+            <p className="text-xs text-white/40 leading-relaxed">
               Senior Frontend Engineer & QA Specialist. Building interactive, high-performance web products with clean code.
             </p>
           </div>
 
           {/* Quick Links & Status */}
           <div className="flex flex-col md:items-end gap-4">
-            {/* Status indicator */}
-            <div className="inline-flex items-center gap-2 text-[10px] font-mono uppercase tracking-wider text-emerald-600 dark:text-emerald-400 bg-emerald-500/5 dark:bg-emerald-500/5 border border-emerald-500/10 dark:border-emerald-500/10 rounded-full px-3 py-1">
-              <span className="relative flex h-1.5 w-1.5">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500/80 dark:bg-emerald-400/80 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500 dark:bg-emerald-400"></span>
-              </span>
-              <span>Available for projects</span>
-            </div>
-
             {/* Navigation links */}
             <div className="flex flex-wrap gap-x-6 gap-y-2 text-xs">
-              <Link href="/#about" className="text-gray-500 hover:text-black dark:text-white/50 dark:hover:text-white transition-colors">About</Link>
-              <Link href="/#services" className="text-gray-500 hover:text-black dark:text-white/50 dark:hover:text-white transition-colors">Services</Link>
-              <Link href="/#projects" className="text-gray-500 hover:text-black dark:text-white/50 dark:hover:text-white transition-colors">Works</Link>
-              <Link href="/#contact" className="text-gray-500 hover:text-black dark:text-white/50 dark:hover:text-white transition-colors">Contact</Link>
+              <Link href="/#about" className="text-white/50 hover:text-white transition-colors">About</Link>
+              <Link href="/#services" className="text-white/50 hover:text-white transition-colors">Services</Link>
+              <Link href="/#projects" className="text-white/50 hover:text-white transition-colors">Works</Link>
+              <Link href="/#contact" className="text-white/50 hover:text-white transition-colors">Contact</Link>
             </div>
           </div>
         </div>
 
         {/* Divider */}
-        <div className="h-px bg-black/5 dark:bg-white/5 w-full" />
+        <div className="h-px bg-white/5 w-full" />
 
         {/* Bottom section: Copyright and Socials */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-6">
-          <p className="text-[11px] text-gray-400 dark:text-white/30 text-center sm:text-left">
+          <p className="text-[11px] text-white/30 text-center sm:text-left">
             © {new Date().getFullYear()} Frédéric Armel Mansah. All rights reserved.
           </p>
 
@@ -87,7 +78,7 @@ export function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={label}
-                className="text-gray-400 hover:text-black dark:text-white/30 dark:hover:text-white hover:scale-105 dark:hover:scale-105 transition-all duration-200"
+                className="text-white/30 hover:text-white hover:scale-105 transition-all duration-200"
               >
                 <Icon />
               </a>
