@@ -91,23 +91,11 @@ export function Footer() {
   return (
     <footer className="w-full bg-[#060608] text-white">
 
-      {/* ── Marquee ── */}
-      <Marquee />
-
-      {/* ── Main body ── */}
-      <div className="mx-auto max-w-7xl px-6 pt-2 pb-12 grid lg:grid-cols-[1.8fr_1fr] gap-10 items-start">
+      {/* ─�      {/* ── Main body ── */}
+      <div className="mx-auto max-w-6xl px-6 pt-0 pb-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 items-start">
 
         {/* Left — Big statement + CTA */}
-        <div className="space-y-6">
-
-          {/* Availability pill */}
-          <div className="inline-flex items-center gap-2.5 rounded-full border border-white/5 bg-white/[0.02] px-3.5 py-1 text-[11px] font-medium tracking-wide text-white/50">
-            <span className="relative flex h-1.5 w-1.5">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-accent/40 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-brand-accent"></span>
-            </span>
-            Available for new projects
-          </div>
+        <div className="lg:col-span-2 space-y-6">
 
           {/* Statement */}
           <div>
@@ -146,29 +134,26 @@ export function Footer() {
             </Link>
           </div>
         </div>
-
-        {/* Right — Nav columns */}
-        <div className="grid grid-cols-3 gap-x-6 md:gap-x-8 lg:gap-x-10 gap-y-8 pt-2">
-          {navCols.map((col) => (
-            <div key={col.label}>
-              <p className="mb-4 text-[10px] font-bold tracking-widest uppercase text-white/25">
-                {col.label}
-              </p>
-              <ul className="space-y-3">
-                {col.links.map((link) => (
-                  <li key={link.name}>
-                    <Link
-                      href={link.href}
-                      className="text-sm text-white/45 hover:text-white transition-colors duration-200"
-                    >
-                      {link.name}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
+        {/* Right — Nav columns (directly mapped to main grid slots) */}
+        {navCols.map((col) => (
+          <div key={col.label} className="lg:col-span-1 pt-2">
+            <p className="mb-4 text-[10px] font-bold tracking-widest uppercase text-white/25">
+              {col.label}
+            </p>
+            <ul className="space-y-3">
+              {col.links.map((link) => (
+                <li key={link.name}>
+                  <Link
+                    href={link.href}
+                    className="text-sm text-white/45 hover:text-white transition-colors duration-200"
+                  >
+                    {link.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
       </div>
 
       {/* ── Divider ── */}
