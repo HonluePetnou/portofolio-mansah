@@ -131,4 +131,28 @@ const response = await model.generateContent({
       },
     ],
   },
+  {
+    title: "Building with a Product Mindset: The Agile QA Approach",
+    excerpt: "How small, multi-disciplinary teams ship higher quality features faster by breaking down the walls between specifications, engineering, and testing.",
+    category: "Product & Agility",
+    date: "Jul 10, 2025",
+    readTime: "4 min read",
+    slug: "product-mindset-agile-qa",
+    quote: "Agility is not about running faster; it is about building the right thing and having the automated safety net to adapt instantly to changes.",
+    introduction: "In high-growth startups and mature teams alike, the bottleneck is rarely coding speed—it is alignment. Shifting from project-based milestones to a continuous product mindset transforms how we specify, engineer, and release software.",
+    sections: [
+      {
+        heading: "Focus on Value over Tickets",
+        body: "Too often, development teams measure progress solely by sprint velocity or ticket completion rate. Real progress, however, is measured by customer value and code reliability. When QA analysts work side-by-side with developers from the start, they design features that are testable, accessible, and robust from the outset.",
+      },
+      {
+        heading: "The 'Three Amigos' Spec Alignment",
+        body: "Before a single line of code is written, a meeting of the 'Three Amigos' (Product Manager, Developer, and QA) takes place to dissect specifications. PMs bring the business requirements, Developers bring the system constraints, and QA brings the edge cases. This collaboration eliminates logic flaws before they turn into bugs.",
+      },
+      {
+        heading: "Feedback Loops & Continuous Shipping",
+        body: "Agility requires short feedback loops. Daily deployments are only safe when protected by automated unit, integration, and E2E regression test suites. By embedding automated quality checks directly into the CI/CD pipeline, the team can ship updates with zero fear.",
+      },
+    ],
+  },
 ];
