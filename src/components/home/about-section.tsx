@@ -63,7 +63,7 @@ export function AboutSection() {
   return (
     <section id="about" className="section-py gap-y-md scroll-mt-20 overflow-hidden bg-brand-alt border-t border-b border-gray-100/50 dark:border-white/5">
       <div className="container">
-        <div className="max-w-5xl mx-auto rounded-3xl overflow-hidden border border-gray-100 dark:border-white/5 bg-white dark:bg-card-bg-alt">
+        <div className="max-w-5xl mx-auto overflow-hidden">
           
           <div className="grid lg:grid-cols-12 items-stretch">
             

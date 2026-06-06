@@ -51,13 +51,13 @@ export function TechStack() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: "easeOut" }}
           viewport={{ once: true }}
-          className="max-w-6xl mx-auto rounded-2xl overflow-hidden border border-gray-200 dark:border-white/8 bg-white dark:bg-card-bg"
+          className="max-w-6xl mx-auto"
         >
           {/* Inner grid: [header] [2×2 cards] */}
           <div className="grid lg:grid-cols-[1fr_1fr_1fr]">
 
             {/* ── Left: Header cell (spans 2 rows on desktop) ── */}
-            <div className="lg:row-span-2 flex flex-col justify-center p-10 lg:p-12 border-b lg:border-b-0 lg:border-r border-gray-200 dark:border-white/8">
+            <div className="lg:row-span-2 flex flex-col justify-center p-10 lg:p-12 border-b lg:border-b-0 lg:border-r border-gray-200/60 dark:border-white/6">
               <div className="inline-flex items-center gap-2 text-brand-primary dark:text-brand-accent text-xs font-bold tracking-widest uppercase mb-5">
                 <span className="h-1.5 w-1.5 rounded-full bg-brand-primary dark:bg-brand-accent" />
                 SERVICES
@@ -93,9 +93,9 @@ export function TechStack() {
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   viewport={{ once: true }}
                   className={cn(
-                    "group relative flex flex-col justify-between p-8 transition-all duration-300 cursor-pointer hover:bg-gray-50/70 dark:hover:bg-white/[0.02]",
-                    isTopRow && "border-b border-gray-200 dark:border-white/8",
-                    isLeftCol && "border-r border-gray-200 dark:border-white/8"
+                    "group relative flex flex-col justify-between p-8 transition-all duration-300",
+                    isTopRow && "border-b border-gray-200/60 dark:border-white/6",
+                    isLeftCol && "border-r border-gray-200/60 dark:border-white/6"
                   )}
                 >
                   {/* Icon */}
