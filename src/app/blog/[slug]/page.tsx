@@ -204,7 +204,7 @@ export default async function BlogPostPage({ params }: Props) {
         </div>
 
         {/* Right Column (Sticky Sidebar on Desktop) */}
-        <aside className="hidden lg:block sticky top-24 self-start space-y-8 max-h-[calc(100vh-120px)] overflow-y-auto pr-2 pl-2 order-2">
+        <aside className="hidden lg:block sticky top-24 self-start space-y-8 pl-2 order-2">
           
           {/* Table of Contents */}
           <div className="space-y-4 text-left">
