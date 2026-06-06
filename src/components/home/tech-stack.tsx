@@ -12,7 +12,6 @@ const services = [
       "Interactive, responsive UIs built with modular components and clean code structure — from design system to production.",
     techs: ["React", "Next.js", "TypeScript", "Tailwind CSS"],
     icon: Code2,
-    highlight: true,
     href: "/projects",
   },
   {
@@ -21,7 +20,6 @@ const services = [
       "Flawless product quality through BDD, Playwright end-to-end flows, and robust testing suites. Zero regressions.",
     techs: ["Cucumber", "Playwright", "Jest", "CI/CD"],
     icon: ShieldCheck,
-    highlight: false,
     href: "/projects",
   },
   {
@@ -30,7 +28,6 @@ const services = [
       "Robust backend APIs and advanced AI integrations using Gemini LLMs to solve real business problems at scale.",
     techs: ["FastAPI", "Python", "Spring Boot", "Gemini AI"],
     icon: Cpu,
-    highlight: false,
     href: "/projects",
   },
   {
@@ -39,7 +36,6 @@ const services = [
       "Code reviews, architecture audits, and technical strategy sessions to align your engineering with business goals.",
     techs: ["Architecture", "Code Review", "Strategy", "Mentoring"],
     icon: Lightbulb,
-    highlight: false,
     href: "/#contact",
   },
 ];
@@ -97,50 +93,24 @@ export function TechStack() {
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   viewport={{ once: true }}
                   className={cn(
-                    "group relative flex flex-col justify-between p-8 transition-all duration-300 cursor-pointer",
-                    // Borders between cells
+                    "group relative flex flex-col justify-between p-8 transition-all duration-300 cursor-pointer hover:bg-gray-50/70 dark:hover:bg-white/[0.02]",
                     isTopRow && "border-b border-gray-200 dark:border-white/8",
-                    isLeftCol && "border-r border-gray-200 dark:border-white/8",
-                    // Highlighted card style
-                    service.highlight
-                      ? "bg-[#09090b] dark:bg-brand-primary/20"
-                      : "hover:bg-gray-50/70 dark:hover:bg-white/[0.02]"
+                    isLeftCol && "border-r border-gray-200 dark:border-white/8"
                   )}
                 >
                   {/* Icon */}
                   <div>
-                    <div
-                      className={cn(
-                        "w-9 h-9 rounded-lg flex items-center justify-center mb-5",
-                        service.highlight
-                          ? "bg-white/10 text-white"
-                          : "bg-brand-primary/8 dark:bg-brand-primary/15 text-brand-primary dark:text-brand-accent"
-                      )}
-                    >
+                    <div className="w-9 h-9 rounded-lg flex items-center justify-center mb-5 bg-brand-primary/8 dark:bg-brand-primary/15 text-brand-primary dark:text-brand-accent">
                       <Icon className="w-5 h-5" />
                     </div>
 
                     {/* Title */}
-                    <h3
-                      className={cn(
-                        "text-base font-bold mb-2 leading-snug",
-                        service.highlight
-                          ? "text-white"
-                          : "text-foreground"
-                      )}
-                    >
+                    <h3 className="text-base font-bold mb-2 leading-snug text-foreground">
                       {service.title}
                     </h3>
 
                     {/* Description */}
-                    <p
-                      className={cn(
-                        "text-xs leading-relaxed mb-5",
-                        service.highlight
-                          ? "text-gray-400"
-                          : "text-muted-foreground dark:text-gray-400"
-                      )}
-                    >
+                    <p className="text-xs leading-relaxed mb-5 text-muted-foreground dark:text-gray-400">
                       {service.description}
                     </p>
                   </div>
@@ -148,12 +118,7 @@ export function TechStack() {
                   {/* Learn more link */}
                   <Link
                     href={service.href}
-                    className={cn(
-                      "inline-flex items-center gap-1.5 text-xs font-bold tracking-wide uppercase transition-all",
-                      service.highlight
-                        ? "text-brand-accent hover:text-white"
-                        : "text-brand-primary dark:text-brand-accent hover:gap-2.5"
-                    )}
+                    className="inline-flex items-center gap-1.5 text-xs font-bold tracking-wide uppercase text-brand-primary dark:text-brand-accent transition-all hover:gap-2.5"
                   >
                     Learn more
                     <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
