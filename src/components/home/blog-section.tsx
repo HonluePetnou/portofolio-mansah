@@ -3,36 +3,29 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { ArrowRight, BookOpen } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { blogPosts } from "@/data/blog";
 
-
-const recentPosts = [
-  {
-    title: "Why Quality Assurance Is a Product Feature, Not a Phase",
-    excerpt:
-      "Shifting the mindset from 'catching bugs' to 'building reliability'. How BDD and automated testing create a safety net for rapid product iteration.",
-    category: "Quality Assurance",
-    date: "Oct 12, 2025",
-    slug: "quality-assurance-product-feature",
-  },
-  {
-    title: "Architecting Scalable Frontends with Next.js",
-    excerpt:
-      "Lessons learned from managing large-scale React applications. Component patterns, state management strategies, and performance optimization.",
-    category: "Frontend Engineering",
-    date: "Sep 28, 2025",
-    slug: "architecting-scalable-frontends",
-  },
-  {
-    title: "Integrating Gemini AI into Real-World Workflows",
-    excerpt:
-      "Moving beyond chatbots: How to use LLMs to solve specific business problems and enhance user decision-making.",
-    category: "AI & APIs",
-    date: "Aug 15, 2025",
-    slug: "integrating-gemini-ai",
-  },
-];
+// Category tag color mappings
+const getCategoryStyle = (category: string) => {
+  switch (category) {
+    case "AI & APIs":
+      return "bg-brand-accent/10 dark:bg-brand-accent/15 border-brand-accent/20 dark:border-brand-accent/30 text-brand-primary dark:text-brand-accent";
+    case "Quality Assurance":
+      return "bg-brand-primary/10 border-brand-primary/20 text-brand-primary";
+    case "Frontend Engineering":
+      return "bg-sky-500/10 border-sky-500/20 text-sky-600 dark:text-sky-400";
+    case "Product & Agility":
+      return "bg-amber-500/10 border-amber-500/20 text-amber-600 dark:text-amber-400";
+    default:
+      return "bg-brand-primary/10 border-brand-primary/20 text-brand-primary";
+  }
+};
 
 export function BlogSection() {
+  // Show first 3 blog posts on the home page
+  const recentPosts = blogPosts.slice(0, 3);
+
   return (
     <section id="blog" className="section-py gap-y-md scroll-mt-20 overflow-hidden bg-transparent">
       <div className="container">
@@ -65,13 +58,16 @@ export function BlogSection() {
                 <div className="h-full flex flex-col justify-between p-8 rounded-2xl border border-gray-100 dark:border-white/5 bg-white dark:bg-card-bg hover:border-brand-primary/30 dark:hover:border-brand-primary/30 transition-all duration-300 shadow-sm dark:shadow-lg hover:-translate-y-1.5">
                   <div>
                     <div className="flex justify-between items-center mb-4">
-                      <span className="text-[9px] font-bold tracking-wider uppercase px-2.5 py-0.5 rounded-full bg-brand-primary/15 border border-brand-primary/30 text-brand-primary">
+                      <span className={cn(
+                        "text-[9px] font-bold tracking-wider uppercase px-2.5 py-0.5 rounded-full border",
+                        getCategoryStyle(post.category)
+                      )}>
                         {post.category}
                       </span>
                       <span className="text-[10px] text-gray-500 dark:text-gray-500 font-medium">{post.date}</span>
                     </div>
                     
-                    <h3 className="text-lg font-bold text-foreground mb-3 group-hover:text-brand-primary transition-colors text-left leading-snug">
+                    <h3 className="text-lg font-bold text-foreground mb-3 group-hover:text-brand-primary dark:group-hover:text-brand-accent transition-colors text-left leading-snug">
                       {post.title}
                     </h3>
                     
@@ -80,7 +76,7 @@ export function BlogSection() {
                     </p>
                   </div>
                   
-                  <div className="mt-6 pt-4 border-t border-gray-100 dark:border-white/5 flex items-center text-xs font-bold text-muted-foreground dark:text-gray-300 group-hover:text-brand-primary transition-colors">
+                  <div className="mt-6 pt-4 border-t border-gray-100 dark:border-white/5 flex items-center text-xs font-bold text-muted-foreground dark:text-gray-300 group-hover:text-brand-primary dark:group-hover:text-brand-accent transition-colors">
                     Read more <ArrowRight className="ml-2 h-3.5 w-3.5" />
                   </div>
                 </div>
