@@ -95,7 +95,7 @@ export function Footer() {
       <Marquee />
 
       {/* ── Main body ── */}
-      <div className="mx-auto max-w-7xl px-6 py-20 grid lg:grid-cols-[1fr_auto] gap-16 items-start">
+      <div className="mx-auto max-w-7xl px-6 py-12 grid lg:grid-cols-[1fr_auto] gap-10 items-start">
 
         {/* Left — Big statement + CTA */}
         <div className="space-y-6">
@@ -177,7 +177,7 @@ export function Footer() {
       </div>
 
       {/* ── Bottom bar ── */}
-      <div className="mx-auto max-w-7xl px-6 py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div className="mx-auto max-w-7xl px-6 py-4 flex flex-col sm:flex-row items-center justify-between gap-4">
 
         {/* Left — copyright */}
         <p className="text-xs text-white/25 order-2 sm:order-1">
