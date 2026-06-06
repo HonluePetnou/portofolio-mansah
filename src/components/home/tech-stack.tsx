@@ -51,7 +51,7 @@ export function TechStack() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: "easeOut" }}
           viewport={{ once: true }}
-          className="max-w-6xl mx-auto rounded-2xl overflow-hidden border border-gray-200 dark:border-white/8 bg-white dark:bg-card-bg shadow-sm dark:shadow-2xl"
+          className="max-w-6xl mx-auto rounded-2xl overflow-hidden border border-gray-200 dark:border-white/8 bg-white dark:bg-card-bg"
         >
           {/* Inner grid: [header] [2×2 cards] */}
           <div className="grid lg:grid-cols-[1fr_1fr_1fr]">
