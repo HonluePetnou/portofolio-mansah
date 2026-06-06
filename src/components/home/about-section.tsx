@@ -68,7 +68,7 @@ export function AboutSection() {
           <div className="grid lg:grid-cols-12 items-stretch">
             
             {/* Left Column: Full-bleed rectangular Image */}
-            <div className="lg:col-span-5 relative min-h-[420px] lg:min-h-full overflow-hidden bg-gray-50 dark:bg-brand-dark/40 group">
+            <div className="lg:col-span-5 relative min-h-[420px] lg:min-h-full overflow-hidden rounded-2xl group">
               {/* Profile Image */}
               <Image
                 src="/me-pro.png"
@@ -78,13 +78,10 @@ export function AboutSection() {
                 className="object-cover object-center scale-100 group-hover:scale-103 transition-transform duration-700 ease-out"
                 priority
               />
-              
-              {/* Subtle Dark Overlay Gradient */}
-              <div className="absolute inset-0 bg-gradient-to-t lg:bg-gradient-to-r from-black/40 via-transparent to-transparent lg:from-transparent lg:to-black/30 z-10 pointer-events-none" />
             </div>
 
             {/* Right Column: Content */}
-            <div className="lg:col-span-7 p-8 md:p-12 lg:p-16 flex flex-col justify-center items-start space-y-8 text-left bg-white dark:bg-card-bg-alt">
+            <div className="lg:col-span-7 p-8 md:p-12 lg:p-16 flex flex-col justify-center items-start space-y-8 text-left">
               
               {/* Subtitle */}
               <div className="inline-flex items-center gap-2 text-brand-primary dark:text-brand-accent text-xs font-bold tracking-widest uppercase">
