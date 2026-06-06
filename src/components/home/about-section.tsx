@@ -71,7 +71,7 @@ export function AboutSection() {
             <div className="lg:col-span-5 relative min-h-[420px] lg:min-h-full overflow-hidden bg-gray-50 dark:bg-brand-dark/40 group">
               {/* Profile Image */}
               <Image
-                src="/me.png"
+                src="/me-pro.png"
                 alt="Frédéric Armel"
                 fill
                 sizes="(max-width: 1024px) 100vw, 500px"
