@@ -1,101 +1,199 @@
-import { SectionHeader } from "@/components/shared/section-header";
-import { Breadcrumbs } from "@/components/shared/breadcrumbs";
-
+import { projectsData } from "@/data/projects";
+import { notFound } from "next/navigation";
 import Link from "next/link";
-import { ArrowLeft, ExternalLink, Github } from "lucide-react";
+import Image from "next/image";
+import { ArrowLeft, ExternalLink, Github, CheckCircle2, Server, Layout, ShieldAlert } from "lucide-react";
+import { Breadcrumbs } from "@/components/shared/breadcrumbs";
+import { Metadata } from "next";
+import { cn } from "@/lib/utils";
 
-export default function ProjectDetailsPage({
-  params,
-}: {
-  params: { slug: string };
-}) {
-  // In a real app, you'd fetch project data based on params.slug
-  // For now, we'll use placeholder content
-  const projectTitle = params.slug
-    .split("-")
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(" ");
+interface Props {
+  params: Promise<{ slug: string }>;
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
+  const project = projectsData.find((p) => p.slug === slug);
+  return {
+    title: project ? `${project.title} Case Study | Mansah` : "Project Details",
+    description: project?.description || "Technical case study details.",
+  };
+}
+
+export default async function ProjectDetailsPage({ params }: Props) {
+  const { slug } = await params;
+  const project = projectsData.find((p) => p.slug === slug);
+
+  if (!project) {
+    notFound();
+  }
 
   return (
-    <div className="container section-py">
-      <Breadcrumbs
-        items={[
-          { label: "Projects", href: "/projects" },
-          { label: projectTitle, href: `/projects/${params.slug}` },
-        ]}
-      />
+    <div className="container section-py space-y-12">
+      
+      {/* Back button & Breadcrumbs */}
+      <div className="space-y-4">
+        <Breadcrumbs
+          items={[
+            { label: "Projects", href: "/projects" },
+            { label: project.title, href: `/projects/${project.slug}` },
+          ]}
+        />
 
-      <div className="mb-12">
         <Link
           href="/projects"
-          className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors mb-6"
+          className="group inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-muted-foreground hover:text-brand-primary dark:hover:text-brand-accent transition-colors"
         >
-          <ArrowLeft className="w-4 h-4" />
+          <ArrowLeft className="w-3.5 h-3.5 transition-transform group-hover:-translate-x-1" />
           Back to Projects
         </Link>
-
-        <SectionHeader
-          title={projectTitle}
-          subtitle="A detailed look at the problem, solution, and outcome."
-          className="text-left mb-0"
-        />
       </div>
 
-      <div className="grid md:grid-cols-[1fr_350px] gap-12">
-        <div className="space-y-12">
-          {/* Main Content would go here */}
-          <div className="aspect-video w-full rounded-[40px] bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-white/10 flex items-center justify-center">
-            <span className="text-muted-foreground italic">Project Preview Image</span>
-          </div>
+      {/* Main Header Title */}
+      <div className="text-left max-w-3xl space-y-3">
+        <div className="text-xs font-bold tracking-wider uppercase text-brand-primary dark:text-brand-accent">
+          {project.category}
+        </div>
+        <h1 className="text-3xl md:text-5xl font-extrabold tracking-tight text-foreground leading-tight">
+          {project.title}
+        </h1>
+        <p className="text-muted-foreground dark:text-gray-400 text-sm md:text-base leading-relaxed">
+          {project.description}
+        </p>
+      </div>
 
-          <div className="max-w-none">
-            <h2 className="text-2xl font-bold text-foreground mb-4">
+      {/* Hero Image Block */}
+      <div className="relative aspect-[16/9] w-full rounded-3xl overflow-hidden border border-gray-200/50 dark:border-white/5 bg-gray-100 dark:bg-white/5 shadow-md">
+        <Image
+          src={project.image}
+          alt={project.title}
+          fill
+          className="object-cover"
+          priority
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
+      </div>
+
+      {/* Core Case Study Content */}
+      <div className="grid lg:grid-cols-[1fr_360px] gap-12 items-start">
+        
+        {/* Left main: Case Study Write-Up */}
+        <div className="space-y-10 text-left">
+          
+          {/* Challenge Section */}
+          <section className="space-y-4">
+            <h2 className="text-xl md:text-2xl font-bold text-foreground flex items-center gap-2.5">
+              <ShieldAlert className="w-5 h-5 text-brand-primary dark:text-brand-accent" />
               The Challenge
             </h2>
-            <p className="text-muted-foreground leading-relaxed">
-              Details about the technical and product challenges faced during
-              development. This section covers the initial problem statement and
-              the constraints involved.
+            <p className="text-muted-foreground dark:text-gray-400 text-xs md:text-sm leading-relaxed whitespace-pre-line">
+              {project.challenge}
             </p>
+          </section>
 
-            <h2 className="text-2xl font-bold text-foreground mt-8 mb-4">
-              The Strategy
+          {/* Strategy Section */}
+          <section className="space-y-4">
+            <h2 className="text-xl md:text-2xl font-bold text-foreground flex items-center gap-2.5">
+              <Server className="w-5 h-5 text-brand-primary dark:text-brand-accent" />
+              The Strategy & Architecture
             </h2>
-            <p className="text-muted-foreground leading-relaxed">
-              How we approached the problem, the architectural decisions made,
-              and the specific technologies chosen to overcome obstacles.
+            <p className="text-muted-foreground dark:text-gray-400 text-xs md:text-sm leading-relaxed whitespace-pre-line">
+              {project.strategy}
             </p>
+          </section>
 
-            <h2 className="text-2xl font-bold text-foreground mt-8 mb-4">
-              The Impact
+          {/* Impact Section */}
+          <section className="space-y-4">
+            <h2 className="text-xl md:text-2xl font-bold text-foreground flex items-center gap-2.5">
+              <CheckCircle2 className="w-5 h-5 text-brand-primary dark:text-brand-accent" />
+              The Impact & Outcomes
             </h2>
-            <p className="text-muted-foreground leading-relaxed">
-              Measurable results, user feedback, and the overall outcome of the
-              project.
+            <p className="text-muted-foreground dark:text-gray-400 text-xs md:text-sm leading-relaxed whitespace-pre-line">
+              {project.impact}
             </p>
-          </div>
+          </section>
+
         </div>
 
-        <aside className="space-y-8">
-          <div className="p-8 rounded-[32px] bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 backdrop-blur-md">
-            <h3 className="font-bold mb-6 uppercase tracking-widest text-[11px] text-muted-foreground">
-              Technology Stack
-            </h3>
-            <div className="flex flex-wrap gap-2">
-              <span className="text-muted-foreground text-sm italic">(Dynamic content coming soon)</span>
+        {/* Right sidebar: Tech specs & action links */}
+        <aside className="space-y-6">
+          
+          {/* Info Card Container */}
+          <div className="p-6 md:p-8 rounded-2xl border border-gray-200/50 dark:border-white/5 bg-gray-50/50 dark:bg-card-bg backdrop-blur-sm shadow-md space-y-8">
+            
+            {/* Tech Stack List */}
+            <div className="space-y-4">
+              <h3 className="font-bold uppercase tracking-widest text-[10px] text-muted-foreground text-left">
+                Tech Stack
+              </h3>
+              <div className="flex flex-wrap gap-2">
+                {project.stack.map((tech) => (
+                  <span
+                    key={tech}
+                    className={cn(
+                      "text-[9px] font-bold tracking-wider uppercase px-2.5 py-0.5 rounded-full border",
+                      tech === project.highlightedStack
+                        ? "bg-brand-accent/10 dark:bg-brand-accent/15 border-brand-accent/20 dark:border-brand-accent/30 text-brand-primary dark:text-brand-accent"
+                        : "bg-brand-primary/10 dark:bg-brand-primary/15 border-brand-primary/20 dark:border-brand-primary/30 text-brand-primary"
+                    )}
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
             </div>
 
-            <div className="mt-10 space-y-4">
-              <button className="w-full flex items-center justify-center gap-2 py-3 rounded-full bg-brand-primary text-white font-bold transition-all hover:shadow-[0_0_20px_rgba(94,80,249,0.4)]">
-                Live Demo <ExternalLink className="w-4 w-4" />
-              </button>
-              <button className="w-full flex items-center justify-center gap-2 py-3 rounded-full border border-gray-200 dark:border-white/10 text-foreground font-medium hover:bg-gray-50 dark:hover:bg-white/5 transition-all">
-                View Repository <Github className="w-4 w-4" />
-              </button>
+            {/* Key Metrics Section */}
+            {project.metrics && (
+              <div className="space-y-4 pt-6 border-t border-gray-200/50 dark:border-white/5">
+                <h3 className="font-bold uppercase tracking-widest text-[10px] text-muted-foreground text-left">
+                  Key Metrics
+                </h3>
+                <div className="space-y-3.5">
+                  {project.metrics.map((metric) => (
+                    <div key={metric.label} className="flex items-center justify-between p-3.5 rounded-xl border border-gray-200/40 dark:border-white/5 bg-white/40 dark:bg-white/[0.02]">
+                      <span className="text-[10px] font-semibold uppercase text-muted-foreground tracking-wide">
+                        {metric.label}
+                      </span>
+                      <span className="text-base font-extrabold text-brand-primary dark:text-brand-accent">
+                        {metric.value}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* CTA action buttons */}
+            <div className="space-y-3 pt-6 border-t border-gray-200/50 dark:border-white/5">
+              {project.demoUrl && (
+                <a
+                  href={project.demoUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full flex items-center justify-center gap-2 py-3 rounded-xl bg-brand-primary text-white font-bold text-xs uppercase tracking-wider transition-all shadow-[0_4px_20px_rgba(94,80,249,0.3)] hover:bg-brand-primary/95 hover:shadow-[0_4px_30px_rgba(94,80,249,0.45)] hover:scale-102"
+                >
+                  Live Demo <ExternalLink className="w-3.5 h-3.5" />
+                </a>
+              )}
+              {project.repoUrl && (
+                <a
+                  href={project.repoUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full flex items-center justify-center gap-2 py-3 rounded-xl border border-gray-200 dark:border-white/10 text-foreground font-bold text-xs uppercase tracking-wider hover:bg-gray-100 dark:hover:bg-white/5 transition-all"
+                >
+                  View Repository <Github className="w-3.5 h-3.5" />
+                </a>
+              )}
             </div>
+
           </div>
+          
         </aside>
+
       </div>
+
     </div>
   );
 }

@@ -1,39 +1,14 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ProjectCard, ProjectData } from "@/components/projects/project-card";
+import { ProjectCard } from "@/components/projects/project-card";
 import { FadeUp, StaggerContainer } from "@/lib/animations";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import { projectsData } from "@/data/projects";
 
-const featuredProjects: ProjectData[] = [
-  {
-    title: "OneControl",
-    description:
-      "AI-integrated hackathon project optimizing resource management.",
-    image: "/onecontrol.png",
-    slug: "one-control",
-    stack: ["Gemini AI", "Next.js", "Python"],
-    highlightedStack: "Gemini AI",
-  },
-  {
-    title: "Feedly",
-    description:
-      "Health analytics application for personalized nutrition tracking.",
-    image: "/feedly.png",
-    slug: "feedly",
-    stack: ["FastAPI", "Python", "React", "PostgreSQL"],
-    highlightedStack: "PostgreSQL",
-  },
-  {
-    title: "Tech Portfolio Directory",
-    description: "Aggregator for tech portfolios with advanced filtering.",
-    image: "/foliofy.png",
-    slug: "tech-portfolio-directory",
-    stack: ["Next.js", "Firebase", "Puppeteer", "Tailwind CSS"],
-    highlightedStack: "Firebase",
-  },
-];
+// Show first 3 projects as featured on the home page
+const featuredProjects = projectsData.slice(0, 3);
 
 export function ProjectsSection() {
   return (

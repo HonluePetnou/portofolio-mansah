@@ -1,6 +1,4 @@
-import { ProjectCard, ProjectData } from "@/components/projects/project-card";
-import { SectionHeader } from "@/components/shared/section-header";
-import { Breadcrumbs } from "@/components/shared/breadcrumbs";
+import { ProjectsClientPage } from "./projects-client";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -9,57 +7,6 @@ export const metadata: Metadata = {
     "Case studies of my work in Frontend Engineering, QA, and Product Development by Mansah (Honlue Petnou Frederic Armel).",
 };
 
-const projects: ProjectData[] = [
-  {
-    title: "OneControl",
-    description:
-      "AI-integrated hackathon project optimizing resource management.",
-    image: "/onecontrol.png",
-    slug: "one-control",
-    stack: ["Gemini AI", "Next.js", "Python"],
-    highlightedStack: "Gemini AI",
-  },
-  {
-    title: "Feedly",
-    description:
-      "Health analytics application for personalized nutrition tracking.",
-    image: "/feedly.png",
-    slug: "feedly",
-    stack: ["FastAPI", "Python", "React", "PostgreSQL"],
-    highlightedStack: "PostgreSQL",
-  },
-  {
-    title: "Tech Portfolio Directory",
-    description: "Aggregator for tech portfolios with advanced filtering.",
-    image: "/foliofy.png",
-    slug: "tech-portfolio-directory",
-    stack: ["Next.js", "Firebase", "Puppeteer", "Tailwind CSS"],
-    highlightedStack: "Firebase",
-  },
-  {
-    title: "Ubuntu App / Library Manager",
-    description: "Desktop-grade library management system.",
-    image: "/foliofy.png",
-    slug: "ubuntu-app-library-manager",
-    stack: ["React", "Java EE", "Electron", "MySQL"],
-    highlightedStack: "Electron",
-  },
-];
-
 export default function ProjectsPage() {
-  return (
-    <div className="container section-py">
-      <Breadcrumbs items={[{ label: "Projects", href: "/projects" }]} />
-
-      <SectionHeader
-        title="Selected Projects"
-        subtitle="Case studies in reliability and impact."
-      />
-      <div className="grid gap-8 md:grid-cols-2">
-        {projects.map((project) => (
-          <ProjectCard key={project.title} project={project} />
-        ))}
-      </div>
-    </div>
-  );
+  return <ProjectsClientPage />;
 }
