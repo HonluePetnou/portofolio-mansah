@@ -4,6 +4,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
+import { SocialFloat } from "@/components/shared/social-float";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
@@ -38,6 +39,7 @@ export default function RootLayout({
             {children}
           </main>
           <Footer />
+          <SocialFloat />
         </ThemeProvider>
       </body>
     </html>

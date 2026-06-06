@@ -48,7 +48,7 @@ export function HeroSection() {
               <span className="text-brand-primary dark:text-brand-accent relative inline-block">
                 Mansah
               </span>
-              . I'm Senior Frontend Engineer & QA.
+              . I'm Junior Engineer.
             </h1>
 
             {/* Paragraph Description */}

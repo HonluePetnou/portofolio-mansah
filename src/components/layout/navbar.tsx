@@ -2,6 +2,7 @@
 
 import { cn } from "@/lib/utils";
 import { ThemeToggle } from "@/components/shared/theme-toggle";
+import { LanguageSelector } from "@/components/shared/language-selector";
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
@@ -144,7 +145,8 @@ export function Navbar() {
         </nav>
 
         {/* Right Actions */}
-        <div className="hidden lg:flex items-center gap-4">
+        <div className="hidden lg:flex items-center gap-3">
+          <LanguageSelector />
           <ThemeToggle />
           <Link href="/#contact">
             <button className="flex items-center gap-2 px-5 py-2.5 rounded-lg bg-brand-primary text-white font-semibold text-xs tracking-wider uppercase hover:bg-brand-primary/95 transition-all shadow-[0_4px_14px_rgba(94,80,249,0.3)]">
@@ -155,7 +157,8 @@ export function Navbar() {
         </div>
 
         {/* Mobile Actions & Menu Toggle */}
-        <div className="flex lg:hidden items-center gap-3">
+        <div className="flex lg:hidden items-center gap-2">
+          <LanguageSelector />
           <ThemeToggle />
           <button
             onClick={() => setIsOpen(!isOpen)}
