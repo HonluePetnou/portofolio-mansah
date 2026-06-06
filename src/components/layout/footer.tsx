@@ -1,171 +1,160 @@
 "use client";
 
 import Link from "next/link";
-import { useTheme } from "next-themes";
-import {
-  Mail,
-  Linkedin,
-  Github,
-  Youtube,
-  Twitter,
-  MessageCircle,
-  Facebook,
-  Heart,
-  Sun,
-  Moon,
-  ArrowUp,
-} from "lucide-react";
+import { motion } from "framer-motion";
+import { ArrowUpRight, Mail, Github, Linkedin, Twitter, Youtube, MapPin } from "lucide-react";
 
-/* ── Inline SVG icons not available in lucide ── */
+/* ── Tiny inline SVGs (not in lucide) ── */
 const InstagramIcon = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5">
-    <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4">
+    <rect x="2" y="2" width="20" height="20" rx="5" />
     <circle cx="12" cy="12" r="4" />
     <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
   </svg>
 );
 
 const TikTokIcon = () => (
-  <svg viewBox="0 0 24 24" fill="currentColor" className="h-5 w-5">
-    <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.79 1.53V6.78a4.85 4.85 0 0 1-1.02-.09z" />
+  <svg viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4">
+    <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.79 1.53V6.78a4.85 4.85 0 0 1-1.02-.09z"/>
   </svg>
 );
 
-function scrollTop() {
-  window.scrollTo({ top: 0, behavior: "smooth" });
-}
-
-const iconLink = "hover:-translate-y-1 border border-dotted rounded-xl p-2.5 transition-all duration-200 hover:border-brand-primary dark:hover:border-brand-accent text-foreground/60 hover:text-brand-primary dark:hover:text-brand-accent";
-
-const navigation = [
+/* ── Data ── */
+const navCols = [
   {
-    title: "Navigate",
-    items: [
+    label: "Explore",
+    links: [
       { name: "Home", href: "/" },
       { name: "About", href: "/#about" },
       { name: "Services", href: "/#services" },
       { name: "Works", href: "/#projects" },
-    ],
-  },
-  {
-    title: "More",
-    items: [
-      { name: "Experience", href: "/#experience" },
       { name: "Blog", href: "/#blog" },
-      { name: "Contact", href: "/#contact" },
-      { name: "Testimonials", href: "/#testimonials" },
     ],
   },
   {
-    title: "Services",
-    items: [
+    label: "Services",
+    links: [
       { name: "Frontend Architecture", href: "/#services" },
       { name: "QA & Automation", href: "/#services" },
       { name: "Full Stack & AI", href: "/#services" },
-      { name: "Tech Consulting", href: "/#services" },
+      { name: "Tech Consulting", href: "/#contact" },
     ],
   },
   {
-    title: "Stack",
-    items: [
-      { name: "React / Next.js", href: "/#services" },
-      { name: "TypeScript", href: "/#services" },
-      { name: "Python / FastAPI", href: "/#services" },
-      { name: "Playwright / Jest", href: "/#services" },
-    ],
-  },
-  {
-    title: "Connect",
-    items: [
-      { name: "LinkedIn", href: "https://www.linkedin.com/in/fr%C3%A9d%C3%A9ric-armel-mansah-610bbb253/" },
-      { name: "GitHub", href: "https://github.com/HonluePetnou" },
-      { name: "Email", href: "mailto:fredericarmel.mansah@gmail.com" },
-      { name: "WhatsApp", href: "https://wa.me/" },
-    ],
-  },
-  {
-    title: "Legal",
-    items: [
+    label: "Legal",
+    links: [
       { name: "Privacy Policy", href: "/privacy" },
       { name: "Terms of Use", href: "/terms" },
-      { name: "Cookies", href: "/cookies" },
       { name: "Hire Me", href: "/#contact" },
     ],
   },
 ];
 
-function ThemeToggle() {
-  const { setTheme } = useTheme();
+const socials = [
+  { Icon: Github,       href: "https://github.com/HonluePetnou",                                          label: "GitHub" },
+  { Icon: Linkedin,     href: "https://www.linkedin.com/in/fr%C3%A9d%C3%A9ric-armel-mansah-610bbb253/", label: "LinkedIn" },
+  { Icon: Twitter,      href: "https://twitter.com/",                                                     label: "Twitter" },
+  { Icon: InstagramIcon,href: "https://instagram.com/",                                                   label: "Instagram" },
+  { Icon: TikTokIcon,   href: "https://tiktok.com/",                                                      label: "TikTok" },
+  { Icon: Youtube,      href: "https://youtube.com/",                                                      label: "YouTube" },
+];
+
+const marqueeItems = [
+  "React", "Next.js", "TypeScript", "Tailwind CSS",
+  "Playwright", "Jest", "FastAPI", "Python",
+  "Spring Boot", "Gemini AI", "CI/CD", "BDD",
+];
+
+/* ── Marquee strip ── */
+function Marquee() {
+  const repeated = [...marqueeItems, ...marqueeItems];
   return (
-    <div className="flex items-center justify-center">
-      <div className="flex items-center rounded-full border border-dotted border-foreground/20 px-1 py-1 gap-1">
-        <button
-          onClick={() => setTheme("light")}
-          className="rounded-full p-2 bg-foreground text-background transition-colors hover:bg-brand-primary hover:text-white"
-          aria-label="Light mode"
-        >
-          <Sun className="h-4 w-4" strokeWidth={1.5} />
-        </button>
-        <button
-          type="button"
-          onClick={scrollTop}
-          className="px-3 py-2 text-foreground/50 hover:text-brand-primary dark:hover:text-brand-accent transition-colors"
-          aria-label="Scroll to top"
-        >
-          <ArrowUp className="h-3 w-3" />
-        </button>
-        <button
-          onClick={() => setTheme("dark")}
-          className="rounded-full p-2 bg-foreground text-background transition-colors hover:bg-brand-primary hover:text-white"
-          aria-label="Dark mode"
-        >
-          <Moon className="h-4 w-4" strokeWidth={1.5} />
-        </button>
-      </div>
+    <div className="overflow-hidden border-y border-white/5 py-4">
+      <motion.div
+        className="flex gap-12 whitespace-nowrap"
+        animate={{ x: ["0%", "-50%"] }}
+        transition={{ duration: 28, ease: "linear", repeat: Infinity }}
+      >
+        {repeated.map((item, i) => (
+          <span key={i} className="flex items-center gap-3 text-xs font-semibold tracking-widest uppercase text-white/20">
+            <span className="h-1 w-1 rounded-full bg-brand-accent inline-block" />
+            {item}
+          </span>
+        ))}
+      </motion.div>
     </div>
   );
 }
 
+/* ── Main Footer ── */
 export function Footer() {
   return (
-    <footer className="w-full border-t border-b border-foreground/10 bg-[#060608] dark:bg-[#060608]">
+    <footer className="w-full bg-[#060608] text-white">
 
-      {/* ── Top: Logo + Bio ── */}
-      <div className="mx-auto grid max-w-7xl items-center justify-center gap-6 p-10 pb-0 md:flex">
-        <Link href="/" className="flex items-center justify-center shrink-0">
-          <span className="text-2xl font-extrabold tracking-tight text-white">
-            Mansah
-            <span className="inline-block ml-1 h-2 w-2 rounded-full bg-brand-accent align-middle" />
-          </span>
-        </Link>
-        <p className="max-w-xl text-center text-xs leading-5 text-white/40 md:text-left">
-          Frédéric Armel Mansah — Senior Frontend Engineer &amp; QA Specialist.
-          Product-oriented engineer combining technical expertise with a quality-first mindset.
-          Currently pursuing an engineering degree at ENSPD (2022–2027), bridging computer science
-          principles with state-of-the-art web architectures. Available for freelance &amp; collaborations.
-        </p>
-      </div>
+      {/* ── Marquee ── */}
+      <Marquee />
 
-      {/* ── Nav grid ── */}
-      <div className="mx-auto max-w-7xl px-6 py-10">
-        <div className="border-b border-dotted border-white/10 mb-10" />
-        <div className="grid grid-cols-3 gap-6 leading-6 md:flex md:justify-between">
-          {navigation.map((section) => (
-            <div key={section.title}>
-              <p className="mb-3 text-[10px] font-bold tracking-widest uppercase text-white/30">
-                {section.title}
+      {/* ── Main body ── */}
+      <div className="mx-auto max-w-7xl px-6 py-20 grid lg:grid-cols-[1fr_auto] gap-16 items-start">
+
+        {/* Left — Big statement + CTA */}
+        <div className="space-y-10">
+
+          {/* Availability pill */}
+          <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-xs font-medium text-white/60">
+            <span className="h-2 w-2 rounded-full bg-brand-accent animate-pulse" />
+            Available for new projects
+          </div>
+
+          {/* Statement */}
+          <div>
+            <h2 className="text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.05] text-white">
+              Let&apos;s build<br />
+              <span className="text-brand-accent">something</span><br />
+              remarkable.
+            </h2>
+          </div>
+
+          {/* Email CTA */}
+          <a
+            href="mailto:fredericarmel.mansah@gmail.com"
+            className="group inline-flex items-center gap-3 text-sm md:text-base font-medium text-white/40 hover:text-white transition-colors duration-300"
+          >
+            <Mail className="w-4 h-4 shrink-0 text-brand-accent" />
+            fredericarmel.mansah@gmail.com
+            <ArrowUpRight className="w-4 h-4 opacity-0 -translate-y-1 translate-x-1 group-hover:opacity-100 group-hover:translate-y-0 group-hover:translate-x-0 transition-all duration-300" />
+          </a>
+
+          {/* Location */}
+          <div className="flex items-center gap-2 text-xs text-white/25">
+            <MapPin className="w-3.5 h-3.5" />
+            Douala, Cameroon · UTC+1
+          </div>
+
+          {/* Start project button */}
+          <Link href="/#contact">
+            <button className="group mt-2 inline-flex items-center gap-2 rounded-full bg-brand-primary px-7 py-3.5 text-sm font-bold tracking-wide text-white hover:bg-brand-primary/90 transition-all shadow-[0_8px_30px_rgba(94,80,249,0.35)] hover:shadow-[0_8px_40px_rgba(94,80,249,0.5)] hover:scale-105">
+              Start a Project
+              <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            </button>
+          </Link>
+        </div>
+
+        {/* Right — Nav columns */}
+        <div className="grid grid-cols-3 gap-x-12 gap-y-8 lg:gap-x-16 pt-2">
+          {navCols.map((col) => (
+            <div key={col.label}>
+              <p className="mb-4 text-[10px] font-bold tracking-widest uppercase text-white/25">
+                {col.label}
               </p>
-              <ul className="flex flex-col space-y-2">
-                {section.items.map((item) => (
-                  <li key={item.name}>
+              <ul className="space-y-3">
+                {col.links.map((link) => (
+                  <li key={link.name}>
                     <Link
-                      href={item.href}
-                      className="text-xs text-white/50 hover:text-white transition-colors"
-                      {...(item.href.startsWith("http") || item.href.startsWith("mailto")
-                        ? { target: "_blank", rel: "noopener noreferrer" }
-                        : {})}
+                      href={link.href}
+                      className="text-sm text-white/45 hover:text-white transition-colors duration-200"
                     >
-                      {item.name}
+                      {link.name}
                     </Link>
                   </li>
                 ))}
@@ -173,60 +162,44 @@ export function Footer() {
             </div>
           ))}
         </div>
-        <div className="border-b border-dotted border-white/10 mt-10" />
       </div>
 
-      {/* ── Social icons + Theme toggle ── */}
-      <div className="flex flex-col items-center gap-6 pb-6">
-        <div className="flex flex-wrap items-center justify-center gap-4 px-6">
-          <Link href="mailto:fredericarmel.mansah@gmail.com" aria-label="Email" className={iconLink}>
-            <Mail className="h-5 w-5" strokeWidth={1.5} />
-          </Link>
-          <Link href="https://www.linkedin.com/in/fr%C3%A9d%C3%A9ric-armel-mansah-610bbb253/" target="_blank" rel="noreferrer" aria-label="LinkedIn" className={iconLink}>
-            <Linkedin className="h-5 w-5" strokeWidth={1.5} />
-          </Link>
-          <Link href="https://github.com/HonluePetnou" target="_blank" rel="noreferrer" aria-label="GitHub" className={iconLink}>
-            <Github className="h-5 w-5" strokeWidth={1.5} />
-          </Link>
-          <Link href="https://twitter.com/" target="_blank" rel="noreferrer" aria-label="Twitter / X" className={iconLink}>
-            <Twitter className="h-5 w-5" strokeWidth={1.5} />
-          </Link>
-          <Link href="https://instagram.com/" target="_blank" rel="noreferrer" aria-label="Instagram" className={iconLink}>
-            <InstagramIcon />
-          </Link>
-          <Link href="https://tiktok.com/" target="_blank" rel="noreferrer" aria-label="TikTok" className={iconLink}>
-            <TikTokIcon />
-          </Link>
-          <Link href="https://youtube.com/" target="_blank" rel="noreferrer" aria-label="YouTube" className={iconLink}>
-            <Youtube className="h-5 w-5" strokeWidth={1.5} />
-          </Link>
-          <Link href="https://wa.me/" target="_blank" rel="noreferrer" aria-label="WhatsApp" className={iconLink}>
-            <MessageCircle className="h-5 w-5" strokeWidth={1.5} />
-          </Link>
-          <Link href="https://facebook.com/" target="_blank" rel="noreferrer" aria-label="Facebook" className={iconLink}>
-            <Facebook className="h-5 w-5" strokeWidth={1.5} />
-          </Link>
-        </div>
-        <ThemeToggle />
+      {/* ── Divider ── */}
+      <div className="mx-auto max-w-7xl px-6">
+        <div className="h-px bg-white/5" />
       </div>
 
-      {/* ── Copyright ── */}
-      <div className="mx-auto mb-10 mt-4 flex flex-col items-center justify-center text-center text-xs text-white/30 max-w-7xl gap-1">
-        <div className="flex flex-row items-center justify-center gap-1">
-          <span>©</span>
-          <span>{new Date().getFullYear()}</span>
-          <span>Made with</span>
-          <Heart className="mx-1 h-3.5 w-3.5 text-brand-accent animate-pulse" fill="currentColor" />
-          <span>by</span>
-          <Link
-            href="https://github.com/HonluePetnou"
-            target="_blank"
-            className="font-bold text-white/60 hover:text-white transition-colors"
-          >
-            Frédéric Armel Mansah
-          </Link>
+      {/* ── Bottom bar ── */}
+      <div className="mx-auto max-w-7xl px-6 py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+
+        {/* Left — copyright */}
+        <p className="text-xs text-white/25 order-2 sm:order-1">
+          © {new Date().getFullYear()} Frédéric Armel Mansah. All rights reserved.
+        </p>
+
+        {/* Center — wordmark */}
+        <Link href="/" className="flex items-center gap-1 order-1 sm:order-2">
+          <span className="text-sm font-extrabold tracking-tight text-white/60 hover:text-white transition-colors">
+            Mansah
+          </span>
+          <span className="h-1.5 w-1.5 rounded-full bg-brand-accent" />
+        </Link>
+
+        {/* Right — Social icons */}
+        <div className="flex items-center gap-3 order-3">
+          {socials.map(({ Icon, href, label }) => (
+            <a
+              key={label}
+              href={href}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={label}
+              className="text-white/30 hover:text-white transition-colors duration-200"
+            >
+              <Icon />
+            </a>
+          ))}
         </div>
-        <p className="text-white/20">All rights reserved.</p>
       </div>
 
     </footer>
