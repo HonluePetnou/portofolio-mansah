@@ -2,6 +2,8 @@
 
 import Link from "next/link";
 import { Mail, Github, Linkedin, Twitter, Youtube } from "lucide-react";
+import { useTheme } from "next-themes";
+import { useState, useEffect } from "react";
 
 /* ── Tiny inline SVGs (not in lucide) ── */
 const InstagramIcon = () => (
@@ -28,6 +30,15 @@ const socials = [
 ];
 
 export function Footer() {
+  const { resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  const isDark = resolvedTheme === "dark" || resolvedTheme === undefined;
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   return (
     <footer className="w-full bg-[#060608] dark:bg-[#121216] text-white border-t border-white/5 py-12 transition-colors duration-300">
       <div className="mx-auto max-w-6xl px-6">
@@ -37,11 +48,15 @@ export function Footer() {
           
           {/* Brand and Description */}
           <div className="space-y-3 max-w-sm">
-            <Link href="/" className="flex items-center gap-1.5 w-fit group">
+            <Link href="/" className="flex items-center gap-2.5 w-fit group">
+              <img
+                src={mounted && !isDark ? "/logo-purple.png" : "/logo-green.png"}
+                alt="Mansah Logo"
+                className="w-6 h-6 object-contain"
+              />
               <span className="text-lg font-bold tracking-tight text-white hover:text-white/80 transition-colors">
                 Mansah
               </span>
-              <span className="h-1.5 w-1.5 rounded-full bg-brand-accent shadow-[0_0_8px_rgba(57,255,20,0.8)]" />
             </Link>
             <p className="text-xs text-white/40 leading-relaxed">
               Senior Frontend Engineer & QA Specialist. Building interactive, high-performance web products with clean code.

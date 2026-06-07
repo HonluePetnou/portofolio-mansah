@@ -6,7 +6,7 @@ import {
   Linkedin,
   Mail,
   Twitter,
-  Plus,
+  Share2,
   X,
   MessageCircle,
   Youtube,
@@ -157,15 +157,15 @@ export function SocialFloat() {
         className={cn(
           "relative z-10 w-14 h-14 rounded-full flex items-center justify-center shadow-xl transition-all duration-300",
           open
-            ? "bg-foreground text-background rotate-45 scale-110"
+            ? "bg-foreground text-background scale-110"
             : "bg-brand-primary text-white hover:bg-brand-primary/90 hover:scale-110 shadow-[0_4px_24px_rgba(94,80,249,0.45)]"
         )}
       >
         <motion.div
-          animate={{ rotate: open ? 45 : 0 }}
+          animate={{ rotate: open ? 90 : 0 }}
           transition={{ type: "spring", stiffness: 300, damping: 20 }}
         >
-          {open ? <X className="w-6 h-6" /> : <Plus className="w-6 h-6" />}
+          {open ? <X className="w-6 h-6" /> : <Share2 className="w-6 h-6" />}
         </motion.div>
       </button>
     </div>

@@ -111,11 +111,15 @@ export function Navbar() {
     >
       <div className="container h-full flex items-center justify-between">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-1.5 group">
+        <Link href="/" className="flex items-center gap-2.5 group">
+          <img
+            src={isDark ? "/logo-green.png" : "/logo-purple.png"}
+            alt="Mansah Logo"
+            className="w-7 h-7 object-contain transition-transform duration-300 group-hover:scale-105"
+          />
           <span className="text-xl font-bold tracking-tight text-foreground">
             Mansah
           </span>
-          <span className="h-2 w-2 rounded-full bg-brand-primary dark:bg-brand-accent animate-pulse" />
         </Link>
 
         {/* Center - Desktop Nav Items */}
