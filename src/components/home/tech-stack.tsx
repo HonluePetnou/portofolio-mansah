@@ -4,43 +4,49 @@ import { motion } from "framer-motion";
 import { Code2, ShieldCheck, Cpu, Lightbulb, ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
-
-const services = [
-  {
-    title: "Frontend Architecture",
-    description:
-      "Interactive, responsive UIs built with modular components and clean code structure — from design system to production.",
-    techs: ["React", "Next.js", "TypeScript", "Tailwind CSS"],
-    icon: Code2,
-    href: "/projects",
-  },
-  {
-    title: "QA & Automation",
-    description:
-      "Flawless product quality through BDD, Playwright end-to-end flows, and robust testing suites. Zero regressions.",
-    techs: ["Cucumber", "Playwright", "Jest", "CI/CD"],
-    icon: ShieldCheck,
-    href: "/projects",
-  },
-  {
-    title: "Full Stack & AI",
-    description:
-      "Robust backend APIs and advanced AI integrations using Gemini LLMs to solve real business problems at scale.",
-    techs: ["FastAPI", "Python", "Spring Boot", "Gemini AI"],
-    icon: Cpu,
-    href: "/projects",
-  },
-  {
-    title: "Tech Consulting",
-    description:
-      "Code reviews, architecture audits, and technical strategy sessions to align your engineering with business goals.",
-    techs: ["Architecture", "Code Review", "Strategy", "Mentoring"],
-    icon: Lightbulb,
-    href: "/#contact",
-  },
-];
+import { useLanguage } from "@/context/language-context";
 
 export function TechStack() {
+  const { lang, t } = useLanguage();
+
+  const services = [
+    {
+      title: lang === "FR" ? "Architecture Frontend" : "Frontend Architecture",
+      description: lang === "FR"
+        ? "Des interfaces utilisateur interactives et réactives construites avec des composants modulaires et un code propre — du design system à la production."
+        : "Interactive, responsive UIs built with modular components and clean code structure — from design system to production.",
+      techs: ["React", "Next.js", "TypeScript", "Tailwind CSS"],
+      icon: Code2,
+      href: "/projects",
+    },
+    {
+      title: lang === "FR" ? "QA & Automatisation" : "QA & Automation",
+      description: lang === "FR"
+        ? "Une qualité de produit irréprochable grâce au BDD, aux flux de bout en bout avec Playwright et à des suites de tests robustes. Zéro régression."
+        : "Flawless product quality through BDD, Playwright end-to-end flows, and robust testing suites. Zero regressions.",
+      techs: ["Cucumber", "Playwright", "Jest", "CI/CD"],
+      icon: ShieldCheck,
+      href: "/projects",
+    },
+    {
+      title: lang === "FR" ? "Full Stack & IA" : "Full Stack & AI",
+      description: lang === "FR"
+        ? "Des API backend robustes et des intégrations d'IA avancées utilisant les LLM Gemini pour résoudre de réels problèmes métier à grande échelle."
+        : "Robust backend APIs and advanced AI integrations using Gemini LLMs to solve real business problems at scale.",
+      techs: ["FastAPI", "Python", "Spring Boot", "Gemini AI"],
+      icon: Cpu,
+      href: "/projects",
+    },
+    {
+      title: lang === "FR" ? "Conseil Technique" : "Tech Consulting",
+      description: lang === "FR"
+        ? "Revues de code, audits d'architecture et sessions de stratégie technique pour aligner votre ingénierie avec vos objectifs commerciaux."
+        : "Code reviews, architecture audits, and technical strategy sessions to align your engineering with business goals.",
+      techs: ["Architecture", "Code Review", "Strategy", "Mentoring"],
+      icon: Lightbulb,
+      href: "/#contact",
+    },
+  ];
   return (
     <section id="services" className="section-py scroll-mt-20 overflow-hidden bg-transparent">
       <div className="container">
@@ -60,20 +66,22 @@ export function TechStack() {
             <div className="lg:row-span-2 flex flex-col justify-center p-10 lg:p-12 border-b lg:border-b-0 lg:border-r border-gray-200/60 dark:border-white/6">
               <div className="inline-flex items-center gap-2 text-brand-primary dark:text-brand-accent text-xs font-bold tracking-widest uppercase mb-5">
                 <span className="h-1.5 w-1.5 rounded-full bg-brand-primary dark:bg-brand-accent" />
-                SERVICES
+                {t("services.title")}
               </div>
               <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-foreground leading-tight mb-5">
-                What I Do.{" "}
+                {lang === "FR" ? "Ce que je fais. " : "What I Do. "}
                 <span className="text-brand-primary dark:text-brand-accent">
-                  How I Deliver.
+                  {lang === "FR" ? "Comment je livre." : "How I Deliver."}
                 </span>
               </h2>
               <p className="text-muted-foreground dark:text-gray-400 text-sm leading-relaxed mb-8 max-w-xs">
-                Engineering best practices fused with a product-first mindset — every line of code ships value.
+                {lang === "FR"
+                  ? "Les meilleures pratiques d'ingénierie fusionnées avec un esprit orienté produit — chaque ligne apporte de la valeur."
+                  : "Engineering best practices fused with a product-first mindset — every line of code ships value."}
               </p>
               <Link href="/#contact">
                 <button className="group inline-flex items-center gap-2 px-5 py-3 rounded-lg bg-brand-primary text-white font-bold text-xs tracking-wider uppercase hover:bg-brand-primary/90 transition-all shadow-[0_4px_14px_rgba(94,80,249,0.3)] w-fit">
-                  Work with me
+                  {lang === "FR" ? "Travaillons ensemble" : "Work with me"}
                   <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
                 </button>
               </Link>
@@ -120,7 +128,7 @@ export function TechStack() {
                     href={service.href}
                     className="inline-flex items-center gap-1.5 text-xs font-bold tracking-wide uppercase text-brand-primary dark:text-brand-accent transition-all hover:gap-2.5"
                   >
-                    Learn more
+                    {lang === "FR" ? "En savoir plus" : "Learn more"}
                     <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
                   </Link>
                 </motion.div>

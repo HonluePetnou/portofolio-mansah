@@ -1,30 +1,16 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import { Languages } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-type Lang = "EN" | "FR";
+import { useLanguage } from "@/context/language-context";
 
 export function LanguageSelector() {
-  const [lang, setLang] = useState<Lang>("EN");
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-    const saved = localStorage.getItem("lang") as Lang | null;
-    if (saved === "EN" || saved === "FR") setLang(saved);
-  }, []);
+  const { lang, setLang } = useLanguage();
 
   const toggle = () => {
-    const next: Lang = lang === "EN" ? "FR" : "EN";
-    setLang(next);
-    localStorage.setItem("lang", next);
-    // Dispatch event so other components can react if needed
-    window.dispatchEvent(new CustomEvent("langchange", { detail: next }));
+    setLang(lang === "EN" ? "FR" : "EN");
   };
-
-  if (!mounted) return null;
 
   return (
     <button

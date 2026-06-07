@@ -8,12 +8,18 @@ import { ArrowRight, Github, ExternalLink, Mail, CheckCircle2 } from "lucide-rea
 import { cn } from "@/lib/utils";
 import { ProjectCard } from "@/components/projects/project-card";
 import { Breadcrumbs } from "@/components/shared/breadcrumbs";
+import { useLanguage } from "@/context/language-context";
 import { projectsData, ProjectData } from "@/data/projects";
 
-const categories = ["All", "AI & Full Stack", "Frontend / Web"];
-
 export function ProjectsClientPage() {
+  const { lang, t } = useLanguage();
   const [activeTab, setActiveTab] = useState("All");
+
+  const categories = [
+    { id: "All", label: t("works.all") },
+    { id: "AI & Full Stack", label: t("works.ai") },
+    { id: "Frontend / Web", label: t("works.frontend") },
+  ];
 
   // Find the featured project (OneControl)
   const featuredProject = projectsData.find((p) => p.slug === "one-control") || projectsData[0];
@@ -28,18 +34,20 @@ export function ProjectsClientPage() {
       
       {/* Header and Breadcrumbs */}
       <div className="space-y-4">
-        <Breadcrumbs items={[{ label: "Projects", href: "/projects" }]} />
+        <Breadcrumbs items={[{ label: lang === "FR" ? "Projets" : "Projects", href: "/projects" }]} />
         
         <div className="max-w-2xl text-left">
           <div className="inline-flex items-center gap-2 text-brand-primary dark:text-brand-accent text-xs font-bold tracking-widest uppercase mb-3">
             <span className="h-1.5 w-1.5 rounded-full bg-brand-primary dark:bg-brand-accent" />
-            CASE STUDIES
+            {lang === "FR" ? "ÉTUDES DE CAS" : "CASE STUDIES"}
           </div>
           <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-foreground leading-tight">
-            Selected Work
+            {lang === "FR" ? "Projets Sélectionnés" : "Selected Work"}
           </h1>
           <p className="mt-4 text-muted-foreground dark:text-gray-400 text-sm leading-relaxed">
-            A deep dive into design systems, full-stack architectures, QA automation pipelines, and generative AI integrations.
+            {lang === "FR"
+              ? "Une plongée dans les design systems, les architectures full-stack, les pipelines d'automatisation QA et les intégrations d'IA générative."
+              : "A deep dive into design systems, full-stack architectures, QA automation pipelines, and generative AI integrations."}
           </p>
         </div>
       </div>
@@ -48,7 +56,7 @@ export function ProjectsClientPage() {
       {featuredProject && (
         <div className="space-y-6">
           <h3 className="text-xs font-bold tracking-wider uppercase text-muted-foreground">
-            Featured Case Study
+            {lang === "FR" ? "Étude de Cas Phare" : "Featured Case Study"}
           </h3>
           <div className="grid lg:grid-cols-[1.2fr_1fr] rounded-3xl overflow-hidden border border-gray-200/50 dark:border-white/5 bg-gray-50/50 dark:bg-card-bg backdrop-blur-sm shadow-md dark:shadow-xl group">
             
@@ -65,7 +73,7 @@ export function ProjectsClientPage() {
               {/* Floating tags */}
               <div className="absolute top-4 left-4 flex gap-2">
                 <span className="text-[10px] font-bold tracking-wider uppercase px-3 py-1 rounded-full bg-brand-primary text-white border border-brand-primary/20 shadow-md">
-                  Flagship Project
+                  {lang === "FR" ? "Projet Phare" : "Flagship Project"}
                 </span>
               </div>
             </div>
@@ -80,19 +88,19 @@ export function ProjectsClientPage() {
                   {featuredProject.title}
                 </h2>
                 <p className="text-muted-foreground dark:text-gray-400 text-xs md:text-sm leading-relaxed">
-                  {featuredProject.description}
+                  {featuredProject.description[lang]}
                 </p>
 
                 {/* Key Metrics Grid */}
                 {featuredProject.metrics && (
                   <div className="grid grid-cols-2 gap-4 pt-4">
                     {featuredProject.metrics.map((metric) => (
-                      <div key={metric.label} className="p-3.5 rounded-xl border border-gray-200/40 dark:border-white/5 bg-white/40 dark:bg-white/[0.02] backdrop-blur-md">
+                      <div key={metric.label.EN} className="p-3.5 rounded-xl border border-gray-200/40 dark:border-white/5 bg-white/40 dark:bg-white/[0.02] backdrop-blur-md">
                         <div className="text-2xl font-extrabold text-brand-primary dark:text-brand-accent">
                           {metric.value}
                         </div>
                         <div className="text-[10px] font-medium tracking-wide uppercase text-muted-foreground mt-0.5">
-                          {metric.label}
+                          {metric.label[lang]}
                         </div>
                       </div>
                     ))}
@@ -143,7 +151,7 @@ export function ProjectsClientPage() {
                   )}
                   <Link href={`/projects/${featuredProject.slug}`}>
                     <button className="flex items-center gap-1.5 px-5 py-2.5 rounded-lg bg-brand-primary text-white font-bold text-xs tracking-wider uppercase hover:bg-brand-primary/90 transition-all shadow-[0_4px_14px_rgba(94,80,249,0.25)]">
-                      Case Study
+                      {lang === "FR" ? "Étude de Cas" : "Case Study"}
                       <ArrowRight className="w-3.5 h-3.5" />
                     </button>
                   </Link>
@@ -161,23 +169,23 @@ export function ProjectsClientPage() {
         {/* Title and Filter Header */}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
           <h3 className="text-xl font-bold tracking-tight text-foreground text-left">
-            All Projects
+            {lang === "FR" ? "Tous les Projets" : "All Projects"}
           </h3>
 
           {/* Animated Tabs */}
           <div className="flex flex-wrap gap-2 p-1.5 rounded-xl border border-gray-200/50 dark:border-white/5 bg-gray-50/50 dark:bg-brand-dark/40 backdrop-blur-md w-fit">
             {categories.map((cat) => (
               <button
-                key={cat}
-                onClick={() => setActiveTab(cat)}
+                key={cat.id}
+                onClick={() => setActiveTab(cat.id)}
                 className={cn(
                   "relative px-4 py-2 rounded-lg text-xs font-bold tracking-wide uppercase transition-all duration-300",
-                  activeTab === cat
+                  activeTab === cat.id
                     ? "text-brand-primary dark:text-brand-accent bg-white dark:bg-card-bg shadow-sm"
                     : "text-muted-foreground hover:text-foreground"
                 )}
               >
-                {cat}
+                {cat.label}
               </button>
             ))}
           </div>

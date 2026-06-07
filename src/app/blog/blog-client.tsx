@@ -26,7 +26,16 @@ const getCategoryStyle = (category: string) => {
 };
 
 export function BlogClientPage() {
+  const { lang, t } = useLanguage();
   const [activeTab, setActiveTab] = useState("All");
+
+  const categories = [
+    { id: "All", label: t("blog.all") },
+    { id: "Quality Assurance", label: lang === "FR" ? "Assurance Qualité" : "Quality Assurance" },
+    { id: "Frontend Engineering", label: lang === "FR" ? "Ingénierie Frontend" : "Frontend Engineering" },
+    { id: "AI & APIs", label: "AI & APIs" },
+    { id: "Product & Agility", label: lang === "FR" ? "Produit & Agilité" : "Product & Agility" },
+  ];
 
   // Filter posts based on active tab
   const filteredPosts = activeTab === "All"
@@ -41,18 +50,20 @@ export function BlogClientPage() {
       
       {/* Header and Breadcrumbs */}
       <div className="space-y-4">
-        <Breadcrumbs items={[{ label: "Blog", href: "/blog" }]} />
+        <Breadcrumbs items={[{ label: lang === "FR" ? "Blog" : "Blog", href: "/blog" }]} />
         
         <div className="max-w-2xl text-left">
           <div className="inline-flex items-center gap-2 text-brand-primary dark:text-brand-accent text-xs font-bold tracking-widest uppercase mb-3">
             <span className="h-1.5 w-1.5 rounded-full bg-brand-primary dark:bg-brand-accent" />
-            WRITTEN ARTICLES
+            {lang === "FR" ? "ARTICLES RÉDIGÉS" : "WRITTEN ARTICLES"}
           </div>
           <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-foreground leading-tight">
-            Engineering Insights
+            {t("blog.title")}
           </h1>
           <p className="mt-4 text-muted-foreground dark:text-gray-400 text-sm leading-relaxed">
-            Explorations into software architecture, frontend modularity, automated testing strategies, and AI integration workflows.
+            {lang === "FR"
+              ? "Explorations de l'architecture logicielle, de la modularité frontend, des stratégies de tests automatisés et des flux d'intégration de l'IA."
+              : "Explorations into software architecture, frontend modularity, automated testing strategies, and AI integration workflows."}
           </p>
         </div>
       </div>
@@ -61,7 +72,7 @@ export function BlogClientPage() {
       {featuredPost && activeTab === "All" && (
         <div className="space-y-6">
           <h3 className="text-xs font-bold tracking-wider uppercase text-muted-foreground">
-            Featured Article
+            {lang === "FR" ? "Article Phare" : "Featured Article"}
           </h3>
           <Link href={`/blog/${featuredPost.slug}`} className="block group">
             <div className="p-8 md:p-12 rounded-3xl border border-gray-200/50 dark:border-white/5 bg-gray-50/50 dark:bg-card-bg backdrop-blur-sm shadow-md dark:shadow-xl hover:border-brand-primary/20 transition-all duration-300">
@@ -79,21 +90,21 @@ export function BlogClientPage() {
                   </span>
                   <span className="flex items-center gap-1">
                     <Clock className="w-3.5 h-3.5" />
-                    {featuredPost.readTime}
+                    {featuredPost.readTime[lang]}
                   </span>
                 </div>
               </div>
               
               <h2 className="text-2xl md:text-4xl font-extrabold text-left text-foreground mb-4 group-hover:text-brand-primary dark:group-hover:text-brand-accent transition-colors leading-tight max-w-4xl">
-                {featuredPost.title}
+                {featuredPost.title[lang]}
               </h2>
               
               <p className="text-muted-foreground dark:text-gray-400 text-xs md:text-sm leading-relaxed mb-6 text-left max-w-3xl">
-                {featuredPost.excerpt}
+                {featuredPost.excerpt[lang]}
               </p>
               
               <div className="inline-flex items-center text-xs font-bold uppercase tracking-wider text-brand-primary dark:text-brand-accent group-hover:translate-x-1.5 transition-transform duration-200">
-                Read Article <ArrowRight className="ml-2 h-4 w-4" />
+                {lang === "FR" ? "Lire l'article" : "Read Article"} <ArrowRight className="ml-2 h-4 w-4" />
               </div>
             </div>
           </Link>
@@ -106,23 +117,23 @@ export function BlogClientPage() {
         {/* Title and Filter Header */}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
           <h3 className="text-xl font-bold tracking-tight text-foreground text-left">
-            Recent Articles
+            {lang === "FR" ? "Articles Récents" : "Recent Articles"}
           </h3>
 
           {/* Animated Tabs */}
           <div className="flex flex-wrap gap-2 p-1.5 rounded-xl border border-gray-200/50 dark:border-white/5 bg-gray-50/50 dark:bg-brand-dark/40 backdrop-blur-md w-fit">
             {categories.map((cat) => (
               <button
-                key={cat}
-                onClick={() => setActiveTab(cat)}
+                key={cat.id}
+                onClick={() => setActiveTab(cat.id)}
                 className={cn(
                   "relative px-4 py-2 rounded-lg text-xs font-bold tracking-wide uppercase transition-all duration-300",
-                  activeTab === cat
+                  activeTab === cat.id
                     ? "text-brand-primary dark:text-brand-accent bg-white dark:bg-card-bg shadow-sm"
                     : "text-muted-foreground hover:text-foreground"
                 )}
               >
-                {cat}
+                {cat.label}
               </button>
             ))}
           </div>
@@ -154,16 +165,16 @@ export function BlogClientPage() {
                       </div>
                       
                       <h3 className="text-xl font-bold text-foreground mb-3 group-hover:text-brand-primary dark:group-hover:text-brand-accent transition-colors text-left leading-snug">
-                        {article.title}
+                        {article.title[lang]}
                       </h3>
                       
                       <p className="text-muted-foreground dark:text-gray-400 text-xs leading-relaxed text-left line-clamp-3">
-                        {article.excerpt}
+                        {article.excerpt[lang]}
                       </p>
                     </div>
                     
                     <div className="mt-6 pt-4 border-t border-gray-200/50 dark:border-white/5 flex items-center text-xs font-bold text-muted-foreground dark:text-gray-300 group-hover:text-brand-primary dark:group-hover:text-brand-accent transition-colors">
-                      Read more <ArrowRight className="ml-2 h-3.5 w-3.5" />
+                      {lang === "FR" ? "Lire l'article" : "Read more"} <ArrowRight className="ml-2 h-3.5 w-3.5" />
                     </div>
                   </div>
                 </Link>

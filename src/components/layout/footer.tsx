@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Mail, Github, Linkedin, Twitter, Youtube } from "lucide-react";
 import { useTheme } from "next-themes";
 import { useState, useEffect } from "react";
+import { useLanguage } from "@/context/language-context";
 
 /* ── Tiny inline SVGs (not in lucide) ── */
 const InstagramIcon = () => (
@@ -32,6 +33,7 @@ const socials = [
 export function Footer() {
   const { resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
+  const { t } = useLanguage();
 
   const isDark = resolvedTheme === "dark" || resolvedTheme === undefined;
 
@@ -59,7 +61,7 @@ export function Footer() {
               </span>
             </Link>
             <p className="text-xs text-white/40 leading-relaxed">
-              Senior Frontend Engineer & QA Specialist. Building interactive, high-performance web products with clean code.
+              {t("footer.desc")}
             </p>
           </div>
 
@@ -67,10 +69,10 @@ export function Footer() {
           <div className="flex flex-col md:items-end gap-4">
             {/* Navigation links */}
             <div className="flex flex-wrap gap-x-6 gap-y-2 text-xs">
-              <Link href="/#about" className="text-white/50 hover:text-white transition-colors">About</Link>
-              <Link href="/#services" className="text-white/50 hover:text-white transition-colors">Services</Link>
-              <Link href="/#projects" className="text-white/50 hover:text-white transition-colors">Works</Link>
-              <Link href="/#contact" className="text-white/50 hover:text-white transition-colors">Contact</Link>
+              <Link href="/#about" className="text-white/50 hover:text-white transition-colors">{t("nav.about")}</Link>
+              <Link href="/#services" className="text-white/50 hover:text-white transition-colors">{t("nav.services")}</Link>
+              <Link href="/#projects" className="text-white/50 hover:text-white transition-colors">{t("nav.works")}</Link>
+              <Link href="/#contact" className="text-white/50 hover:text-white transition-colors">{t("nav.contact")}</Link>
             </div>
           </div>
         </div>
@@ -81,7 +83,7 @@ export function Footer() {
         {/* Bottom section: Copyright and Socials */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-6">
           <p className="text-[11px] text-white/30 text-center sm:text-left">
-            © {new Date().getFullYear()} Frédéric Armel Mansah. All rights reserved.
+            © {new Date().getFullYear()} Frédéric Armel Petnou. {t("footer.allRights")}
           </p>
 
           {/* Social Icons */}

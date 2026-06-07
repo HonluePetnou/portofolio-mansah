@@ -6,6 +6,8 @@ import { ArrowRight, BookOpen } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { blogPosts } from "@/data/blog";
 
+import { useLanguage } from "@/context/language-context";
+
 // Category tag color mappings
 const getCategoryStyle = (category: string) => {
   switch (category) {
@@ -23,6 +25,7 @@ const getCategoryStyle = (category: string) => {
 };
 
 export function BlogSection() {
+  const { lang, t } = useLanguage();
   // Show first 3 blog posts on the home page
   const recentPosts = blogPosts.slice(0, 3);
 
@@ -34,13 +37,15 @@ export function BlogSection() {
         <div className="mb-16 text-center">
           <div className="inline-flex items-center gap-2 text-brand-primary dark:text-brand-accent text-xs font-bold tracking-widest uppercase mb-4 justify-center">
             <span className="h-1.5 w-1.5 rounded-full bg-brand-primary dark:bg-brand-accent" />
-            INSIGHTS
+            {lang === "FR" ? "INSIGHTS" : "INSIGHTS"}
           </div>
           <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-foreground">
-            Engineering Blog
+            {lang === "FR" ? "Blog d'Ingénierie" : "Engineering Blog"}
           </h2>
           <p className="mt-4 text-muted-foreground dark:text-gray-400 max-w-xl mx-auto text-sm leading-relaxed">
-            Latest thoughts on software engineering, product architecture, and quality assurance.
+            {lang === "FR"
+              ? "Mes dernières réflexions sur le génie logiciel, l'architecture produit et l'assurance qualité."
+              : "Latest thoughts on software engineering, product architecture, and quality assurance."}
           </p>
         </div>
 
@@ -68,16 +73,16 @@ export function BlogSection() {
                     </div>
                     
                     <h3 className="text-lg font-bold text-foreground mb-3 group-hover:text-brand-primary dark:group-hover:text-brand-accent transition-colors text-left leading-snug">
-                      {post.title}
+                      {post.title[lang]}
                     </h3>
                     
                     <p className="text-muted-foreground dark:text-gray-400 text-xs leading-relaxed text-left line-clamp-4">
-                      {post.excerpt}
+                      {post.excerpt[lang]}
                     </p>
                   </div>
                   
                   <div className="mt-6 pt-4 border-t border-gray-100 dark:border-white/5 flex items-center text-xs font-bold text-muted-foreground dark:text-gray-300 group-hover:text-brand-primary dark:group-hover:text-brand-accent transition-colors">
-                    Read more <ArrowRight className="ml-2 h-3.5 w-3.5" />
+                    {lang === "FR" ? "Lire l'article" : "Read more"} <ArrowRight className="ml-2 h-3.5 w-3.5" />
                   </div>
                 </div>
               </Link>
@@ -89,7 +94,7 @@ export function BlogSection() {
         <div className="flex justify-center">
           <Link href="/blog">
             <button className="group flex items-center gap-2 px-6 py-3.5 rounded-lg border border-gray-200 dark:border-white/10 bg-white dark:bg-card-bg hover:bg-gray-50 dark:hover:bg-[#1A1A1F] transition-all text-foreground font-bold text-xs tracking-wider uppercase">
-              View All Posts
+              {lang === "FR" ? "Voir tous les articles" : "View All Posts"}
               <BookOpen className="w-3.5 h-3.5" />
             </button>
           </Link>

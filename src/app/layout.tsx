@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
+import { LanguageProvider } from "@/context/language-context";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import { SocialFloat } from "@/components/shared/social-float";
@@ -30,16 +31,18 @@ export default function RootLayout({
           enableSystem={true}
           disableTransitionOnChange
         >
-          {/* Background Glows */}
-          <div className="fixed top-[-10%] left-[-10%] h-[40%] w-[50%] bg-brand-primary/5 rounded-full blur-[120px] pointer-events-none -z-10" />
-          <div className="fixed bottom-[-10%] right-[10%] h-[40%] w-[50%] bg-brand-accent/5 rounded-full blur-[120px] pointer-events-none -z-10" />
+          <LanguageProvider>
+            {/* Background Glows */}
+            <div className="fixed top-[-10%] left-[-10%] h-[40%] w-[50%] bg-brand-primary/5 rounded-full blur-[120px] pointer-events-none -z-10" />
+            <div className="fixed bottom-[-10%] right-[10%] h-[40%] w-[50%] bg-brand-accent/5 rounded-full blur-[120px] pointer-events-none -z-10" />
 
-          <Navbar />
-          <main className="w-full pt-12 min-h-[calc(100vh-100px)]">
-            {children}
-          </main>
-          <Footer />
-          <SocialFloat />
+            <Navbar />
+            <main className="w-full pt-12 min-h-[calc(100vh-100px)]">
+              {children}
+            </main>
+            <Footer />
+            <SocialFloat />
+          </LanguageProvider>
         </ThemeProvider>
       </body>
     </html>

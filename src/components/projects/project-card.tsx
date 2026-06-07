@@ -13,7 +13,11 @@ interface ProjectCardProps {
   isAlt?: boolean;
 }
 
+import { useLanguage } from "@/context/language-context";
+
 export function ProjectCard({ project, isAlt = false }: ProjectCardProps) {
+  const { lang } = useLanguage();
+
   return (
     <div className={cn(
       "flex flex-col h-full rounded-2xl overflow-hidden border border-gray-100 dark:border-white/5 hover:border-gray-200 dark:hover:border-white/10 hover:-translate-y-1.5 transition-all duration-300 shadow-sm hover:shadow-md dark:shadow-lg dark:hover:shadow-xl group",
@@ -69,7 +73,7 @@ export function ProjectCard({ project, isAlt = false }: ProjectCardProps) {
           </h3>
         </Link>
         <p className="text-muted-foreground dark:text-gray-400 text-xs leading-relaxed text-left line-clamp-3 flex-grow">
-          {project.description}
+          {project.description[lang]}
         </p>
 
         {/* Tech Stack */}

@@ -9,17 +9,18 @@ import { usePathname } from "next/navigation";
 import { useTheme } from "next-themes";
 import { Menu, X, ArrowRight } from "lucide-react";
 import Link from "next/link";
-
-const navItems = [
-  { name: "HOME", href: "/" },
-  { name: "ABOUT", href: "/#about" },
-  { name: "SERVICES", href: "/#services" },
-  { name: "WORKS", href: "/#projects" },
-  { name: "EXPERIENCE", href: "/#experience" },
-  { name: "BLOG", href: "/#blog" },
-];
+import { useLanguage } from "@/context/language-context";
 
 export function Navbar() {
+  const { t } = useLanguage();
+  const navItems = [
+    { name: t("nav.home"), href: "/" },
+    { name: t("nav.about"), href: "/#about" },
+    { name: t("nav.services"), href: "/#services" },
+    { name: t("nav.works"), href: "/#projects" },
+    { name: t("nav.experience"), href: "/#experience" },
+    { name: t("nav.blog"), href: "/#blog" },
+  ];
   const pathname = usePathname();
   const [activeSection, setActiveSection] = useState("home");
   const [isOpen, setIsOpen] = useState(false);
@@ -154,7 +155,7 @@ export function Navbar() {
           <ThemeToggle />
           <Link href="/#contact">
             <button className="flex items-center gap-2 px-5 py-2.5 rounded-lg bg-brand-primary text-white font-semibold text-xs tracking-wider uppercase hover:bg-brand-primary/95 transition-all shadow-[0_4px_14px_rgba(94,80,249,0.3)]">
-              CONTACT ME
+              {t("nav.contact")}
               <ArrowRight className="w-3.5 h-3.5" />
             </button>
           </Link>
@@ -226,7 +227,7 @@ export function Navbar() {
                   onClick={() => setIsOpen(false)}
                   className="mt-2 w-full flex items-center justify-center gap-2 px-5 py-3 rounded-lg bg-brand-primary text-white font-semibold text-xs tracking-wider uppercase"
                 >
-                  CONTACT ME
+                  {t("nav.contact")}
                   <ArrowRight className="w-3.5 h-3.5" />
                 </Link>
               </div>

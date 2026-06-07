@@ -5,13 +5,16 @@ import { ArrowRight, Download } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { FourPointStar } from "@/components/ui/four-point-star";
+import { useLanguage } from "@/context/language-context";
 
 export function HeroSection() {
+  const { t, lang } = useLanguage();
+
   const stats = [
-    { value: "10+", label: "PROJECTS COMPLETED" },
-    { value: "4+", label: "YEARS OF EXPERIENCE" },
-    { value: "100%", label: "CLIENT SATISFACTION" },
-    { value: "3+", label: "COMPANIES WORKED" },
+    { value: "10+", label: t("hero.stats.projects") },
+    { value: "4+", label: t("hero.stats.experience") },
+    { value: "100%", label: t("hero.stats.satisfaction") },
+    { value: "3+", label: t("hero.stats.companies") },
   ];
 
   return (
@@ -39,40 +42,40 @@ export function HeroSection() {
             {/* Subtitle Badge */}
             <div className="inline-flex items-center gap-2 text-brand-primary dark:text-brand-accent text-xs font-bold tracking-widest uppercase">
               <span className="h-1.5 w-1.5 rounded-full bg-brand-primary dark:bg-brand-accent" />
-              HI THERE
+              {t("hero.badge")}
             </div>
 
             {/* Main Heading */}
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-foreground leading-[1.1]">
-              Hello, my name's{" "}
+              {t("hero.intro")}{" "}
               <span className="text-brand-primary dark:text-brand-accent relative inline-block">
-                Mansah
+                Frédéric
               </span>
-              . I'm Junior Engineer.
+              . {t("hero.tagline")}
             </h1>
 
             {/* Paragraph Description */}
             <p className="text-lg text-muted-foreground dark:text-gray-400 leading-relaxed max-w-xl">
-              I have 4+ years of experience building scalable applications and robust software solutions for startups and enterprise clients.
+              {t("hero.experience")}
             </p>
 
             {/* CTA Buttons */}
             <div className="flex flex-wrap items-center gap-6 pt-4 w-full">
               <Link href="/#contact">
                 <button className="group flex items-center gap-3 px-8 py-4 rounded-lg bg-brand-primary text-white font-bold text-sm tracking-wider uppercase hover:bg-brand-primary/95 transition-all shadow-[0_4px_20px_rgba(94,80,249,0.3)]">
-                  Let's Talk
+                  {t("hero.ctaTalk")}
                   <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                 </button>
               </Link>
               <a
-                href="/resume.pdf"
+                href={lang === "FR" ? "/resume-fr.pdf" : "/resume-en.pdf"}
                 target="_blank"
                 rel="noopener noreferrer"
-                download="CV_Frederic_Mansah.pdf"
+                download={lang === "FR" ? "CV_PETNOU_HONLUE_FREDERIC_ARMEL_FR.pdf" : "CV_PETNOU_HONLUE_FREDERIC_ARMEL_EN.pdf"}
                 className="flex items-center gap-2 text-sm font-semibold text-foreground hover:text-brand-primary dark:hover:text-brand-accent transition-colors group"
               >
                 <Download className="w-4 h-4 text-brand-primary group-hover:text-brand-primary dark:group-hover:text-brand-accent transition-colors" />
-                DOWNLOAD CV
+                {t("hero.ctaCv")}
               </a>
             </div>
           </motion.div>

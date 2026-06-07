@@ -9,52 +9,73 @@ import { cn } from "@/lib/utils";
 
 type TabId = "story" | "values" | "focus";
 
+import { useLanguage } from "@/context/language-context";
+
 export function AboutSection() {
   const [activeTab, setActiveTab] = useState<TabId>("story");
+  const { lang, t } = useLanguage();
 
   const tabs = [
-    { id: "story" as TabId, label: "My Story", icon: User },
-    { id: "values" as TabId, label: "Core Values", icon: Heart },
-    { id: "focus" as TabId, label: "Tech Focus", icon: Cpu },
+    { id: "story" as TabId, label: lang === "FR" ? "Mon Histoire" : "My Story", icon: User },
+    { id: "focus" as TabId, label: lang === "FR" ? "Focus Technique" : "Tech Focus", icon: Cpu },
+    { id: "values" as TabId, label: lang === "FR" ? "Mes Valeurs" : "Core Values", icon: Heart },
   ];
 
   const tabContent = {
     story: {
-      bio: "Frédéric Armel (Mansah) is a product-oriented software engineer combining technical expertise with a quality-first mindset. Currently pursuing an engineering degree at ENSPD (2022–2027), he bridges core computer science principles with state-of-the-art web architectures.",
+      bio: lang === "FR"
+        ? "Frédéric Armel Petnou est un ingénieur logiciel orienté produit, alliant expertise technique et culture de la qualité. Actuellement en cursus d'ingénieur à l'ENSPD (2022–2027), il fait le lien entre les fondements de l'informatique et les architectures web modernes."
+        : "Frédéric Armel Petnou is a product-oriented software engineer combining technical expertise with a quality-first mindset. Currently pursuing an engineering degree at ENSPD (2022–2027), he bridges core computer science principles with state-of-the-art web architectures.",
       items: [
         {
-          title: "Engineering at ENSPD",
-          desc: "Deep computer science foundations in system design, algorithms, and modular architecture.",
+          title: lang === "FR" ? "Études d'ingénieur à l'ENSPD" : "Engineering at ENSPD",
+          desc: lang === "FR" 
+            ? "Bases approfondies en informatique, conception de systèmes, algorithmes et architecture modulaire."
+            : "Deep computer science foundations in system design, algorithms, and modular architecture.",
         },
         {
-          title: "Global Collaboration",
-          desc: "Shipping responsive React/Next.js applications and reliable digital products for startups worldwide.",
+          title: lang === "FR" ? "Collaboration Globale" : "Global Collaboration",
+          desc: lang === "FR"
+            ? "Livraison d'applications React/Next.js réactives et de produits numériques fiables pour des startups du monde entier."
+            : "Shipping responsive React/Next.js applications and reliable digital products for startups worldwide.",
         },
       ],
     },
     values: {
-      bio: "Code is just a tool; the goal is to deliver actual business value and user satisfaction. Frédéric operates on the principle that reliability and testing are core product features, not post-development phases.",
+      bio: lang === "FR"
+        ? "Le code n'est qu'un outil ; l'objectif est de livrer une valeur réelle et la satisfaction des utilisateurs. Frédéric opère selon le principe que la fiabilité et les tests sont des fonctionnalités produit clés, et non des phases post-développement."
+        : "Code is just a tool; the goal is to deliver actual business value and user satisfaction. Frédéric operates on the principle that reliability and testing are core product features, not post-development phases.",
       items: [
         {
-          title: "QA & BDD Champion",
-          desc: "Ensuring zero-regression codebases using BDD frameworks, Playwright, Jest, and Cucumber.",
+          title: lang === "FR" ? "Champion du QA & BDD" : "QA & BDD Champion",
+          desc: lang === "FR"
+            ? "Garantir des bases de code sans régression grâce aux frameworks BDD, Playwright, Jest et Cucumber."
+            : "Ensuring zero-regression codebases using BDD frameworks, Playwright, Jest, and Cucumber.",
         },
         {
-          title: "Maintainability & Clean Code",
-          desc: "Believer in self-documenting code, solid design patterns, and minimizing technical debt.",
+          title: lang === "FR" ? "Maintenabilité & Code Propre" : "Maintainability & Clean Code",
+          desc: lang === "FR"
+            ? "Adepte du code auto-documenté, des design patterns solides et de la réduction de la dette technique."
+            : "Believer in self-documenting code, solid design patterns, and minimizing technical debt.",
         },
       ],
     },
     focus: {
-      bio: "Mastering the user interface layer while holding robust full-stack capabilities, from backend APIs and cloud services to advanced machine learning integrations.",
+      bio: lang === "FR"
+        ? "Maîtriser la couche d'interface utilisateur tout en conservant de solides compétences full-stack, des API backend aux services cloud et intégrations IA."
+        : "Mastering the user interface layer while holding robust full-stack capabilities, from backend APIs and cloud services to advanced machine learning integrations.",
       items: [
         {
-          title: "Frontend Architecture",
-          desc: "Advanced component design, layout scaling, and state management in TypeScript.",
+          title: lang === "FR" ? "Architecture Frontend" : "Frontend Architecture",
+          desc: lang === "FR"
+            ? "Conception de composants avancés, mise à l'échelle des layouts et gestion d'état en TypeScript."
+            : "Advanced component design, layout scaling, and state management in TypeScript.",
         },
         {
-          title: "Integrations & Gemini AI",
-          desc: "Designing secure REST/GraphQL backends and automating complex workflows using Gemini LLMs.",
+          title: lang === "FR" ? "Intégrations & IA Gemini" : "Integrations & Gemini AI",
+          desc: lang === "FR"
+            ? "Conception de backends REST/GraphQL sécurisés et automatisation de flux complexes avec les LLM Gemini."
+            : "Designing secure REST/GraphQL backends and automating complex workflows using Gemini LLMs.",
         },
       ],
     },
@@ -86,12 +107,12 @@ export function AboutSection() {
               {/* Subtitle */}
               <div className="inline-flex items-center gap-2 text-brand-primary dark:text-brand-accent text-xs font-bold tracking-widest uppercase">
                 <span className="h-1.5 w-1.5 rounded-full bg-brand-primary dark:bg-brand-accent" />
-                ABOUT ME
+                {t("about.title")}
               </div>
 
               {/* Title */}
               <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-foreground leading-tight">
-                Who is Frédéric Armel?
+                {lang === "FR" ? "Qui est Frédéric Armel ?" : "Who is Frédéric Armel?"}
               </h2>
 
               {/* Glassmorphic Tab Headers */}
@@ -155,7 +176,7 @@ export function AboutSection() {
               <div className="pt-4">
                 <Link href="/#contact">
                   <button className="group flex items-center gap-2.5 px-6 py-3.5 rounded-lg bg-brand-primary text-white font-bold text-xs tracking-wider uppercase hover:bg-brand-primary/95 transition-all shadow-[0_4px_14px_rgba(94,80,249,0.3)]">
-                    Let's Connect
+                    {lang === "FR" ? "Parlons Ensemble" : "Let's Connect"}
                     <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
                   </button>
                 </Link>

@@ -7,10 +7,14 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { projectsData } from "@/data/projects";
 
+import { useLanguage } from "@/context/language-context";
+
 // Show first 3 projects as featured on the home page
 const featuredProjects = projectsData.slice(0, 3);
 
 export function ProjectsSection() {
+  const { lang, t } = useLanguage();
+
   return (
     <section id="projects" className="section-py gap-y-md scroll-mt-20 overflow-hidden bg-brand-alt border-t border-b border-gray-100/50 dark:border-white/5">
       <div className="container">
@@ -19,13 +23,15 @@ export function ProjectsSection() {
         <div className="mb-16 text-center">
           <div className="inline-flex items-center gap-2 text-brand-primary dark:text-brand-accent text-xs font-bold tracking-widest uppercase mb-4 justify-center">
             <span className="h-1.5 w-1.5 rounded-full bg-brand-primary dark:bg-brand-accent" />
-            PORTFOLIO
+            {lang === "FR" ? "PORTFOLIO" : "PORTFOLIO"}
           </div>
           <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-foreground">
-            Selected Works
+            {lang === "FR" ? "Projets Sélectionnés" : "Selected Works"}
           </h2>
           <p className="mt-4 text-muted-foreground dark:text-gray-400 max-w-xl mx-auto text-sm leading-relaxed">
-            Case studies in software engineering reliability and impact.
+            {lang === "FR"
+              ? "Études de cas sur la fiabilité et l'impact de l'ingénierie logicielle."
+              : "Case studies in software engineering reliability and impact."}
           </p>
         </div>
 
@@ -48,7 +54,7 @@ export function ProjectsSection() {
         <div className="flex justify-center mt-12">
           <Link href="/projects">
             <button className="group flex items-center gap-2 px-6 py-3.5 rounded-lg border border-gray-200 dark:border-white/10 bg-white dark:bg-card-bg-alt hover:bg-gray-50 dark:hover:bg-[#222033] transition-all text-foreground font-bold text-xs tracking-wider uppercase">
-              View All Projects
+              {lang === "FR" ? "Voir tous les projets" : "View All Projects"}
               <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
             </button>
           </Link>
