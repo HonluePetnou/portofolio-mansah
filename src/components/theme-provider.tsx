@@ -9,19 +9,22 @@ function FaviconUpdater() {
   React.useEffect(() => {
     const isDark = resolvedTheme === "dark";
     const logoUrl = isDark ? "/logo-green.png" : "/logo-purple.png";
+    const timestamp = Date.now();
 
-    // 1. Trouver et supprimer tous les liens d'icônes existants pour forcer le rafraîchissement
+    // 1. Trouver tous les liens d'icônes existants et mettre à jour uniquement leur attribut href
     const iconLinks = document.querySelectorAll("link[rel*='icon']");
-    iconLinks.forEach((link) => {
-      link.parentNode?.removeChild(link);
-    });
-
-    // 2. Créer une nouvelle balise avec un timestamp anti-cache (?v=...)
-    const link = document.createElement("link");
-    link.rel = "icon";
-    link.type = "image/png";
-    link.href = `${logoUrl}?v=${Date.now()}`;
-    document.head.appendChild(link);
+    if (iconLinks.length > 0) {
+      iconLinks.forEach((link) => {
+        (link as HTMLLinkElement).href = `${logoUrl}?v=${timestamp}`;
+      });
+    } else {
+      // 2. Créer l'élément de secours uniquement s'il n'en existait aucun
+      const link = document.createElement("link");
+      link.rel = "icon";
+      link.type = "image/png";
+      link.href = `${logoUrl}?v=${timestamp}`;
+      document.head.appendChild(link);
+    }
   }, [resolvedTheme]);
 
   return null;

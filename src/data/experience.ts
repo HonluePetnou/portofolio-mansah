@@ -6,6 +6,29 @@ export interface Experience {
   achievements: string[];
 }
 
+export interface Education {
+  school: string;
+  degree: string;
+  field: string;
+  period: string;
+}
+
+export interface Award {
+  event: string;
+  result: string;
+  date: string;
+}
+
+export interface Language {
+  name: string;
+  level: string;
+}
+
+export interface SkillGroup {
+  category: string;
+  skills: string[];
+}
+
 export const experiences: Experience[] = [
   {
     role: "Senior Frontend Engineer & QA",
@@ -38,5 +61,54 @@ export const experiences: Experience[] = [
       "Participated in the full lifecycle of software product building.",
       "Contributed to key technical and product decisions.",
     ],
+  },
+];
+
+export const educationList: Education[] = [
+  {
+    school: "Université de Lomé",
+    degree: "Licence de Technologie",
+    field: "Génie Logiciel & Informatique",
+    period: "2021 – 2024",
+  },
+];
+
+export const awardsList: Award[] = [
+  {
+    event: "OneControl AI Hackathon",
+    result: "1ère Place (Logistics AI Prototype)",
+    date: "2025",
+  },
+];
+
+export const languagesList: Language[] = [
+  { name: "Français", level: "Natif" },
+  { name: "Anglais", level: "Professionnel" },
+];
+
+export const skillsGrouped: SkillGroup[] = [
+  {
+    category: "Frontend",
+    skills: ["React", "Next.js", "TypeScript", "Tailwind CSS", "React Native", "Expo"],
+  },
+  {
+    category: "Backend",
+    skills: ["FastAPI", "Spring Boot", "Node.js", "REST APIs"],
+  },
+  {
+    category: "QA & Tests",
+    skills: ["Cucumber BDD", "Postman", "Tests manuels", "Régression"],
+  },
+  {
+    category: "Bases de données",
+    skills: ["PostgreSQL", "MySQL", "Firebase", "SQLite"],
+  },
+  {
+    category: "DevOps & Outils",
+    skills: ["Git", "Docker", "CI/CD", "Jira", "Figma"],
+  },
+  {
+    category: "Langages",
+    skills: ["JavaScript", "TypeScript", "Python", "Java", "C/C++"],
   },
 ];

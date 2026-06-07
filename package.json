@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build:cv": "npx tsx scripts/generate-cv.ts",
+    "build": "npm run build:cv && next build",
     "start": "next start",
     "lint": "eslint"
   },

@@ -1,7 +1,7 @@
 import PDFDocument from "pdfkit";
 import fs from "fs";
 import path from "path";
-import { experiences } from "../src/data/experience";
+import { experiences, educationList, awardsList, languagesList, skillsGrouped } from "../src/data/experience";
 import { projectsData } from "../src/data/projects";
 
 // Output path
@@ -25,7 +25,6 @@ doc.pipe(writeStream);
 // Colors matching the portfolio website
 const COLORS = {
   primary: "#5E50F9",      // Royal Violet
-  accent: "#39FF14",       // Neon Green (used subtly)
   sidebarBg: "#F4F3FF",    // Elegant Lavender-tinted off-white
   textDark: "#0F172A",     // Slate 900
   textMuted: "#475569",    // Slate 600
@@ -51,192 +50,202 @@ const LEFT_WIDTH = SIDEBAR_WIDTH - 40; // 150 pt width
 // Contact Info
 doc.fillColor(COLORS.primary)
    .font("Helvetica-Bold")
-   .fontSize(11)
+   .fontSize(10)
    .text("CONTACT", LEFT_X, leftY);
-leftY += 18;
+leftY += 15;
 
 const contactDetails = [
   { label: "Email", val: "fredericarmel.mansah@gmail.com" },
-  { label: "Phone", val: "+228 90 00 00 00" }, // Placeholder or adjustable
+  { label: "Téléphone", val: "+228 90 00 00 00" },
   { label: "GitHub", val: "github.com/HonluePetnou" },
   { label: "LinkedIn", val: "linkedin.com/in/frederic-armel-mansah" },
   { label: "Portfolio", val: "mansah-portfolio.vercel.app" },
 ];
 
-doc.font("Helvetica").fontSize(7.5).fillColor(COLORS.textDark);
 contactDetails.forEach((c) => {
-  doc.font("Helvetica-Bold").text(c.label, LEFT_X, leftY);
+  doc.font("Helvetica-Bold").fontSize(7.5).fillColor(COLORS.textDark).text(c.label, LEFT_X, leftY);
+  leftY += 9;
+  doc.font("Helvetica").fontSize(7).fillColor(COLORS.textMuted).text(c.val, LEFT_X, leftY, { width: LEFT_WIDTH });
+  leftY += 13;
+});
+
+leftY += 8;
+
+// Compétences Techniques (skillsGrouped)
+doc.fillColor(COLORS.primary)
+   .font("Helvetica-Bold")
+   .fontSize(10)
+   .text("COMPÉTENCES", LEFT_X, leftY);
+leftY += 15;
+
+skillsGrouped.forEach((g) => {
+  doc.font("Helvetica-Bold").fontSize(7.5).fillColor(COLORS.textDark).text(`${g.category}: `, LEFT_X, leftY, { continued: true, width: LEFT_WIDTH });
+  doc.font("Helvetica").fontSize(7).fillColor(COLORS.textMuted).text(g.skills.join(", "), { width: LEFT_WIDTH, lineGap: 1.5 });
+  const textHeight = doc.heightOfString(`${g.category}: ${g.skills.join(", ")}`, { width: LEFT_WIDTH, lineGap: 1.5 });
+  leftY += textHeight + 4;
+});
+
+leftY += 8;
+
+// Formation (educationList)
+doc.fillColor(COLORS.primary)
+   .font("Helvetica-Bold")
+   .fontSize(10)
+   .text("FORMATION", LEFT_X, leftY);
+leftY += 15;
+
+educationList.forEach((e) => {
+  doc.font("Helvetica-Bold").fontSize(7.5).fillColor(COLORS.textDark).text(e.school, LEFT_X, leftY);
   leftY += 10;
-  doc.font("Helvetica").text(c.val, LEFT_X, leftY, { width: LEFT_WIDTH, lineGap: 2 });
-  leftY += 14;
-});
-
-leftY += 10;
-
-// Skills
-doc.fillColor(COLORS.primary)
-   .font("Helvetica-Bold")
-   .fontSize(11)
-   .text("CORE SKILLS", LEFT_X, leftY);
-leftY += 18;
-
-const skillGroups = [
-  {
-    title: "Frontend Engineering",
-    skills: ["React / Next.js 16", "TypeScript / JavaScript", "Tailwind CSS", "Framer Motion"],
-  },
-  {
-    title: "QA & Testing",
-    skills: ["Cucumber (BDD)", "Cucumber Automation", "Regression Testing", "Unit Testing"],
-  },
-  {
-    title: "Tools & Backend",
-    skills: ["Node.js / Express", "FastAPI / Python", "SQL (PostgreSQL)", "Git & CI/CD Pipelines"],
-  },
-];
-
-skillGroups.forEach((g) => {
-  doc.font("Helvetica-Bold").fontSize(8.5).fillColor(COLORS.textDark).text(g.title, LEFT_X, leftY);
-  leftY += 11;
-  doc.font("Helvetica").fontSize(7.5).fillColor(COLORS.textMuted);
-  g.skills.forEach((s) => {
-    doc.text(`• ${s}`, LEFT_X + 4, leftY);
-    leftY += 10;
-  });
-  leftY += 5;
-});
-
-leftY += 10;
-
-// Strengths
-doc.fillColor(COLORS.primary)
-   .font("Helvetica-Bold")
-   .fontSize(11)
-   .text("STRENGTHS", LEFT_X, leftY);
-leftY += 18;
-
-const strengthsList = [
-  "Technical Leadership",
-  "Product-Oriented Mindset",
-  "Agile & Scrum Delivery",
-  "Strict Quality Standards",
-  "Effective Collaboration",
-];
-
-doc.font("Helvetica").fontSize(7.5).fillColor(COLORS.textDark);
-strengthsList.forEach((s) => {
-  doc.text(`✓  ${s}`, LEFT_X, leftY);
+  doc.font("Helvetica").fontSize(7).fillColor(COLORS.textMuted).text(`${e.degree} - ${e.field}`, LEFT_X, leftY, { width: LEFT_WIDTH });
+  leftY += doc.heightOfString(`${e.degree} - ${e.field}`, { width: LEFT_WIDTH }) + 2;
+  doc.font("Helvetica-Oblique").fontSize(6.5).fillColor(COLORS.textMuted).text(e.period, LEFT_X, leftY);
   leftY += 12;
+});
+
+leftY += 8;
+
+// Langues (languagesList)
+doc.fillColor(COLORS.primary)
+   .font("Helvetica-Bold")
+   .fontSize(10)
+   .text("LANGUES", LEFT_X, leftY);
+leftY += 15;
+
+languagesList.forEach((l) => {
+  doc.font("Helvetica-Bold").fontSize(7.5).fillColor(COLORS.textDark).text(`${l.name} : `, LEFT_X, leftY, { continued: true, width: LEFT_WIDTH });
+  doc.font("Helvetica").fontSize(7).fillColor(COLORS.textMuted).text(l.level, { width: LEFT_WIDTH });
+  leftY += 11;
 });
 
 
 // ==========================================
-// RIGHT COLUMN (MAIN) - Starts at X: 215
+// RIGHT COLUMN (MAIN) - Absolute Positioning
 // ==========================================
 let rightY = 40;
 const RIGHT_X = 215;
 const RIGHT_WIDTH = PAGE_WIDTH - RIGHT_X - 30; // 350 pt width
 
-// Header: Name & Title
+// Header: Name (17pt fits perfectly on one line without wrapping)
+const nameText = "PETNOU HONLUE FREDERIC ARMEL";
 doc.fillColor(COLORS.primary)
    .font("Helvetica-Bold")
-   .fontSize(22)
-   .text("Frédéric Armel Mansah", RIGHT_X, rightY);
-rightY += 26;
+   .fontSize(17)
+   .text(nameText, RIGHT_X, rightY, { width: RIGHT_WIDTH });
+rightY += 22;
 
+// Tagline
 doc.fillColor(COLORS.textDark)
    .font("Helvetica-Bold")
-   .fontSize(12)
-   .text("Senior Frontend Engineer & QA Specialist", RIGHT_X, rightY);
-rightY += 16;
+   .fontSize(9.5)
+   .text("Senior Frontend Engineer · QA Specialist · Product Builder", RIGHT_X, rightY, { width: RIGHT_WIDTH });
+rightY += 18;
+
+// PROFIL Section (3-4 lines max)
+const profileText = "Ingénieur logiciel orienté produit, spécialisé dans la conception d'architectures frontend performantes et de frameworks d'automatisation de tests robustes. Expert dans la livraison d'applications web réactives avec des structures React modulaires et du QA préventif pour assurer la fiabilité.";
 
 doc.fillColor(COLORS.textMuted)
    .font("Helvetica")
-   .fontSize(8.5)
-   .text(
-     "Product-oriented Software Engineer with a strong track record of building performant frontend architectures and establishing robust test automation frameworks. Specialized in crafting responsive web applications, modular React structures, and preventative QA automation.",
-     RIGHT_X,
-     rightY,
-     { width: RIGHT_WIDTH, align: "justify", lineGap: 2 }
-   );
-rightY += 46;
+   .fontSize(8)
+   .text(profileText, RIGHT_X, rightY, { width: RIGHT_WIDTH, align: "justify", lineGap: 2.5 });
+
+const profileHeight = doc.heightOfString(profileText, { width: RIGHT_WIDTH, lineGap: 2.5 });
+rightY += profileHeight + 25;
+
+// Section Draw Helpers to keep rightY updated cleanly
+const drawAbsoluteSectionHeader = (title: string) => {
+  doc.rect(RIGHT_X, rightY, 3, 11).fill(COLORS.primary);
+  doc.fillColor(COLORS.primary)
+     .font("Helvetica-Bold")
+     .fontSize(10.5)
+     .text(title, RIGHT_X + 8, rightY);
+  rightY += 15;
+  
+  // Separator Line
+  doc.moveTo(RIGHT_X, rightY).lineTo(RIGHT_X + RIGHT_WIDTH, rightY).strokeColor(COLORS.divider).lineWidth(0.5).stroke();
+  rightY += 12;
+};
 
 // Section: Professional Experience
-doc.fillColor(COLORS.primary)
-   .font("Helvetica-Bold")
-   .fontSize(11)
-   .text("PROFESSIONAL EXPERIENCE", RIGHT_X, rightY);
-rightY += 6;
-
-// Add horizontal separator line
-doc.moveTo(RIGHT_X, rightY).lineTo(RIGHT_X + RIGHT_WIDTH, rightY).strokeColor(COLORS.divider).lineWidth(0.5).stroke();
-rightY += 12;
+drawAbsoluteSectionHeader("EXPÉRIENCE PROFESSIONNELLE");
 
 experiences.forEach((exp) => {
-  // Role & Period
-  doc.font("Helvetica-Bold").fontSize(9.5).fillColor(COLORS.textDark).text(exp.role, RIGHT_X, rightY);
+  const itemY = rightY;
   
-  // Period aligned right
-  doc.font("Helvetica-Bold").fontSize(8).fillColor(COLORS.textMuted).text(exp.period, RIGHT_X, rightY, { align: "right", width: RIGHT_WIDTH });
-  rightY += 11;
+  // Role (Title)
+  doc.font("Helvetica-Bold").fontSize(9.5).fillColor(COLORS.textDark).text(exp.role, RIGHT_X, itemY, { width: RIGHT_WIDTH - 90 });
   
-  // Company
-  doc.font("Helvetica-Bold").fontSize(8.5).fillColor(COLORS.primary).text(exp.company, RIGHT_X, rightY);
-  rightY += 11;
+  // Period aligned to the right (absolute draw on same Y line)
+  doc.font("Helvetica-Bold").fontSize(7.5).fillColor(COLORS.textMuted).text(exp.period, RIGHT_X, itemY, { align: "right", width: RIGHT_WIDTH });
+  
+  // Role height + Company spacing
+  const roleHeight = doc.heightOfString(exp.role, { width: RIGHT_WIDTH - 90 });
+  rightY = itemY + roleHeight + 4; // Generous 4pt gap below role
+
+  // Company (Blue)
+  doc.font("Helvetica-Bold").fontSize(8.5).fillColor(COLORS.primary).text(exp.company, RIGHT_X, rightY, { width: RIGHT_WIDTH });
+  rightY += 14; // Safer 14pt height shift (avoiding text overlap)
 
   // Description
-  doc.font("Helvetica-Oblique").fontSize(8).fillColor(COLORS.textMuted).text(exp.description, RIGHT_X, rightY, { width: RIGHT_WIDTH });
-  rightY += 10;
+  doc.font("Helvetica-Oblique").fontSize(7.5).fillColor(COLORS.textMuted).text(exp.description, RIGHT_X, rightY, { width: RIGHT_WIDTH });
+  rightY += 14; // Safer 14pt height shift
 
-  // Achievements
-  doc.font("Helvetica").fontSize(7.5).fillColor(COLORS.textDark);
+  // Achievements (Bullet points)
+  doc.font("Helvetica").fontSize(7).fillColor(COLORS.textDark);
   exp.achievements.forEach((ach) => {
     doc.text("• ", RIGHT_X + 5, rightY);
     doc.text(ach, RIGHT_X + 12, rightY, { width: RIGHT_WIDTH - 12, lineGap: 1.5 });
     
-    // Calculate vertical offset for text wrapping
     const textHeight = doc.heightOfString(ach, { width: RIGHT_WIDTH - 12, lineGap: 1.5 });
-    rightY += textHeight + 2;
+    rightY += textHeight + 4; // Clean spacing between bullets
   });
   
-  rightY += 10;
+  rightY += 6;
 });
 
 // Section: Selected Projects
-doc.fillColor(COLORS.primary)
-   .font("Helvetica-Bold")
-   .fontSize(11)
-   .text("KEY PROJECTS", RIGHT_X, rightY);
-rightY += 6;
+drawAbsoluteSectionHeader("PROJETS CLÉS");
 
-doc.moveTo(RIGHT_X, rightY).lineTo(RIGHT_X + RIGHT_WIDTH, rightY).strokeColor(COLORS.divider).lineWidth(0.5).stroke();
-rightY += 10;
-
-// Filter for top 2 key projects to avoid overflow
 const selectedProjects = projectsData.slice(0, 3);
 
 selectedProjects.forEach((proj) => {
-  // Title & Stack
+  const startY = rightY;
   const stackString = `[${proj.stack.join(", ")}]`;
-  doc.font("Helvetica-Bold").fontSize(9.5).fillColor(COLORS.textDark).text(proj.title, RIGHT_X, rightY);
+
+  // Project Title
+  doc.font("Helvetica-Bold").fontSize(9.5).fillColor(COLORS.textDark).text(proj.title, RIGHT_X, startY, { width: RIGHT_WIDTH - 120 });
   
-  doc.font("Helvetica").fontSize(7.5).fillColor(COLORS.primary).text(stackString, RIGHT_X, rightY, { align: "right", width: RIGHT_WIDTH });
-  rightY += 11;
+  // Stack on the right
+  doc.font("Helvetica").fontSize(7).fillColor(COLORS.primary).text(stackString, RIGHT_X, startY, { align: "right", width: RIGHT_WIDTH });
+  
+  const titleHeight = doc.heightOfString(proj.title, { width: RIGHT_WIDTH - 120 });
+  rightY = startY + titleHeight + 4;
 
   // Description
-  doc.font("Helvetica").fontSize(7.5).fillColor(COLORS.textMuted).text(proj.description, RIGHT_X, rightY, { width: RIGHT_WIDTH, lineGap: 1 });
-  
-  const descHeight = doc.heightOfString(proj.description, { width: RIGHT_WIDTH, lineGap: 1 });
-  rightY += descHeight + 3;
+  doc.font("Helvetica").fontSize(7.5).fillColor(COLORS.textMuted).text(proj.description, RIGHT_X, rightY, { width: RIGHT_WIDTH, lineGap: 1.5 });
+  const descHeight = doc.heightOfString(proj.description, { width: RIGHT_WIDTH, lineGap: 1.5 });
+  rightY += descHeight + 5;
 
   // Metric or Impact if present
   if (proj.metrics && proj.metrics.length > 0) {
     const metricText = `Impact: ${proj.metrics.map(m => `${m.label} (${m.value})`).join("  |  ")}`;
-    doc.font("Helvetica-Bold").fontSize(7.5).fillColor(COLORS.textDark).text(metricText, RIGHT_X, rightY, { width: RIGHT_WIDTH });
+    doc.font("Helvetica-Bold").fontSize(7).fillColor(COLORS.textDark).text(metricText, RIGHT_X, rightY, { width: RIGHT_WIDTH });
     rightY += 10;
   }
   
-  rightY += 10;
+  rightY += 6;
+});
+
+// Section: Distinctions & Prix
+drawAbsoluteSectionHeader("DISTINCTIONS & PRIX");
+
+awardsList.forEach((a) => {
+  const startY = rightY;
+  doc.font("Helvetica-Bold").fontSize(8.5).fillColor(COLORS.textDark).text(a.event, RIGHT_X, startY, { width: RIGHT_WIDTH - 150 });
+  doc.font("Helvetica").fontSize(7.5).fillColor(COLORS.textMuted).text(` — ${a.result} — ${a.date}`, RIGHT_X, startY, { align: "right", width: RIGHT_WIDTH });
+  
+  const eventHeight = doc.heightOfString(a.event, { width: RIGHT_WIDTH - 150 });
+  rightY = startY + eventHeight + 4;
 });
 
 // Finalize Document

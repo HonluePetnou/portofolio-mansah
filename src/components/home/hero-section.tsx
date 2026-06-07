@@ -64,10 +64,16 @@ export function HeroSection() {
                   <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                 </button>
               </Link>
-              <Link href="/#contact" className="flex items-center gap-2 text-sm font-semibold text-foreground hover:text-brand-primary dark:hover:text-brand-accent transition-colors group">
-                <Download className="w-4 h-4 text-brand-primary group-hover:text-brand-accent transition-colors" />
+              <a
+                href="/resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                download="CV_Frederic_Mansah.pdf"
+                className="flex items-center gap-2 text-sm font-semibold text-foreground hover:text-brand-primary dark:hover:text-brand-accent transition-colors group"
+              >
+                <Download className="w-4 h-4 text-brand-primary group-hover:text-brand-primary dark:group-hover:text-brand-accent transition-colors" />
                 DOWNLOAD CV
-              </Link>
+              </a>
             </div>
           </motion.div>
 
