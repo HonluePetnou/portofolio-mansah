@@ -3,36 +3,24 @@
 import { useLanguage } from "@/context/language-context";
 import { CircularTestimonials } from "@/components/ui/circular-testimonials";
 import type { Testimonial } from "@/components/ui/circular-testimonials";
+import { testimonialsData as staticTestimonials } from "@/data/testimonials";
+import { urlFor } from "@/sanity/lib/image";
 
-export function TestimonialsSection() {
+interface TestimonialsSectionProps {
+  testimonials?: any[];
+}
+
+export function TestimonialsSection({ testimonials: propTestimonials = [] }: TestimonialsSectionProps) {
   const { lang } = useLanguage();
 
-  const testimonials: Testimonial[] = [
-    {
-      quote: lang === "FR"
-        ? "L'approche produit et le souci de la qualité de Frédéric ont fait une énorme différence dans la livraison de notre projet. Sa méthode BDD a permis de détecter les problèmes avant qu'ils n'arrivent en production — un ingénieur hors pair."
-        : "Frédéric's product mindset and attention to quality made a huge difference in our project delivery. His BDD approach caught issues before they reached production — a true quality-first engineer.",
-      name: "Alexandre K.",
-      designation: lang === "FR" ? "Responsable de l'Ingénierie, SOLUTY" : "Engineering Manager, SOLUTY",
-      src: "https://images.unsplash.com/photo-1600486913747-55e5470d6f40?q=80&w=1370&auto=format&fit=crop",
-    },
-    {
-      quote: lang === "FR"
-        ? "Travailler avec Frédéric a été un plaisir. Son leadership technique et sa capacité à faire le pont entre les équipes produit et technique sont exceptionnels. Il livre toujours au-delà des attentes."
-        : "Working with Frédéric was a pleasure. His technical leadership and ability to bridge product and engineering teams is exceptional. He always delivers beyond expectations.",
-      name: "Sarah M.",
-      designation: lang === "FR" ? "Chef d'Équipe, ADS LTD" : "Team Lead, ADS LTD",
-      src: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?q=80&w=1374&auto=format&fit=crop",
-    },
-    {
-      quote: lang === "FR"
-        ? "Frédéric comprend que livrer des logiciels fiables va bien au-delà du simple code. Son approche axée sur la qualité et sa profonde empathie pour l'utilisateur final s'alignent parfaitement avec nos objectifs produit."
-        : "Frédéric understands that shipping reliable software is about more than just code. His quality-first approach and deep empathy for the user aligns perfectly with our product goals.",
-      name: "Julien B.",
-      designation: lang === "FR" ? "Chef de Produit, MELOAUD" : "Product Manager, MELOAUD",
-      src: "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=1374&auto=format&fit=crop",
-    },
-  ];
+  const rawTestimonials = propTestimonials.length > 0 ? propTestimonials : staticTestimonials;
+
+  const testimonials: Testimonial[] = rawTestimonials.map((t) => ({
+    name: t.name,
+    designation: typeof t.designation === "string" ? t.designation : t.designation[lang],
+    quote: typeof t.quote === "string" ? t.quote : t.quote[lang],
+    src: t.avatar ? urlFor(t.avatar).url() : t.src || "",
+  }));
 
   return (
     <section

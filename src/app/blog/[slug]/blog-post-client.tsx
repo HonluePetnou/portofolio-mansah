@@ -1,15 +1,20 @@
 "use client";
 
-import { blogPosts } from "@/data/blog";
+import { blogPosts as staticBlogPosts } from "@/data/blog";
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowLeft, Clock, Calendar, Quote, ChevronRight, BookOpen, Mail, ArrowRight } from "lucide-react";
 import { Breadcrumbs } from "@/components/shared/breadcrumbs";
 import { useLanguage } from "@/context/language-context";
 import { cn } from "@/lib/utils";
+import { urlFor } from "@/sanity/lib/image";
+import { PortableText } from "@portabletext/react";
 
 interface BlogPostClientProps {
   slug: string;
+  post?: any;
+  allPosts?: any[];
 }
 
 const getCategoryStyle = (category: string) => {
@@ -27,17 +32,90 @@ const getCategoryStyle = (category: string) => {
   }
 };
 
-export function BlogPostClient({ slug }: BlogPostClientProps) {
-  const { lang, t } = useLanguage();
-  const post = blogPosts.find((p) => p.slug === slug);
+const portableTextComponents = {
+  types: {
+    image: ({ value }: any) => {
+      if (!value) return null;
+      return (
+        <figure className="my-8 space-y-2 text-center">
+          <div className="relative aspect-[16/9] w-full rounded-2xl overflow-hidden border border-gray-200 dark:border-white/5 bg-gray-50 dark:bg-white/[0.01]">
+            <Image
+              src={urlFor(value).url()}
+              alt={value.alt || 'Blog Image'}
+              fill
+              className="object-cover"
+            />
+          </div>
+          {value.caption && (
+            <figcaption className="text-xs text-muted-foreground italic mt-2">
+              {value.caption}
+            </figcaption>
+          )}
+        </figure>
+      );
+    },
+  },
+  block: {
+    normal: ({ children }: any) => <p className="text-muted-foreground dark:text-gray-300 text-xs md:text-sm leading-relaxed mb-4 text-left">{children}</p>,
+    h2: ({ children }: any) => <h2 className="text-lg md:text-xl font-extrabold text-foreground tracking-tight mt-8 mb-4 text-left">{children}</h2>,
+    h3: ({ children }: any) => <h3 className="text-base md:text-lg font-bold text-foreground tracking-tight mt-6 mb-3 text-left">{children}</h3>,
+    blockquote: ({ children }: any) => (
+      <div className="relative p-6 md:p-8 rounded-2xl border border-brand-primary/10 dark:border-white/5 bg-brand-primary/5 dark:bg-white/[0.01] my-8 flex items-start gap-4">
+        <Quote className="w-10 h-10 text-brand-primary dark:text-brand-accent shrink-0 opacity-20 -mt-2" />
+        <div className="text-xs md:text-sm italic font-medium text-foreground/85 dark:text-gray-300 leading-relaxed text-left">
+          &ldquo;{children}&rdquo;
+        </div>
+        <div className="absolute left-0 top-0 bottom-0 w-1.5 rounded-l-2xl bg-brand-primary dark:bg-brand-accent" />
+      </div>
+    ),
+  },
+  marks: {
+    link: ({ children, value }: any) => {
+      const rel = !value.href.startsWith('/') ? 'noreferrer noopener' : undefined;
+      const target = !value.href.startsWith('/') ? '_blank' : undefined;
+      return (
+        <a href={value.href} target={target} rel={rel} className="text-brand-primary dark:text-brand-accent hover:underline font-bold">
+          {children}
+        </a>
+      );
+    },
+  },
+};
 
-  if (!post) {
+export function BlogPostClient({ slug, post: propPost, allPosts = [] }: BlogPostClientProps) {
+  const { lang, t } = useLanguage();
+  
+  const rawPost = propPost || staticBlogPosts.find((p) => p.slug === slug);
+  if (!rawPost) {
     notFound();
   }
 
+  // Format active post fields
+  const formattedReadTime = typeof rawPost.readTime === 'number'
+    ? (lang === 'FR' ? `${rawPost.readTime} min de lecture` : `${rawPost.readTime} min read`)
+    : rawPost.readTime?.[lang] || rawPost.readTime || "";
+
+  const post = {
+    ...rawPost,
+    date: rawPost.publishDate || rawPost.date || "",
+    category: rawPost.tags && rawPost.tags.length > 0 ? rawPost.tags[0] : rawPost.category || "General",
+    readTimeText: formattedReadTime,
+  };
+
+  const activeAllPosts = allPosts.length > 0 ? allPosts : staticBlogPosts;
+
   // Find a related post (a different post, preferably of the same category)
-  const relatedPost = blogPosts.find((p) => p.slug !== slug && p.category === post.category) || 
-                      blogPosts.find((p) => p.slug !== slug);
+  const relatedRaw = activeAllPosts.find((p) => p.slug !== slug && (p.tags && p.tags.length > 0 ? p.tags[0] : p.category) === post.category) || 
+                     activeAllPosts.find((p) => p.slug !== slug);
+
+  const relatedPost = relatedRaw ? {
+    ...relatedRaw,
+    date: relatedRaw.publishDate || relatedRaw.date || "",
+    category: relatedRaw.tags && relatedRaw.tags.length > 0 ? relatedRaw.tags[0] : relatedRaw.category || "General",
+    readTimeText: typeof relatedRaw.readTime === 'number'
+      ? (lang === 'FR' ? `${relatedRaw.readTime} min de lecture` : `${relatedRaw.readTime} min read`)
+      : relatedRaw.readTime?.[lang] || relatedRaw.readTime || "",
+  } : null;
 
   return (
     <div className="container section-py max-w-6xl space-y-10">
@@ -87,7 +165,7 @@ export function BlogPostClient({ slug }: BlogPostClientProps) {
               <span className="text-gray-300 dark:text-white/10">•</span>
               <span className="flex items-center gap-1.5">
                 <Clock className="w-3.5 h-3.5 text-brand-primary dark:text-brand-accent" />
-                {post.readTime[lang]}
+                {post.readTimeText}
               </span>
               <span className="text-gray-300 dark:text-white/10">•</span>
               <span className="flex items-center gap-1.5 font-medium text-foreground">
@@ -113,52 +191,57 @@ export function BlogPostClient({ slug }: BlogPostClientProps) {
 
           {/* Article Content */}
           <article className="text-left space-y-8 prose dark:prose-invert max-w-none">
-            
-            {/* Introduction */}
-            <p className="text-base md:text-lg text-foreground/90 dark:text-gray-300 leading-relaxed font-normal">
-              {post.introduction[lang]}
-            </p>
-
-            {/* Pull Quote */}
-            {post.quote && (
-              <div className="relative p-6 md:p-8 rounded-2xl border border-brand-primary/10 dark:border-white/5 bg-brand-primary/5 dark:bg-white/[0.01] my-8 flex items-start gap-4">
-                <Quote className="w-10 h-10 text-brand-primary dark:text-brand-accent shrink-0 opacity-20 -mt-2" />
-                <div className="text-xs md:text-sm italic font-medium text-foreground/85 dark:text-gray-300 leading-relaxed">
-                  &ldquo;{post.quote[lang]}&rdquo;
-                </div>
-                <div className="absolute left-0 top-0 bottom-0 w-1.5 rounded-l-2xl bg-brand-primary dark:bg-brand-accent" />
-              </div>
-            )}
-
-            {/* Sections Loop */}
-            {post.sections.map((section, idx) => (
-              <div key={idx} id={`section-${idx}`} className="space-y-4 pt-4 scroll-mt-24">
-                <h2 className="text-xl md:text-2xl font-extrabold text-foreground tracking-tight flex items-center gap-2">
-                  <ChevronRight className="w-4 h-4 text-brand-primary dark:text-brand-accent shrink-0" />
-                  {section.heading[lang]}
-                </h2>
-                <p className="text-muted-foreground dark:text-gray-400 text-xs md:text-sm leading-relaxed">
-                  {section.body[lang]}
+            {post.body ? (
+              <PortableText value={post.body[lang]} components={portableTextComponents} />
+            ) : (
+              <>
+                {/* Introduction */}
+                <p className="text-base md:text-lg text-foreground/90 dark:text-gray-300 leading-relaxed font-normal text-left">
+                  {post.introduction?.[lang]}
                 </p>
 
-                {/* Code Snippet */}
-                {section.codeSnippet && (
-                  <div className="rounded-xl border border-gray-200/50 dark:border-white/10 overflow-hidden bg-[#0A0A0F] text-gray-200 text-left font-mono text-[11px] leading-relaxed my-6 shadow-lg">
-                    <div className="flex items-center justify-between px-4 py-2 border-b border-gray-200/20 dark:border-white/5 bg-white/5">
-                      <span className="text-[10px] font-bold uppercase tracking-wider text-white/40 font-sans">
-                        {section.codeSnippet.language}
-                      </span>
-                      <span className="text-[9px] uppercase tracking-widest text-white/30 font-sans">
-                        Read Only
-                      </span>
+                {/* Pull Quote */}
+                {post.quote && (
+                  <div className="relative p-6 md:p-8 rounded-2xl border border-brand-primary/10 dark:border-white/5 bg-brand-primary/5 dark:bg-white/[0.01] my-8 flex items-start gap-4">
+                    <Quote className="w-10 h-10 text-brand-primary dark:text-brand-accent shrink-0 opacity-20 -mt-2" />
+                    <div className="text-xs md:text-sm italic font-medium text-foreground/85 dark:text-gray-300 leading-relaxed text-left">
+                      &ldquo;{post.quote[lang]}&rdquo;
                     </div>
-                    <pre className="p-4 overflow-x-auto">
-                      <code>{section.codeSnippet.code}</code>
-                    </pre>
+                    <div className="absolute left-0 top-0 bottom-0 w-1.5 rounded-l-2xl bg-brand-primary dark:bg-brand-accent" />
                   </div>
                 )}
-              </div>
-            ))}
+
+                {/* Sections Loop */}
+                {post.sections?.map((section: any, idx: number) => (
+                  <div key={idx} id={`section-${idx}`} className="space-y-4 pt-4 scroll-mt-24">
+                    <h2 className="text-xl md:text-2xl font-extrabold text-foreground tracking-tight flex items-center gap-2 text-left">
+                      <ChevronRight className="w-4 h-4 text-brand-primary dark:text-brand-accent shrink-0" />
+                      {section.heading[lang]}
+                    </h2>
+                    <p className="text-muted-foreground dark:text-gray-400 text-xs md:text-sm leading-relaxed text-left">
+                      {section.body[lang]}
+                    </p>
+
+                    {/* Code Snippet */}
+                    {section.codeSnippet && (
+                      <div className="rounded-xl border border-gray-200/50 dark:border-white/10 overflow-hidden bg-[#0A0A0F] text-gray-200 text-left font-mono text-[11px] leading-relaxed my-6 shadow-lg">
+                        <div className="flex items-center justify-between px-4 py-2 border-b border-gray-200/20 dark:border-white/5 bg-white/5">
+                          <span className="text-[10px] font-bold uppercase tracking-wider text-white/40 font-sans">
+                            {section.codeSnippet.language}
+                          </span>
+                          <span className="text-[9px] uppercase tracking-widest text-white/30 font-sans">
+                            Read Only
+                          </span>
+                        </div>
+                        <pre className="p-4 overflow-x-auto">
+                          <code>{section.codeSnippet.code}</code>
+                        </pre>
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </>
+            )}
           </article>
 
           {/* Footer Profile Box */}
@@ -199,23 +282,25 @@ export function BlogPostClient({ slug }: BlogPostClientProps) {
         <aside className="hidden lg:block sticky top-24 self-start space-y-8 pl-2 order-2">
           
           {/* Table of Contents */}
-          <div className="space-y-4 text-left">
-            <h3 className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
-              {t("blog.toc")}
-            </h3>
-            <ul className="space-y-3 text-[11px] font-medium">
-              {post.sections.map((sec, idx) => (
-                <li key={idx}>
-                  <a
-                    href={`#section-${idx}`}
-                    className="block text-muted-foreground hover:text-brand-primary dark:text-white/50 dark:hover:text-brand-accent transition-colors leading-relaxed"
-                  >
-                    {sec.heading[lang]}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
+          {post.sections && post.sections.length > 0 && (
+            <div className="space-y-4 text-left">
+              <h3 className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
+                {t("blog.toc")}
+              </h3>
+              <ul className="space-y-3 text-[11px] font-medium">
+                {post.sections.map((sec: any, idx: number) => (
+                  <li key={idx}>
+                    <a
+                      href={`#section-${idx}`}
+                      className="block text-muted-foreground hover:text-brand-primary dark:text-white/50 dark:hover:text-brand-accent transition-colors leading-relaxed"
+                    >
+                      {sec.heading[lang]}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
 
           {/* Related Articles */}
           {relatedPost && (
@@ -232,7 +317,7 @@ export function BlogPostClient({ slug }: BlogPostClientProps) {
                   )}>
                     {relatedPost.category}
                   </span>
-                  <span className="text-muted-foreground dark:text-white/40">{relatedPost.readTime[lang]}</span>
+                  <span className="text-muted-foreground dark:text-white/40">{relatedPost.readTimeText}</span>
                 </div>
                 <h4 className="text-xs font-bold text-foreground hover:text-brand-primary dark:hover:text-brand-accent transition-colors leading-snug">
                   <Link href={`/blog/${relatedPost.slug}`}>{relatedPost.title[lang]}</Link>

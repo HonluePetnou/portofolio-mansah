@@ -10,8 +10,13 @@ import { ProjectCard } from "@/components/projects/project-card";
 import { Breadcrumbs } from "@/components/shared/breadcrumbs";
 import { useLanguage } from "@/context/language-context";
 import { projectsData, ProjectData } from "@/data/projects";
+import { urlFor } from "@/sanity/lib/image";
 
-export function ProjectsClientPage() {
+interface ProjectsClientPageProps {
+  projects?: any[];
+}
+
+export function ProjectsClientPage({ projects = [] }: ProjectsClientPageProps) {
   const { lang, t } = useLanguage();
   const [activeTab, setActiveTab] = useState("All");
 
@@ -21,13 +26,15 @@ export function ProjectsClientPage() {
     { id: "Frontend / Web", label: t("works.frontend") },
   ];
 
+  const activeProjects = projects.length > 0 ? projects : projectsData;
+
   // Find the featured project (OneControl)
-  const featuredProject = projectsData.find((p) => p.slug === "one-control") || projectsData[0];
+  const featuredProject = activeProjects.find((p) => p.slug === "one-control") || activeProjects[0];
 
   // Filter projects based on active tab
   const filteredProjects = activeTab === "All"
-    ? projectsData
-    : projectsData.filter((p) => p.category === activeTab);
+    ? activeProjects
+    : activeProjects.filter((p) => p.category === activeTab);
 
   return (
     <div className="container section-py space-y-16">
@@ -63,7 +70,7 @@ export function ProjectsClientPage() {
             {/* Image Section */}
             <div className="relative aspect-[16/10] lg:aspect-auto min-h-[260px] lg:min-h-[380px] w-full bg-gray-100 dark:bg-brand-dark/50 overflow-hidden border-b lg:border-b-0 lg:border-r border-gray-200/50 dark:border-white/5">
               <Image
-                src={featuredProject.image}
+                src={featuredProject.image && typeof featuredProject.image === 'object' ? urlFor(featuredProject.image).url() : featuredProject.image || ""}
                 alt={featuredProject.title}
                 fill
                 className="object-cover transition-transform duration-700 group-hover:scale-102"
@@ -94,8 +101,8 @@ export function ProjectsClientPage() {
                 {/* Key Metrics Grid */}
                 {featuredProject.metrics && (
                   <div className="grid grid-cols-2 gap-4 pt-4">
-                    {featuredProject.metrics.map((metric) => (
-                      <div key={metric.label.EN} className="p-3.5 rounded-xl border border-gray-200/40 dark:border-white/5 bg-white/40 dark:bg-white/[0.02] backdrop-blur-md">
+                    {((featuredProject.metrics || []) as any[]).map((metric: any) => (
+                      <div key={metric.label?.EN || metric.label} className="p-3.5 rounded-xl border border-gray-200/40 dark:border-white/5 bg-white/40 dark:bg-white/[0.02] backdrop-blur-md">
                         <div className="text-2xl font-extrabold text-brand-primary dark:text-brand-accent">
                           {metric.value}
                         </div>
@@ -111,7 +118,7 @@ export function ProjectsClientPage() {
               {/* Footer row of Featured Card */}
               <div className="flex flex-wrap items-center justify-between gap-4 pt-6 border-t border-gray-200/40 dark:border-white/5">
                 <div className="flex flex-wrap gap-1.5">
-                  {featuredProject.stack.map((tech) => (
+                  {((featuredProject.stack || []) as string[]).map((tech: string) => (
                     <span
                       key={tech}
                       className={cn(

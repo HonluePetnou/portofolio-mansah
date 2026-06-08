@@ -23,13 +23,13 @@ export function HeroSection() {
       className="relative flex flex-col items-center justify-center min-h-[75vh] -mt-12 pt-20 pb-12 gap-y-6 scroll-mt-20 overflow-hidden"
     >
       {/* Background Dots Grid */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(0,0,0,0.03)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,0,0,0.03)_1px,transparent_1px)] dark:bg-[linear-gradient(to_right,rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:32px_32px] pointer-events-none z-0" />
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(0,0,0,0.03)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,0,0,0.03)_1px,transparent_1px)] dark:bg-[linear-gradient(to_right,rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-size-[32px_32px] pointer-events-none z-0" />
       
       {/* Subtle Glows */}
       <div className="absolute top-1/4 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-brand-primary/5 rounded-full blur-[100px] pointer-events-none z-0" />
       <div className="absolute top-1/3 right-1/4 translate-x-1/2 w-[300px] h-[300px] bg-brand-accent/5 rounded-full blur-[80px] pointer-events-none z-0" />
 
-      <div className="container relative z-10 w-full flex-grow flex items-center">
+      <div className="container relative z-10 w-full grow flex items-center">
         <div className="grid lg:grid-cols-12 gap-16 items-center w-full py-2 lg:py-4">
           
           {/* Left Side: Content */}
@@ -91,7 +91,7 @@ export function HeroSection() {
             <div className="absolute w-[110%] h-[110%] rounded-full bg-brand-primary/5 dark:bg-brand-primary/10 blur-[80px] -z-10" />
 
             {/* Main Outer Dotted/Line Circle */}
-            <div className="absolute inset-0 rounded-full border border-brand-primary/15 dark:border-white/10 bg-brand-primary/[0.02] dark:bg-brand-primary/[0.04]" />
+            <div className="absolute inset-0 rounded-full border border-brand-primary/15 dark:border-white/10 bg-brand-primary/2 dark:bg-brand-primary/4" />
 
             {/* Outline nodes/dots on the outer circle */}
             <div className="absolute top-[15%] left-[2%] w-3.5 h-3.5 rounded-full bg-brand-primary animate-pulse" />
@@ -144,7 +144,7 @@ export function HeroSection() {
         {/* Decorative Wave SVG Path */}
         <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-none z-0 opacity-15 dark:opacity-20">
           <svg viewBox="0 0 1200 120" preserveAspectRatio="none" className="relative block w-full h-[60px]">
-            <path d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z" className="fill-white dark:fill-[#060608]"></path>
+            <path d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z" className="fill-white dark:fill-brand-dark"></path>
           </svg>
         </div>
 

@@ -8,14 +8,16 @@ import { ArrowLeft, ExternalLink, Github, CheckCircle2, Server, Layout, ShieldAl
 import { Breadcrumbs } from "@/components/shared/breadcrumbs";
 import { useLanguage } from "@/context/language-context";
 import { cn } from "@/lib/utils";
+import { urlFor } from "@/sanity/lib/image";
 
 interface ProjectDetailsClientProps {
   slug: string;
+  project?: any;
 }
 
-export function ProjectDetailsClient({ slug }: ProjectDetailsClientProps) {
+export function ProjectDetailsClient({ slug, project: propProject }: ProjectDetailsClientProps) {
   const { lang, t } = useLanguage();
-  const project = projectsData.find((p) => p.slug === slug);
+  const project = propProject || projectsData.find((p) => p.slug === slug);
 
   if (!project) {
     notFound();
@@ -58,7 +60,7 @@ export function ProjectDetailsClient({ slug }: ProjectDetailsClientProps) {
       {/* Hero Image Block */}
       <div className="relative aspect-[16/9] w-full rounded-3xl overflow-hidden border border-gray-200/50 dark:border-white/5 bg-gray-100 dark:bg-white/5 shadow-md">
         <Image
-          src={project.image}
+          src={project.image && typeof project.image === 'object' ? urlFor(project.image).url() : project.image || ""}
           alt={project.title}
           fill
           className="object-cover"
@@ -126,7 +128,7 @@ export function ProjectDetailsClient({ slug }: ProjectDetailsClientProps) {
                 {lang === "FR" ? "Stack Technique" : "Tech Stack"}
               </h3>
               <div className="flex flex-wrap gap-2">
-                {project.stack.map((tech) => (
+                {((project.stack || []) as string[]).map((tech: string) => (
                   <span
                     key={tech}
                     className={cn(
@@ -149,8 +151,8 @@ export function ProjectDetailsClient({ slug }: ProjectDetailsClientProps) {
                   {lang === "FR" ? "Indicateurs Clés" : "Key Metrics"}
                 </h3>
                 <div className="space-y-3.5">
-                  {project.metrics.map((metric) => (
-                    <div key={metric.label.EN} className="flex items-center justify-between p-3.5 rounded-xl border border-gray-200/40 dark:border-white/5 bg-white/40 dark:bg-white/[0.02]">
+                  {((project.metrics || []) as any[]).map((metric: any) => (
+                    <div key={metric.label?.EN || metric.label} className="flex items-center justify-between p-3.5 rounded-xl border border-gray-200/40 dark:border-white/5 bg-white/40 dark:bg-white/[0.02]">
                       <span className="text-[10px] font-semibold uppercase text-muted-foreground tracking-wide">
                         {metric.label[lang]}
                       </span>

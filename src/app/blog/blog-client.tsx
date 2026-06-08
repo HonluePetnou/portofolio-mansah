@@ -6,9 +6,8 @@ import Link from "next/link";
 import { ArrowRight, BookOpen, Clock, Calendar } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Breadcrumbs } from "@/components/shared/breadcrumbs";
-import { blogPosts, BlogPost } from "@/data/blog";
-
-const categories = ["All", "Quality Assurance", "Frontend Engineering", "AI & APIs", "Product & Agility"];
+import { blogPosts as staticBlogPosts } from "@/data/blog";
+import { useLanguage } from "@/context/language-context";
 
 const getCategoryStyle = (category: string) => {
   switch (category) {
@@ -25,7 +24,11 @@ const getCategoryStyle = (category: string) => {
   }
 };
 
-export function BlogClientPage() {
+interface BlogClientPageProps {
+  posts?: any[];
+}
+
+export function BlogClientPage({ posts = [] }: BlogClientPageProps) {
   const { lang, t } = useLanguage();
   const [activeTab, setActiveTab] = useState("All");
 
@@ -37,13 +40,28 @@ export function BlogClientPage() {
     { id: "Product & Agility", label: lang === "FR" ? "Produit & Agilité" : "Product & Agility" },
   ];
 
+  const rawPosts = posts.length > 0 ? posts : staticBlogPosts;
+
+  const activePosts = rawPosts.map((post) => {
+    const formattedReadTime = typeof post.readTime === 'number'
+      ? (lang === 'FR' ? `${post.readTime} min de lecture` : `${post.readTime} min read`)
+      : post.readTime?.[lang] || post.readTime || "";
+
+    return {
+      ...post,
+      date: post.publishDate || post.date || "",
+      category: post.tags && post.tags.length > 0 ? post.tags[0] : post.category || "General",
+      readTimeText: formattedReadTime,
+    };
+  });
+
   // Filter posts based on active tab
   const filteredPosts = activeTab === "All"
-    ? blogPosts
-    : blogPosts.filter((p) => p.category === activeTab);
+    ? activePosts
+    : activePosts.filter((p) => p.category === activeTab);
 
   // Featured article is the first article
-  const featuredPost = blogPosts[0];
+  const featuredPost = activePosts[0];
 
   return (
     <div className="container section-py space-y-16">
@@ -90,7 +108,7 @@ export function BlogClientPage() {
                   </span>
                   <span className="flex items-center gap-1">
                     <Clock className="w-3.5 h-3.5" />
-                    {featuredPost.readTime[lang]}
+                    {featuredPost.readTimeText}
                   </span>
                 </div>
               </div>

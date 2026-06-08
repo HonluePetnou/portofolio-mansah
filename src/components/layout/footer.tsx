@@ -42,7 +42,7 @@ export function Footer() {
   }, []);
 
   return (
-    <footer className="w-full bg-[#060608] dark:bg-[#121216] text-white border-t border-white/5 py-12 transition-colors duration-300">
+    <footer className="w-full bg-brand-dark dark:bg-[#121216] text-white border-t border-white/5 py-12 transition-colors duration-300">
       <div className="mx-auto max-w-6xl px-6">
         
         {/* Top section: Main Info & Links */}

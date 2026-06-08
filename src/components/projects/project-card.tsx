@@ -14,9 +14,14 @@ interface ProjectCardProps {
 }
 
 import { useLanguage } from "@/context/language-context";
+import { urlFor } from "@/sanity/lib/image";
 
 export function ProjectCard({ project, isAlt = false }: ProjectCardProps) {
   const { lang } = useLanguage();
+
+  const imageUrl = project.image && typeof project.image === 'object'
+    ? urlFor(project.image).url()
+    : project.image || "";
 
   return (
     <div className={cn(
@@ -28,7 +33,7 @@ export function ProjectCard({ project, isAlt = false }: ProjectCardProps) {
       <div className="relative aspect-[16/10] w-full bg-gray-50 dark:bg-[#1C1C21] overflow-hidden border-b border-gray-100 dark:border-white/5">
         <Link href={`/projects/${project.slug}`} className="block w-full h-full">
           <Image
-            src={project.image}
+            src={imageUrl}
             alt={project.title}
             fill
             className="object-cover transition-transform duration-500 group-hover:scale-105"

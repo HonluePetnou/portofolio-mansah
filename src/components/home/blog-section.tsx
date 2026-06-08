@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { ArrowRight, BookOpen } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { blogPosts } from "@/data/blog";
+import { blogPosts as staticBlogPosts } from "@/data/blog";
 
 import { useLanguage } from "@/context/language-context";
 
@@ -24,10 +24,21 @@ const getCategoryStyle = (category: string) => {
   }
 };
 
-export function BlogSection() {
+interface BlogSectionProps {
+  posts?: any[];
+}
+
+export function BlogSection({ posts = [] }: BlogSectionProps) {
   const { lang, t } = useLanguage();
-  // Show first 3 blog posts on the home page
-  const recentPosts = blogPosts.slice(0, 3);
+  
+  const activePosts = posts.length > 0 ? posts : staticBlogPosts;
+  
+  // Format posts to match expected properties
+  const recentPosts = activePosts.slice(0, 3).map((post) => ({
+    ...post,
+    date: post.publishDate || post.date || "",
+    category: post.tags && post.tags.length > 0 ? post.tags[0] : post.category || "General",
+  }));
 
   return (
     <section id="blog" className="section-py gap-y-md scroll-mt-20 overflow-hidden bg-transparent">

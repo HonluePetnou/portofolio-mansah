@@ -9,11 +9,15 @@ import { projectsData } from "@/data/projects";
 
 import { useLanguage } from "@/context/language-context";
 
-// Show first 3 projects as featured on the home page
-const featuredProjects = projectsData.slice(0, 3);
+interface ProjectsSectionProps {
+  projects?: any[];
+}
 
-export function ProjectsSection() {
+export function ProjectsSection({ projects = [] }: ProjectsSectionProps) {
   const { lang, t } = useLanguage();
+  
+  const activeProjects = projects.length > 0 ? projects : projectsData;
+  const featuredProjects = activeProjects.slice(0, 3);
 
   return (
     <section id="projects" className="section-py gap-y-md scroll-mt-20 overflow-hidden bg-brand-alt border-t border-b border-gray-100/50 dark:border-white/5">

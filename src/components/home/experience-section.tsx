@@ -4,10 +4,16 @@ import { motion } from "framer-motion";
 import { GlassCard } from "@/components/ui/glass-card";
 import { Briefcase, Calendar } from "lucide-react";
 import { useLanguage } from "@/context/language-context";
-import { experiences } from "@/data/experience";
+import { experiences as staticExperiences } from "@/data/experience";
 
-export function ExperienceSection() {
+interface ExperienceSectionProps {
+  experiences?: any[];
+}
+
+export function ExperienceSection({ experiences = [] }: ExperienceSectionProps) {
   const { lang, t } = useLanguage();
+  
+  const activeExperiences = experiences.length > 0 ? experiences : staticExperiences;
 
   return (
     <section id="experience" className="section-py gap-y-md scroll-mt-20 overflow-hidden">
@@ -30,7 +36,7 @@ export function ExperienceSection() {
         </div>
 
         <div className="max-w-4xl mx-auto space-y-6">
-          {experiences.map((exp, index) => (
+          {activeExperiences.map((exp, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, x: -20 }}
@@ -62,7 +68,7 @@ export function ExperienceSection() {
                   </div>
                 </div>
                 <ul className="list-disc list-inside space-y-2 text-muted-foreground dark:text-gray-300 ml-0 md:ml-16 mt-4 text-left">
-                  {exp.achievements[lang].map((item, i) => (
+                  {((exp.achievements?.[lang] || []) as string[]).map((item: string, i: number) => (
                     <li key={i} className="text-xs leading-relaxed">
                       {item}
                     </li>
