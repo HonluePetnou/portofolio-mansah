@@ -21,7 +21,7 @@ export function ProjectCard({ project, isAlt = false }: ProjectCardProps) {
 
   const imageUrl = project.image && typeof project.image === 'object'
     ? urlFor(project.image).url()
-    : project.image || "";
+    : project.image || null;
 
   return (
     <div className={cn(
@@ -32,12 +32,18 @@ export function ProjectCard({ project, isAlt = false }: ProjectCardProps) {
       {/* Image Container */}
       <div className="relative aspect-[16/10] w-full bg-gray-50 dark:bg-[#1C1C21] overflow-hidden border-b border-gray-100 dark:border-white/5">
         <Link href={`/projects/${project.slug}`} className="block w-full h-full">
-          <Image
-            src={imageUrl}
-            alt={project.title}
-            fill
-            className="object-cover transition-transform duration-500 group-hover:scale-105"
-          />
+          {imageUrl ? (
+            <Image
+              src={imageUrl}
+              alt={project.title}
+              fill
+              className="object-cover transition-transform duration-500 group-hover:scale-105"
+            />
+          ) : (
+            <div className="absolute inset-0 flex items-center justify-center text-muted-foreground/30">
+              <div className="w-12 h-12 rounded-xl border-2 border-dashed border-current" />
+            </div>
+          )}
           {/* Subtle overlay gradient */}
           <div className="absolute inset-0 bg-[linear-gradient(to_top,rgba(0,0,0,0.2)_0%,transparent_60%)] dark:bg-[linear-gradient(to_top,rgba(6,6,8,0.4)_0%,transparent_60%)]" />
         </Link>

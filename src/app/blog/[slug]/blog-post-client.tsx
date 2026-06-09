@@ -1,10 +1,15 @@
 "use client";
 
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { blogPosts as staticBlogPosts } from "@/data/blog";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowLeft, Clock, Calendar, Quote, ChevronRight, BookOpen, Mail, ArrowRight } from "lucide-react";
+import { 
+  ArrowLeft, Clock, Calendar, Quote, ChevronRight, BookOpen, Mail, ArrowRight,
+  Info, AlertTriangle, Lightbulb, AlertOctagon, FileText, Download 
+} from "lucide-react";
 import { Breadcrumbs } from "@/components/shared/breadcrumbs";
 import { useLanguage } from "@/context/language-context";
 import { cn } from "@/lib/utils";
@@ -32,8 +37,80 @@ const getCategoryStyle = (category: string) => {
   }
 };
 
+const getEmbedUrl = (url: string, platform: string) => {
+  if (!url) return '';
+  if (platform === 'youtube') {
+    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+    const match = url.match(regExp);
+    if (match && match[2].length === 11) {
+      return `https://www.youtube.com/embed/${match[2]}`;
+    }
+  } else if (platform === 'loom') {
+    return url.replace('/share/', '/embed/');
+  }
+  return url;
+};
+
+const getFileUrl = (fileValue: any) => {
+  if (!fileValue || !fileValue.asset || !fileValue.asset._ref) return '';
+  const ref = fileValue.asset._ref;
+  const parts = ref.split('-');
+  if (parts.length < 3) return '';
+  const assetId = parts[1];
+  const extension = parts[2];
+  return `https://cdn.sanity.io/files/c9d6em18/production/${assetId}.${extension}`;
+};
+
+function AccordionBlock({ title, content }: { title: string; content: string }) {
+  const [isOpen, setIsOpen] = useState(false);
+  return (
+    <div className="my-4 rounded-2xl border border-gray-200/50 dark:border-white/5 bg-gray-50/50 dark:bg-card-bg overflow-hidden transition-all duration-300">
+      <button 
+        onClick={() => setIsOpen(!isOpen)} 
+        className="w-full px-5 py-4 flex items-center justify-between text-left font-bold text-foreground text-xs md:text-sm hover:bg-gray-100/50 dark:hover:bg-white/[0.01] transition-colors"
+      >
+        <span>{title}</span>
+        <ChevronRight className={cn("w-4 h-4 text-muted-foreground transition-transform duration-300", isOpen && "rotate-90 text-brand-primary dark:text-brand-accent")} />
+      </button>
+      <AnimatePresence initial={false}>
+        {isOpen && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.25, ease: "easeInOut" }}
+          >
+            <div className="px-5 pb-5 pt-1 text-xs md:text-sm text-muted-foreground dark:text-gray-300 leading-relaxed border-t border-gray-200/20 dark:border-white/5">
+              {content}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
+
 const portableTextComponents = {
   types: {
+    accordion: ({ value }: any) => {
+      if (!value || !value.title || !value.content) return null;
+      return <AccordionBlock title={value.title} content={value.content} />;
+    },
+    iframeEmbed: ({ value }: any) => {
+      if (!value || !value.url) return null;
+      return (
+        <div className="my-8 rounded-2xl overflow-hidden shadow-lg border border-gray-200/50 dark:border-white/5 bg-black/10">
+          <iframe
+            src={value.url}
+            title={value.title || 'Live Demo / Sandbox'}
+            style={{ height: `${value.height || 500}px` }}
+            className="w-full border-0"
+            allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+            sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+          />
+        </div>
+      );
+    },
     image: ({ value }: any) => {
       if (!value) return null;
       return (
@@ -52,6 +129,147 @@ const portableTextComponents = {
             </figcaption>
           )}
         </figure>
+      );
+    },
+    codeBlock: ({ value }: any) => {
+      if (!value || !value.code) return null;
+      return (
+        <div className="rounded-xl border border-gray-200/50 dark:border-white/10 overflow-hidden bg-[#0A0A0F] text-gray-200 text-left font-mono text-[11px] leading-relaxed my-6 shadow-lg">
+          <div className="flex items-center justify-between px-4 py-2 border-b border-gray-200/20 dark:border-white/5 bg-white/5">
+            <span className="text-[10px] font-bold uppercase tracking-wider text-white/40 font-sans">
+              {value.language || 'code'}
+            </span>
+            <span className="text-[9px] uppercase tracking-widest text-white/30 font-sans">
+              Read Only
+            </span>
+          </div>
+          <pre className="p-4 overflow-x-auto">
+            <code>{value.code}</code>
+          </pre>
+        </div>
+      );
+    },
+    callout: ({ value }: any) => {
+      if (!value || !value.text) return null;
+      let bgStyle = 'bg-brand-primary/5 dark:bg-white/[0.01] border-brand-primary/20 text-foreground';
+      let icon = <Info className="w-5 h-5 text-brand-primary" />;
+      
+      switch (value.type) {
+        case 'warning':
+          bgStyle = 'bg-amber-500/5 dark:bg-amber-500/[0.02] border-amber-500/30 text-foreground';
+          icon = <AlertTriangle className="w-5 h-5 text-amber-500" />;
+          break;
+        case 'tip':
+          bgStyle = 'bg-brand-accent/5 dark:bg-brand-accent/[0.02] border-brand-accent/30 text-foreground';
+          icon = <Lightbulb className="w-5 h-5 text-brand-accent" />;
+          break;
+        case 'danger':
+          bgStyle = 'bg-red-500/5 dark:bg-red-500/[0.02] border-red-500/30 text-foreground';
+          icon = <AlertOctagon className="w-5 h-5 text-red-500" />;
+          break;
+      }
+
+      return (
+        <div className={cn("p-5 rounded-2xl border flex items-start gap-4 my-6 text-left backdrop-blur-md", bgStyle)}>
+          <div className="shrink-0 mt-0.5">{icon}</div>
+          <p className="text-xs md:text-sm leading-relaxed text-muted-foreground dark:text-gray-300 font-medium m-0">
+            {value.text}
+          </p>
+        </div>
+      );
+    },
+    divider: ({ value }: any) => {
+      const isStar = value?.style !== 'line';
+      return (
+        <div className="flex items-center justify-center gap-4 my-12 w-full">
+          <div className="h-[1px] bg-gradient-to-r from-transparent to-gray-200/50 dark:to-white/10 flex-1" />
+          {isStar ? (
+            <svg className="w-4 h-4 text-brand-primary dark:text-brand-accent animate-pulse" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 0L15 9L24 12L15 15L12 24L9 15L0 12L9 9Z" />
+            </svg>
+          ) : (
+            <div className="w-1.5 h-1.5 rounded-full bg-gray-300 dark:bg-white/20" />
+          )}
+          <div className="h-[1px] bg-gradient-to-l from-transparent to-gray-200/50 dark:to-white/10 flex-1" />
+        </div>
+      );
+    },
+    simpleTable: ({ value }: any) => {
+      if (!value) return null;
+      return (
+        <div className="my-6 overflow-x-auto rounded-xl border border-gray-200/50 dark:border-white/10 shadow-inner">
+          <table className="w-full text-left text-xs md:text-sm border-collapse">
+            <thead>
+              <tr className="bg-gray-50 dark:bg-white/5 border-b border-gray-200/50 dark:border-white/10 font-bold text-foreground">
+                {value.headers?.map((h: string, i: number) => (
+                  <th key={i} className="px-4 py-3">{h}</th>
+                ))}
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-gray-200/30 dark:divide-white/5">
+              {value.rows?.map((row: any, rIdx: number) => (
+                <tr key={rIdx} className="hover:bg-gray-50/50 dark:hover:bg-white/[0.01] transition-colors">
+                  {row.cells?.map((cell: string, cIdx: number) => (
+                    <td key={cIdx} className="px-4 py-3 text-muted-foreground dark:text-gray-300 font-normal">{cell}</td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      );
+    },
+    videoEmbed: ({ value }: any) => {
+      if (!value || !value.url) return null;
+      const embedUrl = getEmbedUrl(value.url, value.platform);
+      return (
+        <figure className="my-8 space-y-2 text-center w-full">
+          <div className="relative w-full aspect-video rounded-2xl overflow-hidden shadow-lg border border-gray-200/50 dark:border-white/5 bg-black">
+            <iframe
+              src={embedUrl}
+              className="absolute inset-0 w-full h-full border-0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+            />
+          </div>
+          {value.caption && (
+            <figcaption className="text-xs text-muted-foreground italic mt-2">
+              {value.caption}
+            </figcaption>
+          )}
+        </figure>
+      );
+    },
+    downloadCard: ({ value }: any) => {
+      if (!value || !value.file) return null;
+      const downloadUrl = getFileUrl(value.file);
+      return (
+        <a 
+          href={downloadUrl} 
+          download={value.filename || true} 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          className="block my-6 p-5 rounded-2xl border border-brand-primary/10 dark:border-white/5 bg-brand-primary/5 hover:bg-brand-primary/10 dark:bg-white/[0.01] dark:hover:bg-white/[0.02] shadow-sm hover:shadow-md transition-all duration-300 group text-left"
+        >
+          <div className="flex items-center justify-between gap-4">
+            <div className="flex items-start gap-4">
+              <div className="p-3 rounded-xl bg-white dark:bg-brand-dark border border-gray-200 dark:border-white/10 text-brand-primary dark:text-brand-accent group-hover:scale-105 transition-transform">
+                <FileText className="w-6 h-6" />
+              </div>
+              <div className="space-y-1">
+                <h4 className="font-bold text-foreground group-hover:text-brand-primary dark:group-hover:text-brand-accent transition-colors text-sm">
+                  {value.title || 'Download Resource'}
+                </h4>
+                <p className="text-xs text-muted-foreground dark:text-gray-400">
+                  {value.description || 'Click to download this resource file.'}
+                </p>
+              </div>
+            </div>
+            <div className="p-2.5 rounded-full bg-white dark:bg-brand-dark border border-gray-200 dark:border-white/10 text-muted-foreground group-hover:text-brand-primary dark:group-hover:text-brand-accent transition-colors">
+              <Download className="w-4 h-4" />
+            </div>
+          </div>
+        </a>
       );
     },
   },

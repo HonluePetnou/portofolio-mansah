@@ -23,6 +23,24 @@ export const projectsQuery = `*[_type == "project"] | order(order asc) {
   metrics[] {
     label,
     value
+  },
+  displayStyle,
+  playstoreIcon,
+  developerName,
+  downloads,
+  downloadSize,
+  contentRating,
+  ratingValue,
+  ratingCount,
+  screenshots,
+  whatsNew,
+  version,
+  playStoreReviews[] {
+    name,
+    avatar,
+    rating,
+    date,
+    comment
   }
 }`
 

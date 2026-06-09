@@ -19,6 +19,24 @@ export interface ProjectData {
   challenge?: Bilingual<string>;
   strategy?: Bilingual<string>;
   impact?: Bilingual<string>;
+  displayStyle?: "standard" | "playstore";
+  playstoreIcon?: any;
+  developerName?: string;
+  downloads?: string;
+  downloadSize?: string;
+  contentRating?: string;
+  ratingValue?: number;
+  ratingCount?: string;
+  screenshots?: any[];
+  whatsNew?: Bilingual<string>;
+  version?: string;
+  playStoreReviews?: Array<{
+    name: string;
+    avatar?: any;
+    rating: number;
+    date: string;
+    comment: Bilingual<string>;
+  }>;
 }
 
 export const projectsData: ProjectData[] = [

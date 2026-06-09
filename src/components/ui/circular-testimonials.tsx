@@ -194,16 +194,27 @@ export const CircularTestimonials = ({
           style={{ perspective: "1000px" }}
           ref={imageContainerRef}
         >
-          {testimonials.map((testimonial, index) => (
-            <img
-              key={testimonial.src}
-              src={testimonial.src}
-              alt={testimonial.name}
-              data-index={index}
-              style={getImageStyle(index)}
-              className="absolute w-full h-full object-cover rounded-2xl shadow-2xl"
-            />
-          ))}
+          {testimonials.map((testimonial, index) =>
+            testimonial.src ? (
+              <img
+                key={testimonial.src}
+                src={testimonial.src}
+                alt={testimonial.name}
+                data-index={index}
+                style={getImageStyle(index)}
+                className="absolute w-full h-full object-cover rounded-2xl shadow-2xl"
+              />
+            ) : (
+              <div
+                key={index}
+                data-index={index}
+                style={getImageStyle(index)}
+                className="absolute w-full h-full rounded-2xl shadow-2xl flex items-center justify-center bg-gray-100 dark:bg-brand-dark/50 text-muted-foreground/30 text-4xl font-bold border border-dashed border-current"
+              >
+                ?
+              </div>
+            )
+          )}
         </div>
 
         {/* Content */}

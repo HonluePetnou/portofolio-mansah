@@ -69,12 +69,18 @@ export function ProjectsClientPage({ projects = [] }: ProjectsClientPageProps) {
             
             {/* Image Section */}
             <div className="relative aspect-[16/10] lg:aspect-auto min-h-[260px] lg:min-h-[380px] w-full bg-gray-100 dark:bg-brand-dark/50 overflow-hidden border-b lg:border-b-0 lg:border-r border-gray-200/50 dark:border-white/5">
-              <Image
-                src={featuredProject.image && typeof featuredProject.image === 'object' ? urlFor(featuredProject.image).url() : featuredProject.image || ""}
-                alt={featuredProject.title}
-                fill
-                className="object-cover transition-transform duration-700 group-hover:scale-102"
-              />
+              {featuredProject.image ? (
+                <Image
+                  src={typeof featuredProject.image === 'object' ? urlFor(featuredProject.image).url() : featuredProject.image}
+                  alt={featuredProject.title}
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-102"
+                />
+              ) : (
+                <div className="absolute inset-0 flex items-center justify-center text-muted-foreground/40">
+                  <div className="w-16 h-16 rounded-2xl border-2 border-dashed border-current" />
+                </div>
+              )}
               <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
               
               {/* Floating tags */}

@@ -8,8 +8,6 @@ export const metadata: Metadata = {
     "Case studies of my work in Frontend Engineering, QA, and Product Development by Mansah (Honlue Petnou Frederic Armel).",
 };
 
-export const revalidate = 60;
-
 export default async function ProjectsPage() {
   const projects = await getProjects();
   return <ProjectsClientPage projects={projects} />;

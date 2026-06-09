@@ -8,8 +8,6 @@ export const metadata: Metadata = {
     "Insights on Quality Assurance, Frontend Engineering, and Product Mindset by Mansah (Honlue Petnou Frederic Armel).",
 };
 
-export const revalidate = 60;
-
 export default async function BlogPage() {
   const posts = await getBlogPosts();
   return <BlogClientPage posts={posts} />;

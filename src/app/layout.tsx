@@ -1,13 +1,10 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { LanguageProvider } from "@/context/language-context";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import { SocialFloat } from "@/components/shared/social-float";
-
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
 export const metadata: Metadata = {
   title: "Mansah | Honlue Petnou Frederic Armel - Senior Frontend Engineer",
@@ -23,7 +20,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${inter.variable} min-h-screen antialiased selection:bg-brand-primary/30 selection:text-white`}
+        className="min-h-screen antialiased selection:bg-brand-primary/30 selection:text-white"
       >
         <ThemeProvider
           attribute="class"

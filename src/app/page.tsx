@@ -8,10 +8,7 @@ import { BlogSection } from "@/components/home/blog-section";
 import { ContactSection } from "@/components/home/contact-section";
 import { getExperiences, getProjects, getBlogPosts, getTestimonials } from "@/sanity/lib/fetch";
 
-export const revalidate = 60; // Revalidate cache every 60 seconds (Incremental Static Regeneration)
-
 export default async function Home() {
-  // Fetch data in parallel on the server
   const [experiences, projects, blogPosts, testimonials] = await Promise.all([
     getExperiences(),
     getProjects(),

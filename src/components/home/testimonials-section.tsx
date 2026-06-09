@@ -19,7 +19,11 @@ export function TestimonialsSection({ testimonials: propTestimonials = [] }: Tes
     name: t.name,
     designation: typeof t.designation === "string" ? t.designation : t.designation[lang],
     quote: typeof t.quote === "string" ? t.quote : t.quote[lang],
-    src: t.avatar ? urlFor(t.avatar).url() : t.src || "",
+    src: t.avatar
+      ? typeof t.avatar === "object"
+        ? urlFor(t.avatar).url()
+        : t.avatar
+      : t.src || "",
   }));
 
   return (
