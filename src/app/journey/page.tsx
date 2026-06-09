@@ -1,5 +1,6 @@
 import { ProfileSummary } from "@/components/journey/profile-summary";
 import { Timeline } from "@/components/journey/timeline";
+import { EducationAndCertifications } from "@/components/journey/education";
 import { Strengths } from "@/components/journey/strengths";
 import { SectionHeader } from "@/components/shared/section-header";
 import { Metadata } from "next";
@@ -19,6 +20,7 @@ export default function JourneyPage() {
       />
       <ProfileSummary />
       <Timeline />
+      <EducationAndCertifications />
       <Strengths />
     </div>
   );

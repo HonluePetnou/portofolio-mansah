@@ -46,12 +46,12 @@ export function HeroSection() {
             </div>
 
             {/* Main Heading */}
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-foreground leading-[1.1]">
+            <h1 className="text-3xl sm:text-4xl lg:text-[2.75rem] font-bold tracking-tight text-foreground leading-[1.2] max-w-2xl">
               {t("hero.intro")}{" "}
               <span className="text-brand-primary dark:text-brand-accent relative inline-block">
                 Frédéric
               </span>
-              . {t("hero.tagline")}
+              ,<br className="hidden sm:inline" /> {t("hero.tagline")}
             </h1>
 
             {/* Paragraph Description */}

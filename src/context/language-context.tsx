@@ -25,8 +25,8 @@ export const translations: Record<string, any> = {
   },
   hero: {
     badge: { EN: "HI THERE", FR: "BONJOUR" },
-    intro: { EN: "Hello, my name's", FR: "Bonjour, je m'appelle" },
-    tagline: { EN: "I'm Junior Engineer & Solution Finder.", FR: "Je suis Ingénieur Junior & Trouveur de Solutions." },
+    intro: { EN: "I'm", FR: "Je suis" },
+    tagline: { EN: "Junior Engineer & Solution Finder.", FR: "Ingénieur Junior & Trouveur de Solutions." },
     experience: { EN: "Broad-spectrum engineer building scalable applications, network infrastructures, and secure software solutions.", FR: "Ingénieur généraliste concevant des applications évolutives, des infrastructures réseau et des solutions logicielles sécurisées." },
     ctaTalk: { EN: "Let's Talk", FR: "Discutons" },
     ctaCv: { EN: "DOWNLOAD CV", FR: "TÉLÉCHARGER CV" },
