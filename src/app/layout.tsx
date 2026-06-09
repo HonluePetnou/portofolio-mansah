@@ -7,9 +7,9 @@ import { Footer } from "@/components/layout/footer";
 import { SocialFloat } from "@/components/shared/social-float";
 
 export const metadata: Metadata = {
-  title: "Mansah | Honlue Petnou Frederic Armel - Senior Frontend Engineer",
+  title: "Mansah | Honlue Petnou Frederic Armel - Junior Engineer & Solution Finder",
   description:
-    "Mansah (Honlue Petnou Frederic Armel) - Senior Frontend Engineer & QA — Product-Oriented. Designing, testing, and shipping reliable digital products.",
+    "Mansah (Honlue Petnou Frederic Armel) - Junior Engineer & Solution Finder — Product-Oriented. Designing, testing, and shipping robust web, mobile, desktop, network, and security solutions.",
 };
 
 export default function RootLayout({

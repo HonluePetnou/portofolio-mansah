@@ -9,7 +9,7 @@ import {
   Share2,
   X,
   MessageCircle,
-  Youtube,
+  Facebook,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
@@ -33,7 +33,7 @@ const socials = [
   {
     Icon: Linkedin,
     label: "LinkedIn",
-    href: "https://www.linkedin.com/in/fr%C3%A9d%C3%A9ric-armel-mansah-610bbb253/",
+    href: "https://www.linkedin.com/in/honlue-petnou-1299a1287?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
     className: "bg-[#0077B5] text-white hover:bg-[#005f8f]",
   },
   {
@@ -45,38 +45,38 @@ const socials = [
   {
     Icon: Mail,
     label: "Email",
-    href: "mailto:fredericarmel.mansah@gmail.com",
+    href: "mailto:honluepetnou@gmail.com",
     className: "bg-brand-primary text-white hover:bg-brand-primary/90",
   },
   {
     Icon: Twitter,
     label: "Twitter / X",
-    href: "https://twitter.com/",
+    href: "https://x.com/HonluePetnou?t=KGYZbjVM6_8nYEdGQTrvEg&s=09",
     className: "bg-black text-white hover:bg-gray-800",
   },
   {
     Icon: MessageCircle,
     label: "WhatsApp",
-    href: "https://wa.me/",
+    href: "https://wa.me/237675712103",
     className: "bg-[#25D366] text-white hover:bg-[#1ebe57]",
   },
   {
     Icon: InstagramIcon,
     label: "Instagram",
-    href: "https://instagram.com/",
+    href: "https://www.instagram.com/honlue_petnou_?igsh=d3o4MmdzMXVoNHdp",
     className: "bg-gradient-to-br from-[#f09433] via-[#e6683c] via-[#dc2743] via-[#cc2366] to-[#bc1888] text-white",
   },
   {
     Icon: TikTokIcon,
     label: "TikTok",
-    href: "https://tiktok.com/",
+    href: "https://www.tiktok.com/@mansah2.0",
     className: "bg-[#010101] text-white hover:bg-[#1a1a1a]",
   },
   {
-    Icon: Youtube,
-    label: "YouTube",
-    href: "https://youtube.com/",
-    className: "bg-[#FF0000] text-white hover:bg-[#cc0000]",
+    Icon: Facebook,
+    label: "Facebook",
+    href: "https://www.facebook.com/share/1ABNUGqDvn/",
+    className: "bg-[#1877F2] text-white hover:bg-[#166fe5]",
   },
 ];
 

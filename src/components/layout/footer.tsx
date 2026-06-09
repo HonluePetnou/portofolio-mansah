@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Mail, Github, Linkedin, Twitter, Youtube } from "lucide-react";
+import { Mail, Github, Linkedin, Twitter, Facebook } from "lucide-react";
 import { useTheme } from "next-themes";
 import { useState, useEffect } from "react";
 import { useLanguage } from "@/context/language-context";
@@ -22,12 +22,12 @@ const TikTokIcon = () => (
 );
 
 const socials = [
-  { Icon: Github,       href: "https://github.com/HonluePetnou",                                          label: "GitHub" },
-  { Icon: Linkedin,     href: "https://www.linkedin.com/in/fr%C3%A9d%C3%A9ric-armel-mansah-610bbb253/", label: "LinkedIn" },
-  { Icon: Twitter,      href: "https://twitter.com/",                                                     label: "Twitter" },
-  { Icon: InstagramIcon,href: "https://instagram.com/",                                                   label: "Instagram" },
-  { Icon: TikTokIcon,   href: "https://tiktok.com/",                                                      label: "TikTok" },
-  { Icon: Youtube,      href: "https://youtube.com/",                                                     label: "YouTube" },
+  { Icon: Github,       href: "https://github.com/HonluePetnou",                                                                          label: "GitHub" },
+  { Icon: Linkedin,     href: "https://www.linkedin.com/in/honlue-petnou-1299a1287?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app", label: "LinkedIn" },
+  { Icon: Twitter,      href: "https://x.com/HonluePetnou?t=KGYZbjVM6_8nYEdGQTrvEg&s=09",                                                 label: "Twitter / X" },
+  { Icon: InstagramIcon,href: "https://www.instagram.com/honlue_petnou_?igsh=d3o4MmdzMXVoNHdp",                                           label: "Instagram" },
+  { Icon: TikTokIcon,   href: "https://www.tiktok.com/@mansah2.0",                                                                        label: "TikTok" },
+  { Icon: Facebook,     href: "https://www.facebook.com/share/1ABNUGqDvn/",                                                               label: "Facebook" },
 ];
 
 export function Footer() {

@@ -478,12 +478,12 @@ export function BlogPostClient({ slug, post: propPost, allPosts = [] }: BlogPost
                 </h4>
                 <p className="text-xs text-muted-foreground dark:text-gray-400 leading-relaxed">
                   {lang === "FR"
-                    ? "Ingénieur Frontend Senior & spécialiste QA, concentré sur les structures React modulaires, les pipelines d'automatisation de la qualité et les intégrations d'API."
-                    : "Senior Frontend Engineer & QA specialist, focus on modular React structures, quality automation pipelines, and API integrations."}
+                    ? "Ingénieur Junior & Trouveur de Solutions, alliant développement (web, mobile, desktop), réseaux, cybersécurité et conception produit."
+                    : "Junior Engineer & Solution Finder, bridging software engineering (web, mobile, desktop), networking, cybersecurity, and product design."}
                 </p>
                 <div className="pt-1">
                   <a
-                    href="mailto:fredericarmel.mansah@gmail.com"
+                    href="mailto:honluepetnou@gmail.com"
                     className="inline-flex items-center gap-1 text-[11px] font-bold text-brand-primary dark:text-brand-accent hover:underline"
                   >
                     {t("blog.discuss")} <ArrowLeft className="w-3 h-3 rotate-180" />

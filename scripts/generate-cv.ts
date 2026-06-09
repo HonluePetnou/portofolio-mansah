@@ -53,10 +53,10 @@ function generateCV(lang: "EN" | "FR", outputPath: string): Promise<void> {
     leftY += 15;
 
     const contactDetails = [
-      { label: { EN: "Email", FR: "Email" }, val: "fredericarmel.mansah@gmail.com" },
-      { label: { EN: "Phone", FR: "Téléphone" }, val: "+228 90 00 00 00" },
+      { label: { EN: "Email", FR: "Email" }, val: "honluepetnou@gmail.com" },
+      { label: { EN: "Phone", FR: "Téléphone" }, val: "+237 675 71 21 03 / +237 655 51 84 88" },
       { label: { EN: "GitHub", FR: "GitHub" }, val: "github.com/HonluePetnou" },
-      { label: { EN: "LinkedIn", FR: "LinkedIn" }, val: "linkedin.com/in/frederic-armel-mansah" },
+      { label: { EN: "LinkedIn", FR: "LinkedIn" }, val: "linkedin.com/in/honlue-petnou-1299a1287" },
       { label: { EN: "Portfolio", FR: "Portfolio" }, val: "mansah-portfolio.vercel.app" },
     ];
 

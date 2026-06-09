@@ -122,7 +122,7 @@ export function HeroSection() {
             >
               <div className="absolute inset-0 bg-[linear-gradient(to_top,rgba(6,6,8,0.3)_0%,transparent_50%)] z-10" />
               <Image
-                src="/me-selfie.png"
+                src="/me2.png"
                 alt="Frédéric Armel (Mansah)"
                 fill
                 sizes="(max-width: 768px) 100vw, 400px"

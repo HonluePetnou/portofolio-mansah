@@ -7,7 +7,7 @@ import { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Journey | Mansah - Honlue Petnou Frederic Armel",
   description:
-    "My professional journey from engineering student to Senior Frontend Engineer & QA.",
+    "My professional journey from engineering student to Junior Engineer & Solution Finder.",
 };
 
 export default function JourneyPage() {
@@ -15,7 +15,7 @@ export default function JourneyPage() {
     <div className="container section-py">
       <SectionHeader
         title="My Journey"
-        subtitle="The path from student to senior engineer."
+        subtitle="The path of a generalist engineer and solution finder."
       />
       <ProfileSummary />
       <Timeline />

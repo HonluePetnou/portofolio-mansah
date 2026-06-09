@@ -37,8 +37,8 @@ export interface SkillGroup {
 export const experiences: Experience[] = [
   {
     role: {
-      EN: "Senior Frontend Engineer & QA",
-      FR: "Ingénieur Frontend Senior & QA",
+      EN: "QA Automation Engineer & Tester",
+      FR: "Ingénieur QA Automation & Testeur",
     },
     company: "MELOAUD",
     period: {
@@ -46,19 +46,73 @@ export const experiences: Experience[] = [
       FR: "Fév 2025 – Présent",
     },
     description: {
-      EN: "Leading frontend architecture and ensuring product reliability.",
-      FR: "Direction de l'architecture frontend et garantie de la fiabilité du produit.",
+      EN: "Leading QA strategy, writing test automation scripts, and executing manual testing cycles.",
+      FR: "Direction de la stratégie QA, écriture des scripts de test automatisés et exécution des cycles de tests manuels.",
     },
     achievements: {
       EN: [
-        "Ownership of frontend architecture and decision making.",
-        "Implemented BDD automation using Cucumber for regression prevention.",
-        "Close collaboration with product and backend teams to streamline delivery.",
+        "Mainly focused on testing and validation processes to ensure zero-regression releases.",
+        "Implemented end-to-end BDD automation pipelines using Cucumber and Playwright.",
+        "Collaborated with product and frontend engineering to establish QA standards and testing gates.",
       ],
       FR: [
-        "Responsabilité de l'architecture frontend et de la prise de décisions techniques.",
-        "Mise en œuvre de l'automatisation BDD avec Cucumber pour prévenir les régressions.",
-        "Collaboration étroite avec les équipes produit et backend pour fluidifier les livraisons.",
+        "Principalement concentré sur les processus de test et de validation pour garantir des versions sans régression.",
+        "Mise en œuvre de pipelines d'automatisation BDD de bout en bout avec Cucumber et Playwright.",
+        "Collaboration avec les équipes produit et frontend pour établir des standards QA et des barrières de tests.",
+      ],
+    },
+  },
+  {
+    role: {
+      EN: "Founder & Technical Lead",
+      FR: "Fondateur & Directeur Technique",
+    },
+    company: "SOLUTY",
+    period: {
+      EN: "Jan 2024 – Present",
+      FR: "Jan 2024 – Présent",
+    },
+    description: {
+      EN: "Directing our agency Soluty, designing and developing custom software solutions for clients.",
+      FR: "Direction de notre agence Soluty, conception et développement de solutions logicielles sur mesure pour nos clients.",
+    },
+    achievements: {
+      EN: [
+        "Managing client relationships, requirements gathering, and technical design.",
+        "Leading the design and delivery of responsive web applications and secure backend systems.",
+        "Ensuring engineering excellence and clean code practices across all client deliverables.",
+      ],
+      FR: [
+        "Gestion des relations clients, collecte des besoins et conception technique.",
+        "Direction de la conception et de la livraison d'applications web réactives et de systèmes backend sécurisés.",
+        "Garantie de l'excellence technique et des pratiques de code propre sur l'ensemble des livrables clients.",
+      ],
+    },
+  },
+  {
+    role: {
+      EN: "Cybersecurity Instructor",
+      FR: "Enseignant en Cybersécurité",
+    },
+    company: "COMPASS INSTITUTE",
+    period: {
+      EN: "Jan 2026 – Present",
+      FR: "Jan 2026 – Présent",
+    },
+    description: {
+      EN: "Instructing student groups on cybersecurity fundamentals, network defenses, and threat analysis.",
+      FR: "Enseignement des fondamentaux de la cybersécurité, de la défense des réseaux et de l'analyse des menaces aux étudiants.",
+    },
+    achievements: {
+      EN: [
+        "Delivering courses covering introduction to security, risk assessment, and basic networking principles.",
+        "Leading hands-on laboratory sessions focusing on system hardening and security controls.",
+        "Teaching network defense configurations and preparing students for foundational certifications.",
+      ],
+      FR: [
+        "Animation de cours couvrant l'introduction à la sécurité, l'évaluation des risques et les principes de base des réseaux.",
+        "Direction de sessions de laboratoires pratiques axées sur le renforcement des systèmes et les contrôles de sécurité.",
+        "Enseignement des configurations de défense réseau et préparation des étudiants aux certifications de base.",
       ],
     },
   },
@@ -89,34 +143,24 @@ export const experiences: Experience[] = [
       ],
     },
   },
-  {
-    role: {
-      EN: "Software Developer",
-      FR: "Développeur Logiciel",
-    },
-    company: "SOLUTY",
-    period: {
-      EN: "Jan 2024 – Apr 2025",
-      FR: "Jan 2024 – Avr 2025",
-    },
-    description: {
-      EN: "Co-building software products with a focus on technical excellence.",
-      FR: "Co-conception de produits logiciels avec un accent sur l'excellence technique.",
-    },
-    achievements: {
-      EN: [
-        "Participated in the full lifecycle of software product building.",
-        "Contributed to key technical and product decisions.",
-      ],
-      FR: [
-        "Participation au cycle de vie complet de la création de produits logiciels.",
-        "Contribution aux décisions clés concernant le produit et les choix techniques.",
-      ],
-    },
-  },
 ];
 
 export const educationList: Education[] = [
+  {
+    school: "ENSPD",
+    degree: {
+      EN: "Engineering Degree (Level 4)",
+      FR: "Diplôme d'Ingénieur (Niveau 4)",
+    },
+    field: {
+      EN: "Computer Science & Information Systems",
+      FR: "Génie Informatique & Systèmes d'Information",
+    },
+    period: {
+      EN: "2022 – 2027 (Expected)",
+      FR: "2022 – 2027 (Prévu)",
+    },
+  },
   {
     school: "Université de Lomé",
     degree: {
@@ -135,6 +179,14 @@ export const educationList: Education[] = [
 ];
 
 export const awardsList: Award[] = [
+  {
+    event: "Cisco Networking Academy",
+    result: {
+      EN: "Introduction to Cybersecurity & Network Badges",
+      FR: "Badges d'Introduction à la Cybersécurité & Réseaux",
+    },
+    date: "2026",
+  },
   {
     event: "OneControl AI Hackathon",
     result: {
@@ -174,8 +226,8 @@ export const skillsGrouped: SkillGroup[] = [
   {
     category: { EN: "QA & Testing", FR: "QA & Tests" },
     skills: {
-      EN: ["Cucumber BDD", "Postman", "Manual testing", "Regression testing"],
-      FR: ["Cucumber BDD", "Postman", "Tests manuels", "Régression"],
+      EN: ["Cucumber BDD", "Playwright", "Postman", "Manual testing", "Regression testing"],
+      FR: ["Cucumber BDD", "Playwright", "Postman", "Tests manuels", "Régression"],
     },
   },
   {

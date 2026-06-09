@@ -26,8 +26,8 @@ export const translations: Record<string, any> = {
   hero: {
     badge: { EN: "HI THERE", FR: "BONJOUR" },
     intro: { EN: "Hello, my name's", FR: "Bonjour, je m'appelle" },
-    tagline: { EN: "I'm Junior Engineer.", FR: "Je suis Ingénieur Junior." },
-    experience: { EN: "4+ years of experience building scalable applications and robust software solutions.", FR: "Plus de 4 ans d'expérience dans la création d'applications évolutives et de solutions logicielles robustes." },
+    tagline: { EN: "I'm Junior Engineer & Solution Finder.", FR: "Je suis Ingénieur Junior & Trouveur de Solutions." },
+    experience: { EN: "Broad-spectrum engineer building scalable applications, network infrastructures, and secure software solutions.", FR: "Ingénieur généraliste concevant des applications évolutives, des infrastructures réseau et des solutions logicielles sécurisées." },
     ctaTalk: { EN: "Let's Talk", FR: "Discutons" },
     ctaCv: { EN: "DOWNLOAD CV", FR: "TÉLÉCHARGER CV" },
     stats: {
@@ -40,8 +40,8 @@ export const translations: Record<string, any> = {
   about: {
     title: { EN: "About Me", FR: "À Propos de Moi" },
     p1: { 
-      EN: "I am a product-oriented software engineer specializing in frontend architectures and automated quality assurance. I bridge the gap between engineering and user experience.", 
-      FR: "Je suis un ingénieur logiciel orienté produit, spécialisé dans les architectures frontend et l'assurance qualité automatisée. Je fais le pont entre l'ingénierie et l'expérience utilisateur." 
+      EN: "I am a product-oriented Junior Engineer and Solution Finder. I bridge the gaps between development (backend, frontend, mobile, desktop), system networks, cybersecurity, and design to build reliable products.", 
+      FR: "Je suis un Ingénieur Junior orienté produit et trouveur de solutions. Je fais le lien entre le développement (backend, frontend, mobile, desktop), les réseaux, la cybersécurité et le design pour bâtir des produits fiables." 
     },
   },
   services: {
@@ -52,6 +52,7 @@ export const translations: Record<string, any> = {
     title: { EN: "Featured Case Studies", FR: "Études de Cas Phares" },
     subtitle: { EN: "Detailed reports on real-world delivery", FR: "Rapports détaillés sur des projets réels" },
     all: { EN: "All", FR: "Tous" },
+    allTypes: { EN: "All", FR: "Tous" }, // fallback
     ai: { EN: "AI & Full Stack", FR: "IA & Full Stack" },
     frontend: { EN: "Frontend / Web", FR: "Frontend / Web" },
     qa: { EN: "QA & Automation", FR: "QA & Automatisation" },
@@ -70,7 +71,7 @@ export const translations: Record<string, any> = {
   },
   blog: {
     title: { EN: "Insights & Engineering", FR: "Insights & Ingénierie" },
-    subtitle: { EN: "Thoughts on frontend structure, QA automation, and product delivery.", FR: "Réflexions sur les structures frontend, l'automatisation QA et la livraison de produits." },
+    subtitle: { EN: "Thoughts on systems development, cybersecurity, networks, and product delivery.", FR: "Réflexions sur le développement système, la cybersécurité, les réseaux et la livraison de produits." },
     all: { EN: "All", FR: "Tous" },
     readTime: { EN: "min read", FR: "min de lecture" },
     by: { EN: "By", FR: "Par" },
@@ -96,7 +97,7 @@ export const translations: Record<string, any> = {
     success: { EN: "Message sent successfully!", FR: "Message envoyé avec succès !" },
   },
   footer: {
-    desc: { EN: "Senior Frontend Engineer & QA Specialist. Building interactive, high-performance web products with clean code.", FR: "Ingénieur Frontend Senior & Spécialiste QA. Conception de produits web interactifs et performants." },
+    desc: { EN: "Junior Engineer & Solution Finder. Bridging backend, frontend, networks, cybersecurity, and product design.", FR: "Ingénieur Junior & Trouveur de Solutions. Alliant backend, frontend, réseaux, cybersécurité et design produit." },
     allRights: { EN: "All rights reserved.", FR: "Tous droits réservés." }
   }
 };

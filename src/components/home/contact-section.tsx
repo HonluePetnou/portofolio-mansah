@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Mail, Linkedin, Github, MapPin, Send, ArrowRight, CheckCircle2, AlertCircle } from "lucide-react";
+import { Mail, Linkedin, Github, MapPin, Send, ArrowRight, CheckCircle2, AlertCircle, Phone } from "lucide-react";
 import { ScaleIn } from "@/lib/animations";
 import { FourPointStar } from "@/components/ui/four-point-star";
 import Link from "next/link";
@@ -80,17 +80,17 @@ export function ContactSection() {
               
               <div className="space-y-4">
                 <a
-                  href="mailto:fredericarmel.mansah@gmail.com"
+                  href="mailto:honluepetnou@gmail.com"
                   className="flex items-center gap-4 text-muted-foreground dark:text-gray-400 hover:text-brand-primary dark:hover:text-brand-accent transition-colors group"
                 >
                   <div className="p-3 rounded-lg bg-gray-50 dark:bg-brand-dark border border-gray-200 dark:border-white/5 group-hover:border-brand-primary/30 dark:group-hover:border-brand-accent/30 transition-colors text-foreground dark:text-white">
                     <Mail className="h-5 w-5" />
                   </div>
-                  <span className="text-sm">fredericarmel.mansah@gmail.com</span>
+                  <span className="text-sm">honluepetnou@gmail.com</span>
                 </a>
                 
                 <a
-                  href="https://linkedin.com/in/frederic-armel-mansah"
+                  href="https://www.linkedin.com/in/honlue-petnou-1299a1287?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-4 text-muted-foreground dark:text-gray-400 hover:text-brand-primary dark:hover:text-brand-accent transition-colors group"
@@ -111,6 +111,16 @@ export function ContactSection() {
                     <Github className="h-5 w-5" />
                   </div>
                   <span className="text-sm">{lang === "FR" ? "Profil GitHub" : "GitHub Profile"}</span>
+                </a>
+
+                <a
+                  href="tel:+237675712103"
+                  className="flex items-center gap-4 text-muted-foreground dark:text-gray-400 hover:text-brand-primary dark:hover:text-brand-accent transition-colors group"
+                >
+                  <div className="p-3 rounded-lg bg-gray-50 dark:bg-brand-dark border border-gray-200 dark:border-white/5 group-hover:border-brand-primary/30 dark:group-hover:border-brand-accent/30 transition-colors text-foreground dark:text-white">
+                    <Phone className="h-5 w-5" />
+                  </div>
+                  <span className="text-sm">+237 675 71 21 03 / +237 655 51 84 88</span>
                 </a>
                 
                 <div className="flex items-center gap-4 text-muted-foreground dark:text-gray-400">

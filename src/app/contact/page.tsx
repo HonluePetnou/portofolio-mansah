@@ -29,17 +29,18 @@ export default function ContactPage() {
             </p>
             <div className="space-y-4">
               <a
-                href="mailto:contact@example.com"
+                href="mailto:honluepetnou@gmail.com"
                 className="flex items-center gap-3 text-muted-foreground dark:text-gray-300 hover:text-brand-primary transition-colors"
               >
                 <div className="p-2 rounded-full bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-white/10">
                   <Mail className="h-5 w-5" />
                 </div>
-                <span>contact@example.com</span>
+                <span>honluepetnou@gmail.com</span>
               </a>
               <a
-                href="https://linkedin.com"
+                href="https://www.linkedin.com/in/honlue-petnou-1299a1287?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
                 target="_blank"
+                rel="noopener noreferrer"
                 className="flex items-center gap-3 text-muted-foreground dark:text-gray-300 hover:text-brand-primary transition-colors"
               >
                 <div className="p-2 rounded-full bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-white/10">
@@ -48,8 +49,9 @@ export default function ContactPage() {
                 <span>LinkedIn Profile</span>
               </a>
               <a
-                href="https://github.com"
+                href="https://github.com/HonluePetnou"
                 target="_blank"
+                rel="noopener noreferrer"
                 className="flex items-center gap-3 text-muted-foreground dark:text-gray-300 hover:text-brand-primary transition-colors"
               >
                 <div className="p-2 rounded-full bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-white/10">
@@ -57,6 +59,7 @@ export default function ContactPage() {
                 </div>
                 <span>GitHub Profile</span>
               </a>
+
             </div>
           </GlassCard>
 
