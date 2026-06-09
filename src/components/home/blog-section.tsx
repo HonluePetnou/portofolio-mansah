@@ -55,8 +55,8 @@ export function BlogSection({ posts = [] }: BlogSectionProps) {
           </h2>
           <p className="mt-4 text-muted-foreground dark:text-gray-400 max-w-xl mx-auto text-sm leading-relaxed">
             {lang === "FR"
-              ? "Mes dernières réflexions sur le génie logiciel, l'architecture produit et l'assurance qualité."
-              : "Latest thoughts on software engineering, product architecture, and quality assurance."}
+              ? "Mes dernières réflexions sur le génie logiciel, la cybersécurité, les réseaux et la conception de solutions."
+              : "Latest thoughts on software engineering, cybersecurity, networks, and solution design."}
           </p>
         </div>
 
