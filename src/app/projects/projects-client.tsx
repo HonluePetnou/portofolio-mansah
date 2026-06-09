@@ -22,8 +22,8 @@ export function ProjectsClientPage({ projects = [] }: ProjectsClientPageProps) {
 
   const categories = [
     { id: "All", label: t("works.all") },
-    { id: "AI & Full Stack", label: t("works.ai") },
-    { id: "Frontend / Web", label: t("works.frontend") },
+    { id: "AI & Product Solutions", label: t("works.ai") },
+    { id: "Software Engineering", label: t("works.frontend") },
   ];
 
   const activeProjects = projects.length > 0 ? projects : projectsData;

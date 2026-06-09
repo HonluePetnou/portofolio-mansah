@@ -24,13 +24,13 @@ interface BlogPostClientProps {
 
 const getCategoryStyle = (category: string) => {
   switch (category) {
-    case "AI & APIs":
+    case "AI & Backend":
       return "bg-brand-accent/10 dark:bg-brand-accent/15 border-brand-accent/20 dark:border-brand-accent/30 text-brand-primary dark:text-brand-accent";
-    case "Quality Assurance":
+    case "Systems & Security":
       return "bg-brand-primary/10 border-brand-primary/20 text-brand-primary";
-    case "Frontend Engineering":
+    case "Software Engineering":
       return "bg-sky-500/10 border-sky-500/20 text-sky-600 dark:text-sky-400";
-    case "Product & Agility":
+    case "Product & Delivery":
       return "bg-amber-500/10 border-amber-500/20 text-amber-600 dark:text-amber-400";
     default:
       return "bg-brand-primary/10 border-brand-primary/20 text-brand-primary";

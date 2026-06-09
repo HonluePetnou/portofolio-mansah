@@ -12,8 +12,8 @@ import { blogPosts as staticBlogPosts } from '@/data/blog'
 import { testimonialsData as staticTestimonials } from '@/data/testimonials'
 
 const categoryMap: Record<string, string> = {
-  ai: "AI & Full Stack",
-  frontend: "Frontend / Web",
+  ai: "AI & Product Solutions",
+  frontend: "Software Engineering",
   qa: "QA & Automation",
 };
 
@@ -38,7 +38,7 @@ function sanitizeProject(p: any): any {
   return {
     ...p,
     slug: safeString(p.slug),
-    category: categoryMap[p.category] || p.category || "Frontend / Web",
+    category: categoryMap[p.category] || p.category || "Software Engineering",
     highlightedStack: p.highlightedStack || (p.stack?.[0]) || "",
     image: p.image || null,
     description: safeBilingual(p.description, ""),

@@ -11,13 +11,13 @@ import { useLanguage } from "@/context/language-context";
 
 const getCategoryStyle = (category: string) => {
   switch (category) {
-    case "AI & APIs":
+    case "AI & Backend":
       return "bg-brand-accent/10 dark:bg-brand-accent/15 border-brand-accent/20 dark:border-brand-accent/30 text-brand-primary dark:text-brand-accent";
-    case "Quality Assurance":
+    case "Systems & Security":
       return "bg-brand-primary/10 border-brand-primary/20 text-brand-primary";
-    case "Frontend Engineering":
+    case "Software Engineering":
       return "bg-sky-500/10 border-sky-500/20 text-sky-600 dark:text-sky-400";
-    case "Product & Agility":
+    case "Product & Delivery":
       return "bg-amber-500/10 border-amber-500/20 text-amber-600 dark:text-amber-400";
     default:
       return "bg-brand-primary/10 border-brand-primary/20 text-brand-primary";
@@ -34,10 +34,10 @@ export function BlogClientPage({ posts = [] }: BlogClientPageProps) {
 
   const categories = [
     { id: "All", label: t("blog.all") },
-    { id: "Quality Assurance", label: lang === "FR" ? "Assurance Qualité" : "Quality Assurance" },
-    { id: "Frontend Engineering", label: lang === "FR" ? "Ingénierie Frontend" : "Frontend Engineering" },
-    { id: "AI & APIs", label: "AI & APIs" },
-    { id: "Product & Agility", label: lang === "FR" ? "Produit & Agilité" : "Product & Agility" },
+    { id: "Systems & Security", label: lang === "FR" ? "Systèmes & Sécurité" : "Systems & Security" },
+    { id: "Software Engineering", label: lang === "FR" ? "Génie Logiciel" : "Software Engineering" },
+    { id: "AI & Backend", label: lang === "FR" ? "IA & Backend" : "AI & Backend" },
+    { id: "Product & Delivery", label: lang === "FR" ? "Produit & Livraison" : "Product & Delivery" },
   ];
 
   const rawPosts = posts.length > 0 ? posts : staticBlogPosts;

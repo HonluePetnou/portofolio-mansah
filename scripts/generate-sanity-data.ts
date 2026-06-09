@@ -127,7 +127,7 @@ function run() {
   projectsData.forEach((proj, idx) => {
     // Map category
     let category = "frontend";
-    if (proj.category === "AI & Full Stack") category = "ai";
+    if (proj.category === "AI & Product Solutions") category = "ai";
     else if (proj.category === "QA & Automation") category = "qa";
 
     // Map metrics

@@ -11,38 +11,38 @@ export function TechStack() {
 
   const services = [
     {
-      title: lang === "FR" ? "Architecture Frontend" : "Frontend Architecture",
+      title: lang === "FR" ? "Architecture Applicative" : "Application Architecture",
       description: lang === "FR"
-        ? "Des interfaces utilisateur interactives et réactives construites avec des composants modulaires et un code propre — du design system à la production."
-        : "Interactive, responsive UIs built with modular components and clean code structure — from design system to production.",
-      techs: ["React", "Next.js", "TypeScript", "Tailwind CSS"],
+        ? "Conception de solutions robustes couvrant les applications web (Next.js), mobiles (React Native), de bureau (Electron) et des backends (NestJS/FastAPI)."
+        : "Designing robust solutions spanning web (Next.js), mobile (React Native), desktop (Electron), and backend (NestJS/FastAPI) architectures.",
+      techs: ["Next.js", "React Native", "NestJS", "FastAPI", "Electron"],
       icon: Code2,
       href: "/projects",
     },
     {
+      title: lang === "FR" ? "Réseaux & Cybersécurité" : "Networks & Cybersecurity",
+      description: lang === "FR"
+        ? "Administration et routage réseau (Cisco CCNA), audits de sécurité, détection des menaces et sécurisation des infrastructures."
+        : "Network administration and routing (Cisco CCNA), security auditing, threat detection, and infrastructure hardening.",
+      techs: ["Cisco CCNA", "Routing & Switching", "Cybersecurity", "NetAcad"],
+      icon: Cpu,
+      href: "/journey",
+    },
+    {
       title: lang === "FR" ? "QA & Automatisation" : "QA & Automation",
       description: lang === "FR"
-        ? "Une qualité de produit irréprochable grâce au BDD, aux flux de bout en bout avec Playwright et à des suites de tests robustes. Zéro régression."
-        : "Flawless product quality through BDD, Playwright end-to-end flows, and robust testing suites. Zero regressions.",
-      techs: ["Cucumber", "Playwright", "Jest", "CI/CD"],
+        ? "Assurance qualité automatisée de bout en bout avec BDD (Cucumber, Playwright) pour assurer des cycles de livraison fluides et sans régression."
+        : "Automated end-to-end quality assurance using BDD (Cucumber, Playwright) to ensure smooth, regression-free shipping cycles.",
+      techs: ["Cucumber BDD", "Playwright", "Postman", "CI/CD"],
       icon: ShieldCheck,
       href: "/projects",
     },
     {
-      title: lang === "FR" ? "Full Stack & IA" : "Full Stack & AI",
+      title: lang === "FR" ? "Conseil Technique & IA" : "Tech Consulting & AI",
       description: lang === "FR"
-        ? "Des API backend robustes et des intégrations d'IA avancées utilisant les LLM Gemini pour résoudre de réels problèmes métier à grande échelle."
-        : "Robust backend APIs and advanced AI integrations using Gemini LLMs to solve real business problems at scale.",
-      techs: ["FastAPI", "Python", "Spring Boot", "Gemini AI"],
-      icon: Cpu,
-      href: "/projects",
-    },
-    {
-      title: lang === "FR" ? "Conseil Technique" : "Tech Consulting",
-      description: lang === "FR"
-        ? "Revues de code, audits d'architecture et sessions de stratégie technique pour aligner votre ingénierie avec vos objectifs commerciaux."
-        : "Code reviews, architecture audits, and technical strategy sessions to align your engineering with business goals.",
-      techs: ["Architecture", "Code Review", "Strategy", "Mentoring"],
+        ? "Audits de code, intégrations d'IA (Gemini), et collaboration d'outils de gestion de projet (Jira, Confluence, GitLab, Figma)."
+        : "Tech audits, AI integrations (Gemini), and workspace project management setup (Jira, Confluence, GitLab, Figma).",
+      techs: ["Jira / Confluence", "GitLab / Docker", "Figma", "Gemini AI"],
       icon: Lightbulb,
       href: "/#contact",
     },

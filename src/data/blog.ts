@@ -12,7 +12,7 @@ export interface BlogSection {
 export interface BlogPost {
   title: Bilingual<string>;
   excerpt: Bilingual<string>;
-  category: "Quality Assurance" | "Frontend Engineering" | "AI & APIs" | "Product & Agility";
+  category: "Systems & Security" | "Software Engineering" | "AI & Backend" | "Product & Delivery";
   date: string;
   readTime: Bilingual<string>;
   slug: string;
@@ -32,7 +32,7 @@ export const blogPosts: BlogPost[] = [
       EN: "Shifting the mindset from 'catching bugs' to 'building reliability'. How BDD and automated testing create a safety net for rapid product iteration.",
       FR: "Passer de la détection de bugs à la construction de la fiabilité. Comment le BDD et les tests automatisés sécurisent les itérations rapides de produits.",
     },
-    category: "Quality Assurance",
+    category: "Systems & Security",
     date: "Oct 12, 2025",
     readTime: {
       EN: "5 min read",
@@ -97,7 +97,7 @@ export const blogPosts: BlogPost[] = [
       EN: "Lessons learned from managing large-scale React applications. Component patterns, state management strategies, and performance optimization.",
       FR: "Leçons tirées de la gestion d'applications React à grande échelle. Modèles de composants, stratégies de gestion d'état et optimisation des performances.",
     },
-    category: "Frontend Engineering",
+    category: "Software Engineering",
     date: "Sep 28, 2025",
     readTime: {
       EN: "8 min read",
@@ -167,7 +167,7 @@ src/
       EN: "Moving beyond chatbots: How to use LLMs to solve specific business problems and enhance user decision-making.",
       FR: "Dépasser les chatbots : comment utiliser les LLM pour résoudre des problèmes métier spécifiques et améliorer la prise de décision.",
     },
-    category: "AI & APIs",
+    category: "AI & Backend",
     date: "Aug 15, 2025",
     readTime: {
       EN: "6 min read",
@@ -241,7 +241,7 @@ const response = await model.generateContent({
       EN: "How small, multi-disciplinary teams ship higher quality features faster by breaking down the walls between specifications, engineering, and testing.",
       FR: "Comment de petites équipes pluridisciplinaires livrent des fonctionnalités de meilleure qualité plus rapidement en brisant les murs entre spécifications, ingénierie et tests.",
     },
-    category: "Product & Agility",
+    category: "Product & Delivery",
     date: "Jul 10, 2025",
     readTime: {
       EN: "4 min read",

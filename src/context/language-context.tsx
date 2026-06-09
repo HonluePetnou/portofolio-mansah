@@ -52,9 +52,8 @@ export const translations: Record<string, any> = {
     title: { EN: "Featured Case Studies", FR: "Études de Cas Phares" },
     subtitle: { EN: "Detailed reports on real-world delivery", FR: "Rapports détaillés sur des projets réels" },
     all: { EN: "All", FR: "Tous" },
-    allTypes: { EN: "All", FR: "Tous" }, // fallback
-    ai: { EN: "AI & Full Stack", FR: "IA & Full Stack" },
-    frontend: { EN: "Frontend / Web", FR: "Frontend / Web" },
+    ai: { EN: "AI & Product Solutions", FR: "IA & Solutions Produit" },
+    frontend: { EN: "Software Engineering", FR: "Génie Logiciel" },
     qa: { EN: "QA & Automation", FR: "QA & Automatisation" },
     demo: { EN: "Live Demo", FR: "Démo Live" },
     repo: { EN: "Repository", FR: "Code Source" },

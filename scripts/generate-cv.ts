@@ -141,8 +141,8 @@ function generateCV(lang: "EN" | "FR", outputPath: string): Promise<void> {
 
     // Tagline
     const taglineText = lang === "FR" 
-      ? "Ingénieur Frontend Senior · Spécialiste QA · Product Builder" 
-      : "Senior Frontend Engineer · QA Specialist · Product Builder";
+      ? "Ingénieur Junior · Trouveur de Solutions · Systèmes & Réseaux" 
+      : "Junior Engineer · Solution Finder · Systems & Networks";
     doc.fillColor(COLORS.textDark)
        .font("Helvetica-Bold")
        .fontSize(9.5)
@@ -151,8 +151,8 @@ function generateCV(lang: "EN" | "FR", outputPath: string): Promise<void> {
 
     // PROFIL Section (3-4 lines max)
     const profileText = lang === "FR"
-      ? "Ingénieur logiciel orienté produit, spécialisé dans la conception d'architectures frontend performantes et de frameworks d'automatisation de tests robustes. Expert dans la livraison d'applications web réactives avec des structures React modulaires et du QA préventif pour assurer la fiabilité."
-      : "Product-oriented software engineer specializing in high-performance frontend architectures and robust test automation frameworks. Expert in delivering responsive web applications with modular React structures and preventive QA to ensure reliability.";
+      ? "Ingénieur Junior orienté produit et trouveur de solutions. Développeur polyvalent couvrant le full-stack web, le mobile et le desktop, combiné à des compétences solides en réseaux, cybersécurité (Cisco NetAcad) et automatisation de tests (QA). Passionné par la création d'architectures fiables et d'infrastructures sécurisées."
+      : "Product-oriented Junior Engineer and Solution Finder. Versatile developer spanning full-stack web, mobile, and desktop applications, coupled with solid competencies in networks, cybersecurity (Cisco NetAcad), and test automation (QA). Passionate about building reliable architectures and secure infrastructures.";
 
     doc.fillColor(COLORS.textMuted)
        .font("Helvetica")

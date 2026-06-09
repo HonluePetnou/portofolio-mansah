@@ -24,58 +24,58 @@ export function AboutSection() {
   const tabContent = {
     story: {
       bio: lang === "FR"
-        ? "Frédéric Armel Petnou est un ingénieur logiciel orienté produit, alliant expertise technique et culture de la qualité. Actuellement en cursus d'ingénieur à l'ENSPD (2022–2027), il fait le lien entre les fondements de l'informatique et les architectures web modernes."
-        : "Frédéric Armel Petnou is a product-oriented software engineer combining technical expertise with a quality-first mindset. Currently pursuing an engineering degree at ENSPD (2022–2027), he bridges core computer science principles with state-of-the-art web architectures.",
+        ? "Frédéric Armel Petnou est un ingénieur junior orienté produit et trouveur de solutions. Actuellement en cursus d'ingénieur à l'ENSPD (Niveau 4), il conçoit des architectures logicielles de bout en bout (web, mobile, desktop) tout en intégrant des systèmes de réseaux, de cybersécurité et de design."
+        : "Frédéric Armel Petnou is a product-oriented Junior Engineer and Solution Finder. Currently pursuing an engineering degree at ENSPD (Level 4), he designs end-to-end software architectures (web, mobile, desktop) while integrating networking, cybersecurity, and product design.",
       items: [
         {
-          title: lang === "FR" ? "Études d'ingénieur à l'ENSPD" : "Engineering at ENSPD",
+          title: lang === "FR" ? "Cursus Ingénieur ENSPD" : "Engineering at ENSPD",
           desc: lang === "FR" 
-            ? "Bases approfondies en informatique, conception de systèmes, algorithmes et architecture modulaire."
-            : "Deep computer science foundations in system design, algorithms, and modular architecture.",
+            ? "Bases approfondies en algorithmes, architecture système, routage réseau et conception logicielle modulaire."
+            : "Deep foundations in algorithms, system architecture, network routing, and modular software design.",
         },
         {
           title: lang === "FR" ? "Collaboration Globale" : "Global Collaboration",
           desc: lang === "FR"
-            ? "Livraison d'applications React/Next.js réactives et de produits numériques fiables pour des startups du monde entier."
-            : "Shipping responsive React/Next.js applications and reliable digital products for startups worldwide.",
+            ? "Livraison de solutions logicielles multiplateformes robustes et d'infrastructures pour des clients du monde entier."
+            : "Shipping robust multiplatform software solutions and infrastructures for clients worldwide.",
         },
       ],
     },
     values: {
       bio: lang === "FR"
-        ? "Le code n'est qu'un outil ; l'objectif est de livrer une valeur réelle et la satisfaction des utilisateurs. Frédéric opère selon le principe que la fiabilité et les tests sont des fonctionnalités produit clés, et non des phases post-développement."
-        : "Code is just a tool; the goal is to deliver actual business value and user satisfaction. Frédéric operates on the principle that reliability and testing are core product features, not post-development phases.",
+        ? "Le code n'est qu'un outil ; l'objectif est de livrer une valeur réelle et la satisfaction des utilisateurs. Frédéric opère selon le principe que la sécurité, la fiabilité et les tests font partie intégrante du cycle de vie du produit."
+        : "Code is just a tool; the goal is to deliver actual business value and user satisfaction. Frédéric operates on the principle that security, reliability, and testing are integral parts of the product lifecycle.",
       items: [
         {
-          title: lang === "FR" ? "Champion du QA & BDD" : "QA & BDD Champion",
+          title: lang === "FR" ? "Tests & Automatisation QA" : "Testing & QA Automation",
           desc: lang === "FR"
-            ? "Garantir des bases de code sans régression grâce aux frameworks BDD, Playwright, Jest et Cucumber."
-            : "Ensuring zero-regression codebases using BDD frameworks, Playwright, Jest, and Cucumber.",
+            ? "Garantir des systèmes fiables sans régression grâce au BDD, Playwright et Cucumber."
+            : "Ensuring reliable, regression-free systems using BDD, Playwright, and Cucumber.",
         },
         {
-          title: lang === "FR" ? "Maintenabilité & Code Propre" : "Maintainability & Clean Code",
+          title: lang === "FR" ? "Sécurité & Maintenabilité" : "Security & Maintainability",
           desc: lang === "FR"
-            ? "Adepte du code auto-documenté, des design patterns solides et de la réduction de la dette technique."
-            : "Believer in self-documenting code, solid design patterns, and minimizing technical debt.",
+            ? "Application des meilleures pratiques de cybersécurité, de code propre et de réduction de la dette technique."
+            : "Applying cybersecurity best practices, clean code patterns, and minimizing technical debt.",
         },
       ],
     },
     focus: {
       bio: lang === "FR"
-        ? "Maîtriser la couche d'interface utilisateur tout en conservant de solides compétences full-stack, des API backend aux services cloud et intégrations IA."
-        : "Mastering the user interface layer while holding robust full-stack capabilities, from backend APIs and cloud services to advanced machine learning integrations.",
+        ? "Maîtriser l'ensemble de la chaîne de valeur technologique : du développement applicatif multiplateforme aux infrastructures réseaux Cisco et à la cybersécurité."
+        : "Mastering the entire technological value chain: from multiplatform application development to Cisco network infrastructures and cybersecurity.",
       items: [
         {
-          title: lang === "FR" ? "Architecture Frontend" : "Frontend Architecture",
+          title: lang === "FR" ? "Architecture Multiplateforme" : "Multiplatform Architecture",
           desc: lang === "FR"
-            ? "Conception de composants avancés, mise à l'échelle des layouts et gestion d'état en TypeScript."
-            : "Advanced component design, layout scaling, and state management in TypeScript.",
+            ? "Conception de solutions web, mobiles (React Native/Expo), de bureau (Electron/Java EE) et backend (NestJS/FastAPI)."
+            : "Designing web, mobile (React Native/Expo), desktop (Electron/Java EE), and backend (NestJS/FastAPI) solutions.",
         },
         {
-          title: lang === "FR" ? "Intégrations & IA Gemini" : "Integrations & Gemini AI",
+          title: lang === "FR" ? "Réseaux & Cybersécurité" : "Networks & Cybersecurity",
           desc: lang === "FR"
-            ? "Conception de backends REST/GraphQL sécurisés et automatisation de flux complexes avec les LLM Gemini."
-            : "Designing secure REST/GraphQL backends and automating complex workflows using Gemini LLMs.",
+            ? "Configuration d'architectures réseau sécurisées (Cisco CCNA), audits de vulnérabilités et intégrations IA."
+            : "Configuring secure network architectures (Cisco CCNA), vulnerability auditing, and AI integrations.",
         },
       ],
     },

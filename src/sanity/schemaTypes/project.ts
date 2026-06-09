@@ -25,8 +25,8 @@ export const project = defineType({
       type: 'string',
       options: {
         list: [
-          { title: 'AI & Full Stack', value: 'ai' },
-          { title: 'Frontend / Web', value: 'frontend' },
+          { title: 'AI & Product Solutions', value: 'ai' },
+          { title: 'Software Engineering', value: 'frontend' },
           { title: 'QA & Automation', value: 'qa' },
         ],
       },

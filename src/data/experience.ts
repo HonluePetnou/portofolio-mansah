@@ -210,17 +210,31 @@ export const languagesList: Language[] = [
 
 export const skillsGrouped: SkillGroup[] = [
   {
-    category: { EN: "Frontend", FR: "Frontend" },
+    category: { EN: "Development (Web & Mobile)", FR: "Développement (Web & Mobile)" },
     skills: {
-      EN: ["React", "Next.js", "TypeScript", "Tailwind CSS", "React Native", "Expo"],
-      FR: ["React", "Next.js", "TypeScript", "Tailwind CSS", "React Native", "Expo"],
+      EN: ["React", "Next.js", "TypeScript", "React Native", "Expo", "Tailwind CSS"],
+      FR: ["React", "Next.js", "TypeScript", "React Native", "Expo", "Tailwind CSS"],
     },
   },
   {
-    category: { EN: "Backend", FR: "Backend" },
+    category: { EN: "Backend & Desktop", FR: "Backend & Bureau" },
     skills: {
-      EN: ["FastAPI", "Spring Boot", "Node.js", "REST APIs"],
-      FR: ["FastAPI", "Spring Boot", "Node.js", "APIs REST"],
+      EN: ["NestJS", "FastAPI", "Python", "Node.js", "Electron", "Java EE", "Spring Boot"],
+      FR: ["NestJS", "FastAPI", "Python", "Node.js", "Electron", "Java EE", "Spring Boot"],
+    },
+  },
+  {
+    category: { EN: "Databases", FR: "Bases de données" },
+    skills: {
+      EN: ["PostgreSQL", "MySQL", "SQLite", "Firebase"],
+      FR: ["PostgreSQL", "MySQL", "SQLite", "Firebase"],
+    },
+  },
+  {
+    category: { EN: "Networks & Cybersecurity", FR: "Réseaux & Cybersécurité" },
+    skills: {
+      EN: ["Cisco CCNA", "Network Routing & Switching", "Threat Analysis", "Security Controls"],
+      FR: ["Cisco CCNA", "Routage & Commutation Réseau", "Analyse des Menaces", "Contrôles de Sécurité"],
     },
   },
   {
@@ -231,24 +245,10 @@ export const skillsGrouped: SkillGroup[] = [
     },
   },
   {
-    category: { EN: "Databases", FR: "Bases de données" },
-    skills: {
-      EN: ["PostgreSQL", "MySQL", "Firebase", "SQLite"],
-      FR: ["PostgreSQL", "MySQL", "Firebase", "SQLite"],
-    },
-  },
-  {
     category: { EN: "DevOps & Tools", FR: "DevOps & Outils" },
     skills: {
-      EN: ["Git", "Docker", "CI/CD", "Jira", "Figma"],
-      FR: ["Git", "Docker", "CI/CD", "Jira", "Figma"],
-    },
-  },
-  {
-    category: { EN: "Languages", FR: "Langages" },
-    skills: {
-      EN: ["JavaScript", "TypeScript", "Python", "Java", "C/C++"],
-      FR: ["JavaScript", "TypeScript", "Python", "Java", "C/C++"],
+      EN: ["Docker", "Git", "GitLab", "CI/CD", "Jira", "Confluence", "Figma"],
+      FR: ["Docker", "Git", "GitLab", "CI/CD", "Jira", "Confluence", "Figma"],
     },
   },
 ];

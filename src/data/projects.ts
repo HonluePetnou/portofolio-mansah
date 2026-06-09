@@ -12,7 +12,7 @@ export interface ProjectData {
   slug: string;
   stack: string[];
   highlightedStack?: string;
-  category: "AI & Full Stack" | "Frontend / Web" | "QA & Automation";
+  category: "AI & Product Solutions" | "Software Engineering" | "QA & Automation";
   demoUrl?: string;
   repoUrl?: string;
   metrics?: ProjectMetric[];
@@ -50,7 +50,7 @@ export const projectsData: ProjectData[] = [
     slug: "one-control",
     stack: ["Gemini AI", "Next.js", "Python"],
     highlightedStack: "Gemini AI",
-    category: "AI & Full Stack",
+    category: "AI & Product Solutions",
     demoUrl: "https://onecontrol-demo.example.com",
     repoUrl: "https://github.com/HonluePetnou/one-control",
     metrics: [
@@ -86,7 +86,7 @@ export const projectsData: ProjectData[] = [
     slug: "feedly",
     stack: ["FastAPI", "Python", "React", "PostgreSQL"],
     highlightedStack: "PostgreSQL",
-    category: "AI & Full Stack",
+    category: "Software Engineering",
     demoUrl: "https://feedly-health.example.com",
     repoUrl: "https://github.com/HonluePetnou/feedly-nutrition",
     metrics: [
@@ -122,7 +122,7 @@ export const projectsData: ProjectData[] = [
     slug: "tech-portfolio-directory",
     stack: ["Next.js", "Firebase", "Puppeteer", "Tailwind CSS"],
     highlightedStack: "Firebase",
-    category: "Frontend / Web",
+    category: "Software Engineering",
     demoUrl: "https://foliofy.example.com",
     repoUrl: "https://github.com/HonluePetnou/tech-portfolio-directory",
     metrics: [
@@ -158,7 +158,7 @@ export const projectsData: ProjectData[] = [
     slug: "ubuntu-app-library-manager",
     stack: ["React", "Java EE", "Electron", "MySQL"],
     highlightedStack: "Electron",
-    category: "Frontend / Web",
+    category: "Software Engineering",
     repoUrl: "https://github.com/HonluePetnou/ubuntu-library-manager",
     metrics: [
       {
