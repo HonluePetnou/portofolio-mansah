@@ -246,7 +246,7 @@ function run() {
       _id: `testimonial-${idx + 1}`,
       _type: "testimonial",
       name: test.name,
-      role: {
+      designation: {
         _type: "localeString",
         FR: test.designation.FR,
         EN: test.designation.EN,
